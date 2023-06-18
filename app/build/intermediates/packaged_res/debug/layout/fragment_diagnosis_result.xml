@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DiagnosisResultFragment">
+
+    <ScrollView
+        android:id="@+id/diagnosis_result_fragment_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/diagnosis_result_fragment_layout_cl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".DiagnosisResultFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/diagnosis_result_fragment_top_cl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingTop="20dp">
+
+                <ImageButton
+                    android:id="@+id/diagnosis_result_back_ib"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/back"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+                    android:id="@+id/diagnosis_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="진단 결과"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/diagnosis_result_back_ib"
+                    app:layout_constraintBottom_toBottomOf="@id/diagnosis_result_back_ib"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/diagnosis_result_iv_photo"
+                android:layout_width="295dp"
+                android:layout_height="197dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diagnosis_result_fragment_top_cl"
+                app:srcCompat="@drawable/img" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/diagnosis_result_layout_resultabout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diagnosis_result_iv_photo">
+
+                <TextView
+                    android:id="@+id/diagnosis_result_tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="세균 모무늬병"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/diagnosis_result_tv_describe"
+                    android:layout_width="295dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="딸기 잎뒷면에 수침상의 다각형의 반점이 생기고 병이 진전될 경우 노란색의 세균누출액이 관찰되며 잎이 시들게 됩니다."
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/diagnosis_result_tv_name" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="295dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="32dp"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/diagnosis_result_layout_resultabout"
+                app:layout_constraintTop_toBottomOf="@+id/diagnosis_result_layout_resultabout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/diagnosis_result_layout_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider">
+
+
+                <Button
+                    android:id="@+id/diagnosis_result_btn_symptom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="증상"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <Button
+                    android:id="@+id/diagnosis_result_btn_cause"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="원인"
+                    app:layout_constraintStart_toEndOf="@id/diagnosis_result_btn_symptom"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/diagnosis_result_btn_cure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="치료법"
+                    app:layout_constraintEnd_toEndOf="@id/diagnosis_result_layout_detail"
+                    app:layout_constraintStart_toEndOf="@id/diagnosis_result_btn_cause"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/diagnosis_result_tv_detail"
+                    android:layout_width="295dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="잎의 수침상의 작은 반점이 서서히 생기면서 엽맥의 주위에 다각형의 모무늬 병반이 나타나고 노란색의 달무리가 형성됩니다.
+병든잎은 서서히히 시들고 암갈색으로 말라 죽습니다. "
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/diagnosis_result_btn_symptom" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/diagnosis_result_layout_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diagnosis_result_layout_detail">
+
+
+                <Button
+                    android:id="@+id/diagnosis_result_btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="저장하기"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/diagnosis_result_btn_recheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:text="재측정"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/diagnosis_result_btn_save"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>
