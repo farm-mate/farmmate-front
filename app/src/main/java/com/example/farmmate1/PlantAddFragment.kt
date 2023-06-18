@@ -50,6 +50,11 @@ class PlantAddFragment : Fragment() {
         binding.plantAddLocationIb.setOnClickListener {
             selectLocation()
         }
+
+        // 등록하기 버튼 클릭 후 나의 식물 페이지로 이동, 새로운 아이템 추가됨
+        binding.plantAddBtnEnroll.setOnClickListener{
+            moveToPlantFragment()
+        }
     }
 
     private fun setUpSpinnerPlants() {
@@ -78,4 +83,5 @@ class PlantAddFragment : Fragment() {
     private fun selectLocation() {
         TODO("Not yet implemented")
     }
+
 }
