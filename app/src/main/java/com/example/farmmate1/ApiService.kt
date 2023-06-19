@@ -14,6 +14,10 @@ interface ApiService {
     fun createPlant(@Body plant: Plant): Call<Plant>
 
     @GET("plants")
-    suspend fun getPlants(@Query("page") page: Int, @Query("limit") limit: Int): Response<List<Plant>>
+    fun getPlant(): Call<Plant>
+
+
+//    @GET("plants")
+//    suspend fun getPlants(@Query("page") page: Int, @Query("limit") limit: Int): Response<List<Plant>>
 
 }
