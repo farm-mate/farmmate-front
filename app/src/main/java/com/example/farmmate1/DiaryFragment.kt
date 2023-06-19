@@ -5,6 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.CalendarView
+import android.widget.ListView
+import androidx.fragment.app.Fragment
+import com.example.farmmate1.network.TodoListInterface
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,20 +32,84 @@ class DiaryFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private lateinit var fragment2: WriteDiaryFragment
+    private lateinit var calendarView: CalendarView
+    private lateinit var writeButton: Button
+    private lateinit var listView : ListView
+    private lateinit var todoListInterface : TodoListInterface
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_diary, container, false)
+
+        calendarView = view.findViewById(R.id.diary_calview)
+        listView = view.findViewById(R.id.diary_todo_list_view)
+
+
+        // 프래그먼트 인스턴스 생성
+        fragment2 = WriteDiaryFragment()
+        calendarView = view.findViewById(R.id.diary_calview)
+        writeButton = view.findViewById(R.id.diary_regitst_btn)
+
+        //캘린더 날짜 선택 이벤트 처리
+        calendarView.setOnDateChangeListener{_, year, month, dayOfMonth ->
+            val selectDate = Calendar.getInstance().apply{
+                set(year, month, dayOfMonth)
+            }
+            val todoList = getTodoList(selectDate)
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, todoItems)
+
+
+            listView.adapter=adapter
         }
     }
+    //TodolistInterface 인터페이스 구현
+    private fun getTodoList(date:Calendar) {
+        //선택 날짜에 해당하는 할일 목록 가져오는 로직 추가 구현
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val selectedDate = formatter.format(date.time)
+        val call = todoListInterface.getTodos(selectedDate)
+        call.enqueue(object : Callback<List<TodoItem>>) {
+            override fun onResponse(
+                call: Call<List<TodoItem>>,
+                response: Response<List<TodoItem>>
+            ) {
+                if (response.isSuccessful) {
+                    val todoItems = response.body()
+                    // todoItems를 사용하여 UI를 업데이트합니다.
+                    // 예: 리스트뷰에 할 일(todo) 항목을 표시합니다.
+                } else {
+                    // 응답이 실패한 경우에 대한 처리를 수행합니다.
+                }
+            }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diary, container, false)
+        }
+        override fun onFailure(call: Call<List<TodoItem>>, t: Throwable) {
+        }
+    })
+        }
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        view.findViewById<Button>(R.id.diary_regitst_btn).setOnClickListener {
+            val selectedDate = Calendar.getInstance().apply {
+                timeInMillis = calendarView.date
+            }
+
+            val fragmentManager = requireActivity().supportFragmentManager
+            val writeDiaryFragment = WriteDiaryFragment.newInstance(selectedDate)
+
+            fragmentManager.beginTransaction()
+                .replace(R.id.main_fl, writeDiaryFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+    override fun onDiaryDataReceived(date: Calendar, data: String) {
+        TODO("Not yet implemented")
     }
 
     companion object {
@@ -56,4 +131,9 @@ class DiaryFragment : Fragment() {
                 }
             }
     }
-}
+
+
+
+
+
+
