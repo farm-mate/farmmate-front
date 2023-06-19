@@ -223,6 +223,7 @@ attr buttonIconDimen
 attr buttonIconTint
 attr buttonIconTintMode
 attr buttonPanelSideLayout
+attr buttonSize
 attr buttonStyle
 attr buttonStyleSmall
 attr buttonTint
@@ -282,6 +283,7 @@ attr chipStrokeColor
 attr chipStrokeWidth
 attr chipStyle
 attr chipSurfaceColor
+attr circleCrop
 attr circleRadius
 attr circularProgressIndicatorStyle
 attr circularflow_angles
@@ -355,6 +357,7 @@ attr colorPrimaryFixedDim
 attr colorPrimaryInverse
 attr colorPrimarySurface
 attr colorPrimaryVariant
+attr colorScheme
 attr colorSecondary
 attr colorSecondaryContainer
 attr colorSecondaryFixed
@@ -629,6 +632,8 @@ attr iconTintMode
 attr iconifiedByDefault
 attr ifTagNotSet
 attr ifTagSet
+attr imageAspectRatio
+attr imageAspectRatioAdjust
 attr imageButtonStyle
 attr imagePanX
 attr imagePanY
@@ -994,6 +999,7 @@ attr round
 attr roundPercent
 attr saturation
 attr scaleFromTextSize
+attr scopeUris
 attr scrimAnimationDuration
 attr scrimBackground
 attr scrimVisibleHeightTrigger
@@ -1352,6 +1358,17 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color common_google_signin_btn_text_dark
+color common_google_signin_btn_text_dark_default
+color common_google_signin_btn_text_dark_disabled
+color common_google_signin_btn_text_dark_focused
+color common_google_signin_btn_text_dark_pressed
+color common_google_signin_btn_text_light
+color common_google_signin_btn_text_light_default
+color common_google_signin_btn_text_light_disabled
+color common_google_signin_btn_text_light_focused
+color common_google_signin_btn_text_light_pressed
+color common_google_signin_btn_tint
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -2921,6 +2938,26 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable cloudy
+drawable common_full_open_on_phone
+drawable common_google_signin_btn_icon_dark
+drawable common_google_signin_btn_icon_dark_focused
+drawable common_google_signin_btn_icon_dark_normal
+drawable common_google_signin_btn_icon_dark_normal_background
+drawable common_google_signin_btn_icon_disabled
+drawable common_google_signin_btn_icon_light
+drawable common_google_signin_btn_icon_light_focused
+drawable common_google_signin_btn_icon_light_normal
+drawable common_google_signin_btn_icon_light_normal_background
+drawable common_google_signin_btn_text_dark
+drawable common_google_signin_btn_text_dark_focused
+drawable common_google_signin_btn_text_dark_normal
+drawable common_google_signin_btn_text_dark_normal_background
+drawable common_google_signin_btn_text_disabled
+drawable common_google_signin_btn_text_light
+drawable common_google_signin_btn_text_light_focused
+drawable common_google_signin_btn_text_light_normal
+drawable common_google_signin_btn_text_light_normal_background
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -2928,6 +2965,8 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable diary
 drawable diary_book
+drawable googleg_disabled_color_18
+drawable googleg_standard_color_18
 drawable home
 drawable ic_arrow_back_black_24
 drawable ic_clear_black_24
@@ -3032,11 +3071,13 @@ drawable number_ten
 drawable number_three
 drawable number_twelve
 drawable number_two
+drawable rainy
 drawable star
 drawable star_filled
 drawable stethoscope
 drawable strawberry
 drawable strawberry_h
+drawable sunny
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3113,6 +3154,8 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id adjust_height
+id adjust_width
 id alertTitle
 id aligned
 id all
@@ -3122,6 +3165,7 @@ id animateToEnd
 id animateToStart
 id antiClockwise
 id anticipate
+id app_name
 id arc
 id asConfigured
 id async
@@ -3145,7 +3189,11 @@ id btm_nav_diary
 id btm_nav_home
 id btm_nav_plant
 id btm_nav_user
+id button
+id button2
 id button3
+id button4
+id button5
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3185,6 +3233,7 @@ id currentState
 id custom
 id customPanel
 id cut
+id dark
 id dataBinding
 id date_picker_actions
 id decelerate
@@ -3198,20 +3247,6 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
-id diagnosis_btn_fragment1
-id diagnosis_btn_fragment2
-id diagnosis_btn_fragment3
-id diagnosis_btn_fragment4
-id diagnosis_btn_fragment5
-id diagnosis_btn_fragment6
-id diagnosis_fragment_history_cl
-id diagnosis_fragment_hsv
-id diagnosis_fragment_layout_cl
-id diagnosis_fragment_top_cl
-id diagnosis_history_btn_diagnosis
-id diagnosis_history_btn_edit
-id diagnosis_history_title_tv
-id diagnosis_list_lv_history
 id diagnosis_result_back_ib
 id diagnosis_result_btn_cause
 id diagnosis_result_btn_cure
@@ -3241,6 +3276,22 @@ id diagnosis_select_tv_anyplant
 id diagnosis_select_tv_myplant
 id diagnosis_title_tv
 id dialog_button
+id diary_calview
+id diary_cl
+id diary_cucumber_btn
+id diary_fragment_tv_cl
+id diary_hsc
+id diary_layout_title_cl
+id diary_linearlayout
+id diary_paprica_btn
+id diary_pepper_btn
+id diary_regist_btn_cl
+id diary_regitst_btn
+id diary_sc
+id diary_strawberry_btn
+id diary_todo_list_view
+id diary_tomato_btn
+id diary_whole_btn
 id dimensions
 id direct
 id disableHome
@@ -3274,6 +3325,7 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fade
+id favorite_tv
 id fill
 id fill_horizontal
 id fill_vertical
@@ -3302,10 +3354,21 @@ id header_title
 id hideable
 id home
 id homeAsUp
+id home_fragment
+id home_fragment_myplant_tv
+id home_fragment_title_tv
+id home_fragment_weather_cl
+id home_fragment_weather_cl_date
+id home_fragment_weather_cl_humid
+id home_fragment_weather_cl_max_tempe
+id home_fragment_weather_cl_min_tempe
+id home_fragment_weather_cl_tempe
+id home_layout_title_cl
 id honorRequest
 id horizontal_only
 id icon
 id icon_group
+id icon_only
 id ifRoom
 id ignore
 id ignoreRequest
@@ -3318,6 +3381,7 @@ id invisible
 id inward
 id italic
 id item_touch_helper_previous_elevation
+id iv_profile
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -3325,6 +3389,7 @@ id layout
 id left
 id leftToRight
 id legacy
+id light
 id line1
 id line3
 id linear
@@ -3332,9 +3397,6 @@ id listMode
 id list_item
 id list_item_history_cl
 id list_item_ib_number
-id list_item_name
-id list_item_profile
-id list_item_startdate
 id list_item_tv_date
 id list_item_tv_result
 id m3_side_sheet
@@ -3399,6 +3461,7 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id myplant_btn_homefragment
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3437,9 +3500,14 @@ id pathRelative
 id peekHeight
 id percent
 id pin
+id pl_greet
+id pl_name
+id pl_profile
 id plan_info_btn_diary
 id plant_add_back_ib
 id plant_add_btn
+id plant_add_btn_back
+id plant_add_et_date
 id plant_add_et_location
 id plant_add_et_memo
 id plant_add_et_name
@@ -3454,7 +3522,7 @@ id plant_add_layout_location
 id plant_add_layout_memo
 id plant_add_layout_name
 id plant_add_layout_select
-id plant_add_location_ib
+id plant_add_layout_title
 id plant_add_select_cl
 id plant_add_spinner_select
 id plant_add_title_tv
@@ -3465,8 +3533,9 @@ id plant_add_tv_location
 id plant_add_tv_memo
 id plant_add_tv_name
 id plant_add_tv_select
-id plant_add_tv_selectdate
+id plant_add_tv_title
 id plant_info_back_ib
+id plant_info_btn_back
 id plant_info_btn_test
 id plant_info_et_firstdate
 id plant_info_fragment_layout_cl
@@ -3474,6 +3543,7 @@ id plant_info_fragment_sv
 id plant_info_iv_profile
 id plant_info_layout_basic
 id plant_info_layout_testdiary
+id plant_info_layout_title
 id plant_info_tv_fert
 id plant_info_tv_fertdate
 id plant_info_tv_first
@@ -3484,9 +3554,11 @@ id plant_info_tv_title
 id plant_info_tv_water
 id plant_info_tv_waterdate
 id plant_infor_tv_basicinfo
+id plant_list_btn_add
 id plant_list_btn_edit
 id plant_list_layout_title
 id plant_list_lv_plants
+id plant_list_tv_title
 id plant_title_tv
 id position
 id postLayout
@@ -3496,6 +3568,7 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id report_drawn
 id reverseSawtooth
 id right
 id rightToLeft
@@ -3593,6 +3666,16 @@ id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id tag_window_insets_animation_callback
+id test_result_btn_name
+id test_result_iv_photo
+id test_result_layout_resultabout
+id test_result_layout_title
+id test_result_tv_title
+id test_resultlist_btn_fragment1
+id test_resultlist_btn_fragment2
+id test_resultlist_btn_fragment3
+id test_resultlist_layout_title
+id test_resultlist_tv_title
 id text
 id text2
 id textEnd
@@ -3614,6 +3697,33 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
+id todo_cb_fertle
+id todo_cb_pes
+id todo_date_cl
+id todo_et_fertle
+id todo_et_fertle_usage
+id todo_et_memo
+id todo_et_pes
+id todo_et_pes_usage
+id todo_fragment_back_ib
+id todo_fragment_cb_water
+id todo_fragment_sv
+id todo_fragment_top_cl
+id todo_layout_fertle
+id todo_layout_memo
+id todo_layout_pes
+id todo_layout_water
+id todo_register_btn
+id todo_select_cl
+id todo_spinner_select
+id todo_title_todobtn
+id todo_title_writediarybtn
+id todo_tv_date
+id todo_tv_fertle
+id todo_tv_memo
+id todo_tv_pes
+id todo_tv_select
+id todo_tv_water
 id toggle
 id top
 id topPanel
@@ -3640,13 +3750,48 @@ id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
 id visible
 id visible_removing_fragment_view_tag
+id weather_icon_im_homefragment
+id weather_location_tv_homefragment
 id west
+id wide
 id withText
 id with_icon
 id withinBounds
 id wrap
 id wrap_content
 id wrap_content_constrained
+id write_diary_cb_fertle
+id write_diary_et_fertle
+id write_diary_et_fertle_usage
+id write_diary_et_pes
+id write_diary_et_pes_usage
+id write_diary_fragment_back_ib
+id write_diary_fragment_cb_water
+id write_diary_fragment_select_ll
+id write_diary_fragment_sv
+id write_diary_fragment_top_cl
+id write_diary_ib_image
+id write_diary_layout_fer
+id write_diary_layout_image
+id write_diary_layout_location
+id write_diary_layout_memo
+id write_diary_layout_name
+id write_diary_layout_pes
+id write_diary_register_btn
+id write_diary_select_cl
+id write_diary_spinner_select
+id write_diary_title_btn
+id write_diary_title_todobtn
+id write_diary_tv
+id write_diary_tv_date
+id write_diary_tv_fertle
+id write_diary_tv_image
+id write_diary_tv_image_explain
+id write_diary_tv_memo
+id write_diary_tv_pes
+id write_diary_tv_select
+id write_diary_tv_water
+id write_fragment_layout_cl
 id x_left
 id x_right
 integer abc_config_activityDefaultDur
@@ -3657,6 +3802,7 @@ integer cancel_button_image_alpha
 integer config_tooltipAnimTime
 integer design_snackbar_text_max_lines
 integer design_tab_indicator_anim_duration_ms
+integer google_play_services_version
 integer hide_password_duration
 integer m3_btn_anim_delay_ms
 integer m3_btn_anim_duration_ms
@@ -3762,7 +3908,13 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_intro
 layout activity_main
+layout activity_plant_add
+layout activity_plant_info
+layout activity_plant_list
+layout activity_test_result
+layout activity_test_result_list
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3788,7 +3940,9 @@ layout fragment_plant
 layout fragment_plant_add
 layout fragment_plant_info
 layout fragment_test_result
+layout fragment_todo
 layout fragment_user
+layout fragment_write_diary
 layout list_item_history
 layout list_item_plant
 layout m3_alert_dialog
@@ -3899,6 +4053,24 @@ string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
 string clear_text_end_icon_content_description
+string common_google_play_services_enable_button
+string common_google_play_services_enable_text
+string common_google_play_services_enable_title
+string common_google_play_services_install_button
+string common_google_play_services_install_text
+string common_google_play_services_install_title
+string common_google_play_services_notification_channel_name
+string common_google_play_services_notification_ticker
+string common_google_play_services_unknown_issue
+string common_google_play_services_unsupported_text
+string common_google_play_services_update_button
+string common_google_play_services_update_text
+string common_google_play_services_update_title
+string common_google_play_services_updating_text
+string common_google_play_services_wear_update_text
+string common_open_on_phone
+string common_signin_button_text
+string common_signin_button_text_long
 string error_a11y_label
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
@@ -4561,7 +4733,6 @@ style Theme_Design_Light
 style Theme_Design_Light_BottomSheetDialog
 style Theme_Design_Light_NoActionBar
 style Theme_Design_NoActionBar
-style Theme_Farmmate1
 style Theme_Material3_Dark
 style Theme_Material3_Dark_BottomSheetDialog
 style Theme_Material3_Dark_Dialog
@@ -4636,6 +4807,7 @@ style Theme_MaterialComponents_Light_NoActionBar
 style Theme_MaterialComponents_Light_NoActionBar_Bridge
 style Theme_MaterialComponents_NoActionBar
 style Theme_MaterialComponents_NoActionBar_Bridge
+style Theme_MyApplication
 style ThemeOverlay_AppCompat
 style ThemeOverlay_AppCompat_ActionBar
 style ThemeOverlay_AppCompat_Dark
@@ -5197,6 +5369,7 @@ styleable LinearLayoutCompat android_gravity android_orientation android_baselin
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable LinearProgressIndicator indeterminateAnimationType indicatorDirectionLinear
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
+styleable LoadingImageView circleCrop imageAspectRatio imageAspectRatioAdjust
 styleable MaterialAlertDialog backgroundInsetBottom backgroundInsetEnd backgroundInsetStart backgroundInsetTop
 styleable MaterialAlertDialogTheme materialAlertDialogBodyTextStyle materialAlertDialogButtonSpacerVisibility materialAlertDialogTheme materialAlertDialogTitleIconStyle materialAlertDialogTitlePanelStyle materialAlertDialogTitleTextStyle
 styleable MaterialAutoCompleteTextView android_inputType android_popupElevation simpleItemLayout simpleItemSelectedColor simpleItemSelectedRippleColor simpleItems
@@ -5246,6 +5419,7 @@ styleable SearchView android_textAppearance android_focusable android_maxWidth a
 styleable ShapeAppearance cornerFamily cornerFamilyBottomLeft cornerFamilyBottomRight cornerFamilyTopLeft cornerFamilyTopRight cornerSize cornerSizeBottomLeft cornerSizeBottomRight cornerSizeTopLeft cornerSizeTopRight
 styleable ShapeableImageView contentPadding contentPaddingBottom contentPaddingEnd contentPaddingLeft contentPaddingRight contentPaddingStart contentPaddingTop shapeAppearance shapeAppearanceOverlay strokeColor strokeWidth
 styleable SideSheetBehavior_Layout android_maxWidth android_maxHeight android_elevation backgroundTint behavior_draggable coplanarSiblingViewId shapeAppearance shapeAppearanceOverlay
+styleable SignInButton buttonSize colorScheme scopeUris
 styleable Slider android_enabled android_value android_stepSize android_valueFrom android_valueTo haloColor haloRadius labelBehavior labelStyle minTouchTargetSize thumbColor thumbElevation thumbRadius thumbStrokeColor thumbStrokeWidth tickColor tickColorActive tickColorInactive tickRadiusActive tickRadiusInactive tickVisible trackColor trackColorActive trackColorInactive trackHeight
 styleable Snackbar snackbarButtonStyle snackbarStyle snackbarTextViewStyle
 styleable SnackbarLayout android_maxWidth actionTextColorAlpha animationMode backgroundOverlayColorAlpha backgroundTint backgroundTintMode elevation maxActionInlineWidth shapeAppearance shapeAppearanceOverlay
@@ -5276,3 +5450,4 @@ styleable ViewTransition android_id SharedValue SharedValueId clearsTag duration
 styleable include constraintSet
 xml backup_rules
 xml data_extraction_rules
+xml network_security_config

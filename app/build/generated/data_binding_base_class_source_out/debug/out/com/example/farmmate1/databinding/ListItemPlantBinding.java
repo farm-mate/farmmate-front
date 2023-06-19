@@ -21,25 +21,20 @@ public final class ListItemPlantBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final TextView listItemName;
+  public final TextView plGreet;
 
   @NonNull
-  public final ImageView listItemProfile;
+  public final TextView plName;
 
   @NonNull
-  public final TextView listItemStartdate;
+  public final ImageView plProfile;
 
-  @NonNull
-  public final ImageView plantInfoBackIb;
-
-  private ListItemPlantBinding(@NonNull ConstraintLayout rootView, @NonNull TextView listItemName,
-      @NonNull ImageView listItemProfile, @NonNull TextView listItemStartdate,
-      @NonNull ImageView plantInfoBackIb) {
+  private ListItemPlantBinding(@NonNull ConstraintLayout rootView, @NonNull TextView plGreet,
+      @NonNull TextView plName, @NonNull ImageView plProfile) {
     this.rootView = rootView;
-    this.listItemName = listItemName;
-    this.listItemProfile = listItemProfile;
-    this.listItemStartdate = listItemStartdate;
-    this.plantInfoBackIb = plantInfoBackIb;
+    this.plGreet = plGreet;
+    this.plName = plName;
+    this.plProfile = plProfile;
   }
 
   @Override
@@ -69,32 +64,25 @@ public final class ListItemPlantBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.list_item_name;
-      TextView listItemName = ViewBindings.findChildViewById(rootView, id);
-      if (listItemName == null) {
+      id = R.id.pl_greet;
+      TextView plGreet = ViewBindings.findChildViewById(rootView, id);
+      if (plGreet == null) {
         break missingId;
       }
 
-      id = R.id.list_item_profile;
-      ImageView listItemProfile = ViewBindings.findChildViewById(rootView, id);
-      if (listItemProfile == null) {
+      id = R.id.pl_name;
+      TextView plName = ViewBindings.findChildViewById(rootView, id);
+      if (plName == null) {
         break missingId;
       }
 
-      id = R.id.list_item_startdate;
-      TextView listItemStartdate = ViewBindings.findChildViewById(rootView, id);
-      if (listItemStartdate == null) {
+      id = R.id.pl_profile;
+      ImageView plProfile = ViewBindings.findChildViewById(rootView, id);
+      if (plProfile == null) {
         break missingId;
       }
 
-      id = R.id.plant_info_back_ib;
-      ImageView plantInfoBackIb = ViewBindings.findChildViewById(rootView, id);
-      if (plantInfoBackIb == null) {
-        break missingId;
-      }
-
-      return new ListItemPlantBinding((ConstraintLayout) rootView, listItemName, listItemProfile,
-          listItemStartdate, plantInfoBackIb);
+      return new ListItemPlantBinding((ConstraintLayout) rootView, plGreet, plName, plProfile);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

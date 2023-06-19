@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/list_item_profile"
+        android:id="@+id/pl_profile"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="24dp"
@@ -18,40 +18,26 @@
         app:srcCompat="@drawable/strawberry" />
 
     <TextView
-        android:id="@+id/list_item_name"
+        android:id="@+id/pl_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="딸기"
-        android:textColor="#000000"
-        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/list_item_profile"
-        app:layout_constraintTop_toTopOf="@+id/list_item_profile" />
+        app:layout_constraintStart_toEndOf="@+id/pl_profile"
+        app:layout_constraintTop_toTopOf="@+id/pl_profile" />
 
     <TextView
-        android:id="@+id/list_item_startdate"
+        android:id="@+id/pl_greet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="2023.04.19"
-        android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/list_item_profile"
-        app:layout_constraintStart_toEndOf="@+id/list_item_profile"
-        app:layout_constraintTop_toBottomOf="@+id/list_item_name" />
-
-    <ImageView
-        android:id="@+id/plant_info_back_ib"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="24dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/star_filled"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/list_item_profile" />
+        app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
+        app:layout_constraintStart_toEndOf="@+id/pl_profile"
+        app:layout_constraintTop_toBottomOf="@+id/pl_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
