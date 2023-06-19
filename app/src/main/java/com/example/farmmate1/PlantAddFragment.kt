@@ -1,6 +1,7 @@
 package com.example.farmmate1
 
 import android.os.Bundle
+import android.util.Log
 import android.app.DatePickerDialog
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,9 @@ import android.view.ViewGroup
 import android.widget.*
 import com.example.farmmate1.databinding.FragmentPlantAddBinding
 import java.util.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class PlantAddFragment : Fragment() {
@@ -30,6 +34,7 @@ class PlantAddFragment : Fragment() {
         return view
     }
 
+    private lateinit var plant: Plant
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,7 +58,37 @@ class PlantAddFragment : Fragment() {
 
         // 등록하기 버튼 클릭 후 나의 식물 페이지로 이동, 새로운 아이템 추가됨
         binding.plantAddBtnEnroll.setOnClickListener{
-            moveToPlantFragment()
+
+            val profile = R.drawable.strawberry // 프로필 이미지
+            val name = binding.plantAddEtName.text.toString() // 사용자가 입력한 이름
+            val startDate = binding.plantAddTvSelectdate.text.toString() // 사용자가 선택한 시작일
+            val favorite = R.drawable.star_filled // 즐겨찾기 이미지
+
+            plant = Plant(profile, name, startDate, favorite)
+
+            // Retrofit 인스턴스 생성
+            val retrofit = RetrofitClient.instance
+            val apiService = retrofit.create(ApiService::class.java)
+
+            // 데이터 요청
+            apiService.createPlant(plant).enqueue(object : Callback<Plant> {
+                override fun onResponse(call: Call<Plant>, response: Response<Plant>) {
+                    if (response.isSuccessful) {
+                        val createdPlant = response.body()
+                        // 생성된 식물에 대한 처리를 진행할 수 있습니다.
+                        Log.d("PlantAddFragment", "Plant created: $createdPlant")
+                        moveToPlantFragment()
+                    } else {
+                        // API 요청 실패 처리
+                        Log.e("PlantAddFragment", "Failed to create plant: ${response.message()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<Plant>, t: Throwable) {
+                    // 통신 오류 처리
+                    Log.e("PlantAddFragment", "Network error: ${t.message}")
+                }
+            })
         }
     }
 
