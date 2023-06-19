@@ -1,5 +1,6 @@
 package com.example.farmmate1
 
+import HomeFragment
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,10 +10,15 @@ import androidx.fragment.app.Fragment
 import com.example.farmmate1.databinding.ActivityMainBinding
 import com.example.farmmate1.databinding.FragmentDiagnosisBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.Calendar
+import java.util.*
 
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DiaryDataListener {
+    override fun onDiaryDataReceived(date: Calendar, data: String) {
+        // 데이터 처리 로직을 여기에 구현합니다.
+    }
 
 //    private var mBinding: ActivityMainBinding? = null
 //    private val binding get() = mBinding!!
