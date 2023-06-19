@@ -33,6 +33,9 @@ public final class FragmentPlantAddBinding implements ViewBinding {
   public final ImageButton plantAddBackIb;
 
   @NonNull
+  public final EditText plantAddEtDate;
+
+  @NonNull
   public final EditText plantAddEtLocation;
 
   @NonNull
@@ -72,9 +75,6 @@ public final class FragmentPlantAddBinding implements ViewBinding {
   public final ConstraintLayout plantAddLayoutName;
 
   @NonNull
-  public final ImageButton plantAddLocationIb;
-
-  @NonNull
   public final ConstraintLayout plantAddSelectCl;
 
   @NonNull
@@ -104,27 +104,24 @@ public final class FragmentPlantAddBinding implements ViewBinding {
   @NonNull
   public final TextView plantAddTvSelect;
 
-  @NonNull
-  public final TextView plantAddTvSelectdate;
-
   private FragmentPlantAddBinding(@NonNull FrameLayout rootView, @NonNull Button button3,
-      @NonNull ImageButton plantAddBackIb, @NonNull EditText plantAddEtLocation,
-      @NonNull EditText plantAddEtMemo, @NonNull EditText plantAddEtName,
-      @NonNull ConstraintLayout plantAddFragmentLayoutCl,
+      @NonNull ImageButton plantAddBackIb, @NonNull EditText plantAddEtDate,
+      @NonNull EditText plantAddEtLocation, @NonNull EditText plantAddEtMemo,
+      @NonNull EditText plantAddEtName, @NonNull ConstraintLayout plantAddFragmentLayoutCl,
       @NonNull LinearLayout plantAddFragmentSelectLl, @NonNull ScrollView plantAddFragmentSv,
       @NonNull ConstraintLayout plantAddFragmentTopCl, @NonNull ImageButton plantAddIbImage,
       @NonNull ConstraintLayout plantAddLayoutDate, @NonNull ConstraintLayout plantAddLayoutImage,
       @NonNull ConstraintLayout plantAddLayoutLocation,
       @NonNull ConstraintLayout plantAddLayoutMemo, @NonNull ConstraintLayout plantAddLayoutName,
-      @NonNull ImageButton plantAddLocationIb, @NonNull ConstraintLayout plantAddSelectCl,
-      @NonNull Spinner plantAddSpinnerSelect, @NonNull TextView plantAddTitleTv,
-      @NonNull TextView plantAddTvDate, @NonNull TextView plantAddTvImage,
-      @NonNull TextView plantAddTvImageExplain, @NonNull TextView plantAddTvLocation,
-      @NonNull TextView plantAddTvMemo, @NonNull TextView plantAddTvName,
-      @NonNull TextView plantAddTvSelect, @NonNull TextView plantAddTvSelectdate) {
+      @NonNull ConstraintLayout plantAddSelectCl, @NonNull Spinner plantAddSpinnerSelect,
+      @NonNull TextView plantAddTitleTv, @NonNull TextView plantAddTvDate,
+      @NonNull TextView plantAddTvImage, @NonNull TextView plantAddTvImageExplain,
+      @NonNull TextView plantAddTvLocation, @NonNull TextView plantAddTvMemo,
+      @NonNull TextView plantAddTvName, @NonNull TextView plantAddTvSelect) {
     this.rootView = rootView;
     this.button3 = button3;
     this.plantAddBackIb = plantAddBackIb;
+    this.plantAddEtDate = plantAddEtDate;
     this.plantAddEtLocation = plantAddEtLocation;
     this.plantAddEtMemo = plantAddEtMemo;
     this.plantAddEtName = plantAddEtName;
@@ -138,7 +135,6 @@ public final class FragmentPlantAddBinding implements ViewBinding {
     this.plantAddLayoutLocation = plantAddLayoutLocation;
     this.plantAddLayoutMemo = plantAddLayoutMemo;
     this.plantAddLayoutName = plantAddLayoutName;
-    this.plantAddLocationIb = plantAddLocationIb;
     this.plantAddSelectCl = plantAddSelectCl;
     this.plantAddSpinnerSelect = plantAddSpinnerSelect;
     this.plantAddTitleTv = plantAddTitleTv;
@@ -149,7 +145,6 @@ public final class FragmentPlantAddBinding implements ViewBinding {
     this.plantAddTvMemo = plantAddTvMemo;
     this.plantAddTvName = plantAddTvName;
     this.plantAddTvSelect = plantAddTvSelect;
-    this.plantAddTvSelectdate = plantAddTvSelectdate;
   }
 
   @Override
@@ -188,6 +183,12 @@ public final class FragmentPlantAddBinding implements ViewBinding {
       id = R.id.plant_add_back_ib;
       ImageButton plantAddBackIb = ViewBindings.findChildViewById(rootView, id);
       if (plantAddBackIb == null) {
+        break missingId;
+      }
+
+      id = R.id.plant_add_et_date;
+      EditText plantAddEtDate = ViewBindings.findChildViewById(rootView, id);
+      if (plantAddEtDate == null) {
         break missingId;
       }
 
@@ -269,12 +270,6 @@ public final class FragmentPlantAddBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.plant_add_location_ib;
-      ImageButton plantAddLocationIb = ViewBindings.findChildViewById(rootView, id);
-      if (plantAddLocationIb == null) {
-        break missingId;
-      }
-
       id = R.id.plant_add_select_cl;
       ConstraintLayout plantAddSelectCl = ViewBindings.findChildViewById(rootView, id);
       if (plantAddSelectCl == null) {
@@ -335,20 +330,14 @@ public final class FragmentPlantAddBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.plant_add_tv_selectdate;
-      TextView plantAddTvSelectdate = ViewBindings.findChildViewById(rootView, id);
-      if (plantAddTvSelectdate == null) {
-        break missingId;
-      }
-
       return new FragmentPlantAddBinding((FrameLayout) rootView, button3, plantAddBackIb,
-          plantAddEtLocation, plantAddEtMemo, plantAddEtName, plantAddFragmentLayoutCl,
-          plantAddFragmentSelectLl, plantAddFragmentSv, plantAddFragmentTopCl, plantAddIbImage,
-          plantAddLayoutDate, plantAddLayoutImage, plantAddLayoutLocation, plantAddLayoutMemo,
-          plantAddLayoutName, plantAddLocationIb, plantAddSelectCl, plantAddSpinnerSelect,
-          plantAddTitleTv, plantAddTvDate, plantAddTvImage, plantAddTvImageExplain,
-          plantAddTvLocation, plantAddTvMemo, plantAddTvName, plantAddTvSelect,
-          plantAddTvSelectdate);
+          plantAddEtDate, plantAddEtLocation, plantAddEtMemo, plantAddEtName,
+          plantAddFragmentLayoutCl, plantAddFragmentSelectLl, plantAddFragmentSv,
+          plantAddFragmentTopCl, plantAddIbImage, plantAddLayoutDate, plantAddLayoutImage,
+          plantAddLayoutLocation, plantAddLayoutMemo, plantAddLayoutName, plantAddSelectCl,
+          plantAddSpinnerSelect, plantAddTitleTv, plantAddTvDate, plantAddTvImage,
+          plantAddTvImageExplain, plantAddTvLocation, plantAddTvMemo, plantAddTvName,
+          plantAddTvSelect);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -4,25 +4,106 @@ package com.example.farmmate1.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
 import com.example.farmmate1.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentDiaryBinding implements ViewBinding {
   @NonNull
-  private final FrameLayout rootView;
+  private final ConstraintLayout rootView;
 
-  private FragmentDiaryBinding(@NonNull FrameLayout rootView) {
+  @NonNull
+  public final CalendarView diaryCalview;
+
+  @NonNull
+  public final ConstraintLayout diaryCl;
+
+  @NonNull
+  public final Button diaryCucumberBtn;
+
+  @NonNull
+  public final TextView diaryFragmentTvCl;
+
+  @NonNull
+  public final HorizontalScrollView diaryHsc;
+
+  @NonNull
+  public final ConstraintLayout diaryLayoutTitleCl;
+
+  @NonNull
+  public final LinearLayout diaryLinearlayout;
+
+  @NonNull
+  public final Button diaryPapricaBtn;
+
+  @NonNull
+  public final Button diaryPepperBtn;
+
+  @NonNull
+  public final ConstraintLayout diaryRegistBtnCl;
+
+  @NonNull
+  public final Button diaryRegitstBtn;
+
+  @NonNull
+  public final ScrollView diarySc;
+
+  @NonNull
+  public final Button diaryStrawberryBtn;
+
+  @NonNull
+  public final ListView diaryTodoListView;
+
+  @NonNull
+  public final Button diaryTomatoBtn;
+
+  @NonNull
+  public final Button diaryWholeBtn;
+
+  private FragmentDiaryBinding(@NonNull ConstraintLayout rootView,
+      @NonNull CalendarView diaryCalview, @NonNull ConstraintLayout diaryCl,
+      @NonNull Button diaryCucumberBtn, @NonNull TextView diaryFragmentTvCl,
+      @NonNull HorizontalScrollView diaryHsc, @NonNull ConstraintLayout diaryLayoutTitleCl,
+      @NonNull LinearLayout diaryLinearlayout, @NonNull Button diaryPapricaBtn,
+      @NonNull Button diaryPepperBtn, @NonNull ConstraintLayout diaryRegistBtnCl,
+      @NonNull Button diaryRegitstBtn, @NonNull ScrollView diarySc,
+      @NonNull Button diaryStrawberryBtn, @NonNull ListView diaryTodoListView,
+      @NonNull Button diaryTomatoBtn, @NonNull Button diaryWholeBtn) {
     this.rootView = rootView;
+    this.diaryCalview = diaryCalview;
+    this.diaryCl = diaryCl;
+    this.diaryCucumberBtn = diaryCucumberBtn;
+    this.diaryFragmentTvCl = diaryFragmentTvCl;
+    this.diaryHsc = diaryHsc;
+    this.diaryLayoutTitleCl = diaryLayoutTitleCl;
+    this.diaryLinearlayout = diaryLinearlayout;
+    this.diaryPapricaBtn = diaryPapricaBtn;
+    this.diaryPepperBtn = diaryPepperBtn;
+    this.diaryRegistBtnCl = diaryRegistBtnCl;
+    this.diaryRegitstBtn = diaryRegitstBtn;
+    this.diarySc = diarySc;
+    this.diaryStrawberryBtn = diaryStrawberryBtn;
+    this.diaryTodoListView = diaryTodoListView;
+    this.diaryTomatoBtn = diaryTomatoBtn;
+    this.diaryWholeBtn = diaryWholeBtn;
   }
 
   @Override
   @NonNull
-  public FrameLayout getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -43,10 +124,112 @@ public final class FragmentDiaryBinding implements ViewBinding {
 
   @NonNull
   public static FragmentDiaryBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.diary_calview;
+      CalendarView diaryCalview = ViewBindings.findChildViewById(rootView, id);
+      if (diaryCalview == null) {
+        break missingId;
+      }
 
-    return new FragmentDiaryBinding((FrameLayout) rootView);
+      id = R.id.diary_cl;
+      ConstraintLayout diaryCl = ViewBindings.findChildViewById(rootView, id);
+      if (diaryCl == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_cucumber_btn;
+      Button diaryCucumberBtn = ViewBindings.findChildViewById(rootView, id);
+      if (diaryCucumberBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_fragment_tv_cl;
+      TextView diaryFragmentTvCl = ViewBindings.findChildViewById(rootView, id);
+      if (diaryFragmentTvCl == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_hsc;
+      HorizontalScrollView diaryHsc = ViewBindings.findChildViewById(rootView, id);
+      if (diaryHsc == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_layout_title_cl;
+      ConstraintLayout diaryLayoutTitleCl = ViewBindings.findChildViewById(rootView, id);
+      if (diaryLayoutTitleCl == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_linearlayout;
+      LinearLayout diaryLinearlayout = ViewBindings.findChildViewById(rootView, id);
+      if (diaryLinearlayout == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_paprica_btn;
+      Button diaryPapricaBtn = ViewBindings.findChildViewById(rootView, id);
+      if (diaryPapricaBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_pepper_btn;
+      Button diaryPepperBtn = ViewBindings.findChildViewById(rootView, id);
+      if (diaryPepperBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_regist_btn_cl;
+      ConstraintLayout diaryRegistBtnCl = ViewBindings.findChildViewById(rootView, id);
+      if (diaryRegistBtnCl == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_regitst_btn;
+      Button diaryRegitstBtn = ViewBindings.findChildViewById(rootView, id);
+      if (diaryRegitstBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_sc;
+      ScrollView diarySc = ViewBindings.findChildViewById(rootView, id);
+      if (diarySc == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_strawberry_btn;
+      Button diaryStrawberryBtn = ViewBindings.findChildViewById(rootView, id);
+      if (diaryStrawberryBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_todo_list_view;
+      ListView diaryTodoListView = ViewBindings.findChildViewById(rootView, id);
+      if (diaryTodoListView == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_tomato_btn;
+      Button diaryTomatoBtn = ViewBindings.findChildViewById(rootView, id);
+      if (diaryTomatoBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.diary_whole_btn;
+      Button diaryWholeBtn = ViewBindings.findChildViewById(rootView, id);
+      if (diaryWholeBtn == null) {
+        break missingId;
+      }
+
+      return new FragmentDiaryBinding((ConstraintLayout) rootView, diaryCalview, diaryCl,
+          diaryCucumberBtn, diaryFragmentTvCl, diaryHsc, diaryLayoutTitleCl, diaryLinearlayout,
+          diaryPapricaBtn, diaryPepperBtn, diaryRegistBtnCl, diaryRegitstBtn, diarySc,
+          diaryStrawberryBtn, diaryTodoListView, diaryTomatoBtn, diaryWholeBtn);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }
