@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,10 +13,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/plant_add_fragment_layout_cl"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".TestResultActivity">
+            tools:context=".PlantAddFragment">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/plant_add_fragment_top_cl"
@@ -117,6 +117,7 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="8dp"
                         android:ems="10"
+                        android:maxLength="10"
                         android:hint="입력하기"
                         android:inputType="textPersonName"
                         android:textSize="16sp"
@@ -145,8 +146,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <EditText
-                        android:id="@+id/plant_add_et_date"
+                    <TextView
+                        android:id="@+id/plant_add_tv_selectdate"
                         android:layout_width="300dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="8dp"
@@ -173,10 +174,21 @@
                         android:layout_marginTop="8dp"
                         android:text="재배지 입력"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:textSize="16dp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/plant_add_location_ib"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/location"
+                        app:layout_constraintBottom_toBottomOf="@+id/plant_add_tv_location"
+                        app:layout_constraintStart_toEndOf="@+id/plant_add_tv_location" />
 
                     <EditText
                         android:id="@+id/plant_add_et_location"
@@ -214,12 +226,15 @@
                     <EditText
                         android:id="@+id/plant_add_et_memo"
                         android:layout_width="300dp"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:ems="50"
                         android:hint="메모 작성"
-                        android:inputType="textPersonName"
                         android:textSize="16sp"
+                        android:maxLength="60"
+                        android:maxLines="5"
+                        android:inputType="text|textMultiLine"
+                        android:scrollbars="vertical"
                         app:layout_constraintStart_toStartOf="@+id/plant_add_tv_memo"
                         app:layout_constraintTop_toBottomOf="@+id/plant_add_tv_memo" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -228,6 +243,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:paddingBottom="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/plant_add_layout_memo">
@@ -270,18 +286,16 @@
                         app:layout_constraintTop_toTopOf="@+id/plant_add_ib_image" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/plant_add_btn_enroll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="등록하기"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/plant_add_fragment_select_ll" />
             </LinearLayout>
-
-
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="등록하기"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/plant_add_fragment_select_ll" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
