@@ -45,6 +45,7 @@ class HomeFragment : Fragment() {
     private lateinit var temperature: TextView
     private lateinit var weatherTip: TextView
     private lateinit var weatherIcon: ImageView
+    private lateinit var humidity:TextView
 
     private lateinit var mLocationManager: LocationManager
     private lateinit var mLocationListener: LocationListener
@@ -66,6 +67,7 @@ class HomeFragment : Fragment() {
             weatherState = weatherTv
             //weatherTip = weatherTipTv
             weatherIcon = weatherIc
+            humidity =
         }
     }
 
