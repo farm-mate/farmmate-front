@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +13,6 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/plant_info_fragment_layout_cl"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".PlantInfoActivity">
@@ -84,6 +84,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/plant_info_tv_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="딸기1"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/plant_info_tv_name"
+                    app:layout_constraintStart_toEndOf="@+id/plant_info_tv_name" />
+
                 <Button
                     android:id="@+id/plant_info_btn_test"
                     android:layout_width="262dp"
@@ -125,12 +135,21 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <Button
+                    android:id="@+id/plant_list_btn_edit"
+                    android:layout_width="66dp"
+                    android:layout_height="44dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="수정"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/plant_infor_tv_basicinfo"/>
+
                 <TextView
                     android:id="@+id/plant_info_tv_first"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     android:text="처음 심은 날짜"
                     android:textColor="@color/black"
                     android:textStyle="bold"
@@ -147,63 +166,46 @@
                     app:layout_constraintTop_toTopOf="@+id/plant_info_tv_first" />
 
                 <TextView
-                    android:id="@+id/plant_info_tv_water"
+                    android:id="@+id/plant_info_tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="최근 물 준 날짜"
+                    android:text="재배지"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/plant_info_tv_first"
                     app:layout_constraintTop_toBottomOf="@+id/plant_info_tv_first" />
 
                 <TextView
-                    android:id="@+id/plant_info_tv_waterdate"
+                    android:id="@+id/plant_info_tv_getlocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="물 준 날짜 가져오기"
+                    android:text="재배지 받아오기"
                     app:layout_constraintStart_toStartOf="@+id/plant_info_tv_firstdate"
-                    app:layout_constraintTop_toTopOf="@+id/plant_info_tv_water" />
+                    app:layout_constraintTop_toTopOf="@+id/plant_info_tv_location" />
 
                 <TextView
-                    android:id="@+id/plant_info_tv_fert"
+                    android:id="@+id/plant_info_tv_memo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="최근 비료 준 날짜"
+                    android:text="메모"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/plant_info_tv_water"
-                    app:layout_constraintTop_toBottomOf="@+id/plant_info_tv_water" />
+                    app:layout_constraintStart_toStartOf="@+id/plant_info_tv_location"
+                    app:layout_constraintTop_toBottomOf="@+id/plant_info_tv_location" />
 
                 <TextView
-                    android:id="@+id/plant_info_tv_fertdate"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/plant_info_tv_getmemo"
+                    android:layout_width="262dp"
                     android:layout_height="wrap_content"
-                    android:text="비료 준 날짜 가져오기"
-                    app:layout_constraintStart_toStartOf="@+id/plant_info_tv_waterdate"
-                    app:layout_constraintTop_toTopOf="@+id/plant_info_tv_fert" />
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Lorem ipsum dolor sit amet consectetur. Congue fringilla elit mattis enim nunc magna elementum."
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/plant_info_tv_memo"
+                    app:layout_constraintTop_toBottomOf="@+id/plant_info_tv_memo" />
 
-                <TextView
-                    android:id="@+id/plant_info_tv_pest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="최근 농약 준 날짜"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/plant_info_tv_fert"
-                    app:layout_constraintTop_toBottomOf="@+id/plant_info_tv_fert" />
-
-                <TextView
-                    android:id="@+id/plant_info_tv_pestdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="농약 준 날짜 가져오기"
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintEnd_toEndOf="@id/plant_info_layout_basic"
-                    app:layout_constraintStart_toStartOf="@+id/plant_info_tv_fertdate"
-                    app:layout_constraintTop_toTopOf="@+id/plant_info_tv_pest" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
