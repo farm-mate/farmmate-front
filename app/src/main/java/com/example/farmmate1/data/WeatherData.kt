@@ -9,7 +9,8 @@ class WeatherData {
     lateinit var weatherType: String
     private var weatherId: Int = 0
     private var tempInt: Int =0
-    private var humidity:Int =0
+    lateinit var humidityString:String
+    var humidityInt:Int =0
 
     fun fromJson(jsonObject: JSONObject?): WeatherData? {
         try{
@@ -20,13 +21,29 @@ class WeatherData {
             val roundedTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp")-273.15).toInt()
             weatherData.tempString = roundedTemp.toString()
             weatherData.tempInt = roundedTemp
-            weatherData.humidity = jsonObject.getJSONObject("main").getInt("humidity")
+            val roundedHumidity: Int = (jsonObject.getJSONObject("main").getDouble("humidity")).toInt()
+            weatherData.humidityString = roundedHumidity.toString()
             return weatherData
         }catch (e: JSONException){
             e.printStackTrace()
             return null
         }
     }
+
+    fun updateData(jsonObject: JSONObject?) {
+        try {
+            weatherId = jsonObject?.getJSONArray("weather")?.getJSONObject(0)?.getInt("id")!!
+            weatherType = jsonObject.getJSONArray("weather").getJSONObject(0).getString("main")
+            icon = updateWeatherIcon(weatherId)
+            val roundedTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp") - 273.15).toInt()
+            tempString = roundedTemp.toString()
+            tempInt = roundedTemp
+            
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }
+
     private fun updateWeatherIcon(condition: Int): String {
         if (condition in 200..299) {
             return "thunderstorm"

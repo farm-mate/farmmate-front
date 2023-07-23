@@ -133,7 +133,7 @@
                     android:id="@+id/home_fragment_weather_cl_humid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="습도 : 89% "
+                    android:text="습도 : 00 "
                     android:textColor="@color/black"
                     android:textSize="15dp"
                     app:layout_constraintEnd_toStartOf="@id/home_fragment_weather_cl_tempe"
