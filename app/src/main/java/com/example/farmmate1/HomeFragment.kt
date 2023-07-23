@@ -45,6 +45,7 @@ class HomeFragment : Fragment() {
     private lateinit var temperature: TextView
     private lateinit var weatherTip: TextView
     private lateinit var weatherIcon: ImageView
+    private lateinit var humidity:TextView
 
     private lateinit var mLocationManager: LocationManager
     private lateinit var mLocationListener: LocationListener
@@ -66,6 +67,7 @@ class HomeFragment : Fragment() {
             weatherState = weatherTv
             //weatherTip = weatherTipTv
             weatherIcon = weatherIc
+            humidity = homeFragmentWeatherClHumid
         }
     }
 
@@ -116,6 +118,7 @@ class HomeFragment : Fragment() {
     private fun doNetworking(params: RequestParams) {
         val client = AsyncHttpClient()
 
+
         client.get(WEATHER_URL, params, object : JsonHttpResponseHandler() {
             override fun onSuccess(
                 statusCode: Int,
@@ -138,6 +141,7 @@ class HomeFragment : Fragment() {
             "drawable",
             activity?.packageName
         )
+        humidity.text= "습도 :"+weather.humidityString + " %"
         weatherIcon.setImageResource(resourceID)
     }
 
