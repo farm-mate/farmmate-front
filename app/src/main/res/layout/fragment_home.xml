@@ -144,7 +144,7 @@
                     android:id="@+id/home_fragment_weather_cl_max_tempe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="최고 : 29°C "
+                    android:text="최고 : 00°C "
                     android:textColor="@color/black"
                     android:textSize="15dp"
                     app:layout_constraintEnd_toEndOf="@id/home_fragment_weather_cl_humid"
