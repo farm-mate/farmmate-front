@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,9 +37,6 @@ public final class FragmentPlantInfoBinding implements ViewBinding {
   public final Button plantInfoBtnTest;
 
   @NonNull
-  public final EditText plantInfoEtFirstdate;
-
-  @NonNull
   public final ConstraintLayout plantInfoFragmentLayoutCl;
 
   @NonNull
@@ -65,6 +61,9 @@ public final class FragmentPlantInfoBinding implements ViewBinding {
   public final TextView plantInfoTvFirst;
 
   @NonNull
+  public final TextView plantInfoTvFirstdate;
+
+  @NonNull
   public final TextView plantInfoTvName;
 
   @NonNull
@@ -87,21 +86,20 @@ public final class FragmentPlantInfoBinding implements ViewBinding {
 
   private FragmentPlantInfoBinding(@NonNull FrameLayout rootView, @NonNull Button planInfoBtnDiary,
       @NonNull ConstraintLayout plantAddFragmentTopCl, @NonNull ImageButton plantInfoBackIb,
-      @NonNull Button plantInfoBtnTest, @NonNull EditText plantInfoEtFirstdate,
-      @NonNull ConstraintLayout plantInfoFragmentLayoutCl, @NonNull ScrollView plantInfoFragmentSv,
-      @NonNull ImageView plantInfoIvProfile, @NonNull ConstraintLayout plantInfoLayoutBasic,
+      @NonNull Button plantInfoBtnTest, @NonNull ConstraintLayout plantInfoFragmentLayoutCl,
+      @NonNull ScrollView plantInfoFragmentSv, @NonNull ImageView plantInfoIvProfile,
+      @NonNull ConstraintLayout plantInfoLayoutBasic,
       @NonNull ConstraintLayout plantInfoLayoutTestdiary, @NonNull TextView plantInfoTvFert,
       @NonNull TextView plantInfoTvFertdate, @NonNull TextView plantInfoTvFirst,
-      @NonNull TextView plantInfoTvName, @NonNull TextView plantInfoTvPest,
-      @NonNull TextView plantInfoTvPestdate, @NonNull TextView plantInfoTvTitle,
-      @NonNull TextView plantInfoTvWater, @NonNull TextView plantInfoTvWaterdate,
-      @NonNull TextView plantInforTvBasicinfo) {
+      @NonNull TextView plantInfoTvFirstdate, @NonNull TextView plantInfoTvName,
+      @NonNull TextView plantInfoTvPest, @NonNull TextView plantInfoTvPestdate,
+      @NonNull TextView plantInfoTvTitle, @NonNull TextView plantInfoTvWater,
+      @NonNull TextView plantInfoTvWaterdate, @NonNull TextView plantInforTvBasicinfo) {
     this.rootView = rootView;
     this.planInfoBtnDiary = planInfoBtnDiary;
     this.plantAddFragmentTopCl = plantAddFragmentTopCl;
     this.plantInfoBackIb = plantInfoBackIb;
     this.plantInfoBtnTest = plantInfoBtnTest;
-    this.plantInfoEtFirstdate = plantInfoEtFirstdate;
     this.plantInfoFragmentLayoutCl = plantInfoFragmentLayoutCl;
     this.plantInfoFragmentSv = plantInfoFragmentSv;
     this.plantInfoIvProfile = plantInfoIvProfile;
@@ -110,6 +108,7 @@ public final class FragmentPlantInfoBinding implements ViewBinding {
     this.plantInfoTvFert = plantInfoTvFert;
     this.plantInfoTvFertdate = plantInfoTvFertdate;
     this.plantInfoTvFirst = plantInfoTvFirst;
+    this.plantInfoTvFirstdate = plantInfoTvFirstdate;
     this.plantInfoTvName = plantInfoTvName;
     this.plantInfoTvPest = plantInfoTvPest;
     this.plantInfoTvPestdate = plantInfoTvPestdate;
@@ -170,12 +169,6 @@ public final class FragmentPlantInfoBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.plant_info_et_firstdate;
-      EditText plantInfoEtFirstdate = ViewBindings.findChildViewById(rootView, id);
-      if (plantInfoEtFirstdate == null) {
-        break missingId;
-      }
-
       id = R.id.plant_info_fragment_layout_cl;
       ConstraintLayout plantInfoFragmentLayoutCl = ViewBindings.findChildViewById(rootView, id);
       if (plantInfoFragmentLayoutCl == null) {
@@ -224,6 +217,12 @@ public final class FragmentPlantInfoBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.plant_info_tv_firstdate;
+      TextView plantInfoTvFirstdate = ViewBindings.findChildViewById(rootView, id);
+      if (plantInfoTvFirstdate == null) {
+        break missingId;
+      }
+
       id = R.id.plant_info_tv_name;
       TextView plantInfoTvName = ViewBindings.findChildViewById(rootView, id);
       if (plantInfoTvName == null) {
@@ -267,9 +266,9 @@ public final class FragmentPlantInfoBinding implements ViewBinding {
       }
 
       return new FragmentPlantInfoBinding((FrameLayout) rootView, planInfoBtnDiary,
-          plantAddFragmentTopCl, plantInfoBackIb, plantInfoBtnTest, plantInfoEtFirstdate,
-          plantInfoFragmentLayoutCl, plantInfoFragmentSv, plantInfoIvProfile, plantInfoLayoutBasic,
-          plantInfoLayoutTestdiary, plantInfoTvFert, plantInfoTvFertdate, plantInfoTvFirst,
+          plantAddFragmentTopCl, plantInfoBackIb, plantInfoBtnTest, plantInfoFragmentLayoutCl,
+          plantInfoFragmentSv, plantInfoIvProfile, plantInfoLayoutBasic, plantInfoLayoutTestdiary,
+          plantInfoTvFert, plantInfoTvFertdate, plantInfoTvFirst, plantInfoTvFirstdate,
           plantInfoTvName, plantInfoTvPest, plantInfoTvPestdate, plantInfoTvTitle, plantInfoTvWater,
           plantInfoTvWaterdate, plantInforTvBasicinfo);
     }

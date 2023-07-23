@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="HomeFragment">
+    >
 
     <ScrollView
         android:id="@+id/plant_add_fragment_sv"
@@ -48,6 +48,64 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_layout_title_cl">
+
+
+                <RelativeLayout
+                    android:id="@+id/weather_tip_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/weather_ic"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp" />
+
+                    <LinearLayout
+                        android:id="@+id/weather_txt_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_toEndOf="@id/weather_ic"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/temperature_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="25sp"
+                            tools:text="00" />
+
+                        <TextView
+                            android:id="@+id/weather_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Sunny" />
+
+                        <TextView
+                            android:id="@+id/weather_location_tv_homefragment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="27dp"
+                            android:text="청파동"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/home_fragment_weather_cl_date"
@@ -103,31 +161,6 @@
                     app:layout_constraintEnd_toEndOf="@id/home_fragment_weather_cl_tempe"
                     app:layout_constraintTop_toBottomOf="@id/home_fragment_weather_cl_tempe"
                     tools:ignore="TextSizeCheck" />
-
-                <ImageView
-                    android:id="@+id/weather_icon_im_homefragment"
-                    android:layout_width="68dp"
-                    android:layout_height="49dp"
-                    android:src="@drawable/cloudy"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/home_fragment_weather_cl_humid"
-                    app:layout_constraintHorizontal_bias="0.364"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.529" />
-
-                <TextView
-                    android:id="@+id/weather_location_tv_homefragment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_margin="5dp"
-                    android:text="청파동"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/weather_icon_im_homefragment"
-                    app:layout_constraintStart_toStartOf="@+id/weather_icon_im_homefragment"
-                    app:layout_constraintTop_toBottomOf="@+id/weather_icon_im_homefragment" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

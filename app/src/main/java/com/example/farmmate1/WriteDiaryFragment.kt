@@ -107,9 +107,9 @@ class WriteDiaryFragment : Fragment() {
         saveButton = view.findViewById(R.id.write_diary_register_btn)
 
 
-        saveButton.setOnClickListener {
-            sendDataToServer()
-        }
+//        saveButton.setOnClickListener {
+//            sendDataToServer()
+//        }
 
         // Retrofit 인스턴스 초기화
         val gson: Gson = GsonBuilder().setLenient().create()
@@ -247,33 +247,33 @@ class WriteDiaryFragment : Fragment() {
         }
     }
 
-    private fun sendDataToServer() {
-        val fertleValue = editTextFertle.text.toString()
-        val fertleUsageValue = editTextFertleUsage.text.toString()
-        val pesValue = editTextPes.text.toString()
-        val pesUsageValue = editTextPesUsage.text.toString()
-        val spinnerSelectedItem = spinner.selectedItem.toString()
-
-        // 데이터 객체 생성
-        val data = WriteDiaryData(spinnerSelectedItem,fertleValue,fertleUsageValue,pesValue,pesUsageValue)
-
-        // 데이터 전송 요청
-        val call: Call<Void> = writeDiaryInterface.sendData(data)
-        call.enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if (response.isSuccessful) {
-                    Toast.makeText(getActivity(),"Registered",Toast.LENGTH_SHORT).show();
-                    // 서버 응답이 성공적으로 받아졌을 때의 처리
-                } else {
-                    // 서버 응답이 실패일 때의 처리
-                }
-            }
-
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                // 네트워크 오류 처리
-            }
-        })
-    }
+//    private fun sendDataToServer() {
+//        val fertleValue = editTextFertle.text.toString()
+//        val fertleUsageValue = editTextFertleUsage.text.toString()
+//        val pesValue = editTextPes.text.toString()
+//        val pesUsageValue = editTextPesUsage.text.toString()
+//        val spinnerSelectedItem = spinner.selectedItem.toString()
+//
+//        // 데이터 객체 생성
+//        val data = WriteDiaryData(spinnerSelectedItem,fertleValue,fertleUsageValue,pesValue,pesUsageValue)
+//
+//        // 데이터 전송 요청
+//        val call: Call<Void> = writeDiaryInterface.sendData(data)
+//        call.enqueue(object : Callback<Void> {
+//            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+//                if (response.isSuccessful) {
+//                    Toast.makeText(getActivity(),"Registered",Toast.LENGTH_SHORT).show();
+//                    // 서버 응답이 성공적으로 받아졌을 때의 처리
+//                } else {
+//                    // 서버 응답이 실패일 때의 처리
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<Void>, t: Throwable) {
+//                // 네트워크 오류 처리
+//            }
+//        })
+//    }
 }
 
 

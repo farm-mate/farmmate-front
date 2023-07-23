@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -79,10 +80,22 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final ScrollView plantAddFragmentSv;
 
   @NonNull
-  public final ImageView weatherIconImHomefragment;
+  public final TextView temperatureTv;
+
+  @NonNull
+  public final ImageView weatherIc;
 
   @NonNull
   public final TextView weatherLocationTvHomefragment;
+
+  @NonNull
+  public final RelativeLayout weatherTipContainer;
+
+  @NonNull
+  public final TextView weatherTv;
+
+  @NonNull
+  public final LinearLayout weatherTxtContainer;
 
   private FragmentHomeBinding(@NonNull FrameLayout rootView, @NonNull Button button,
       @NonNull Button button2, @NonNull Button button3, @NonNull Button button4,
@@ -92,8 +105,10 @@ public final class FragmentHomeBinding implements ViewBinding {
       @NonNull TextView homeFragmentWeatherClHumid, @NonNull TextView homeFragmentWeatherClMaxTempe,
       @NonNull TextView homeFragmentWeatherClMinTempe, @NonNull TextView homeFragmentWeatherClTempe,
       @NonNull ConstraintLayout homeLayoutTitleCl, @NonNull LinearLayout myplantBtnHomefragment,
-      @NonNull ScrollView plantAddFragmentSv, @NonNull ImageView weatherIconImHomefragment,
-      @NonNull TextView weatherLocationTvHomefragment) {
+      @NonNull ScrollView plantAddFragmentSv, @NonNull TextView temperatureTv,
+      @NonNull ImageView weatherIc, @NonNull TextView weatherLocationTvHomefragment,
+      @NonNull RelativeLayout weatherTipContainer, @NonNull TextView weatherTv,
+      @NonNull LinearLayout weatherTxtContainer) {
     this.rootView = rootView;
     this.button = button;
     this.button2 = button2;
@@ -113,8 +128,12 @@ public final class FragmentHomeBinding implements ViewBinding {
     this.homeLayoutTitleCl = homeLayoutTitleCl;
     this.myplantBtnHomefragment = myplantBtnHomefragment;
     this.plantAddFragmentSv = plantAddFragmentSv;
-    this.weatherIconImHomefragment = weatherIconImHomefragment;
+    this.temperatureTv = temperatureTv;
+    this.weatherIc = weatherIc;
     this.weatherLocationTvHomefragment = weatherLocationTvHomefragment;
+    this.weatherTipContainer = weatherTipContainer;
+    this.weatherTv = weatherTv;
+    this.weatherTxtContainer = weatherTxtContainer;
   }
 
   @Override
@@ -248,9 +267,15 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.weather_icon_im_homefragment;
-      ImageView weatherIconImHomefragment = ViewBindings.findChildViewById(rootView, id);
-      if (weatherIconImHomefragment == null) {
+      id = R.id.temperature_tv;
+      TextView temperatureTv = ViewBindings.findChildViewById(rootView, id);
+      if (temperatureTv == null) {
+        break missingId;
+      }
+
+      id = R.id.weather_ic;
+      ImageView weatherIc = ViewBindings.findChildViewById(rootView, id);
+      if (weatherIc == null) {
         break missingId;
       }
 
@@ -260,12 +285,30 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.weather_tip_container;
+      RelativeLayout weatherTipContainer = ViewBindings.findChildViewById(rootView, id);
+      if (weatherTipContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.weather_tv;
+      TextView weatherTv = ViewBindings.findChildViewById(rootView, id);
+      if (weatherTv == null) {
+        break missingId;
+      }
+
+      id = R.id.weather_txt_container;
+      LinearLayout weatherTxtContainer = ViewBindings.findChildViewById(rootView, id);
+      if (weatherTxtContainer == null) {
+        break missingId;
+      }
+
       return new FragmentHomeBinding((FrameLayout) rootView, button, button2, button3, button4,
           button5, favoriteTv, homeFragment, homeFragmentMyplantTv, homeFragmentTitleTv,
           homeFragmentWeatherCl, homeFragmentWeatherClDate, homeFragmentWeatherClHumid,
           homeFragmentWeatherClMaxTempe, homeFragmentWeatherClMinTempe, homeFragmentWeatherClTempe,
-          homeLayoutTitleCl, myplantBtnHomefragment, plantAddFragmentSv, weatherIconImHomefragment,
-          weatherLocationTvHomefragment);
+          homeLayoutTitleCl, myplantBtnHomefragment, plantAddFragmentSv, temperatureTv, weatherIc,
+          weatherLocationTvHomefragment, weatherTipContainer, weatherTv, weatherTxtContainer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,314 +1,294 @@
 [
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_star_filled.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/star_filled.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_nine.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_nine.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_five.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_five.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_diagnosis.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_diagnosis.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_diagnosis_result.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_diagnosis_result.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_twelve.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_twelve.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_activity_intro.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/activity_intro.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_plant_info.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_plant_info.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_diary.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/diary.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_ic_home.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/ic_home.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_plant_add.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_plant_add.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_baseline_arrow_drop_down_24.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/baseline_arrow_drop_down_24.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_spinner_item_myplant.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/spinner_item_myplant.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_ic_settings.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/ic_settings.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_home.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_home.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_diary.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_diary.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_two.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_two.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_seven.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_seven.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/xml_backup_rules.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/xml/backup_rules.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_diagnosis.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_diagnosis.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_ic_settings.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/ic_settings.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_plant.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_plant.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_ten.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_ten.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_four.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_four.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_user.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/user.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_star_filled.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/star_filled.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_plant_add.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_plant_add.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_strawberry_h.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/strawberry_h.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_activity_main.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/activity_main.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_plant.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_plant.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_star.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/star.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_seven.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_seven.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_eleven.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_eleven.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_diagnosis_result.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_diagnosis_result.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_ic_info.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/ic_info.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_home.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/home.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_twelve.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_twelve.png"
-    },
-    {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_nine.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_nine.png"
-    },
-    {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_trash.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/trash.png"
-    },
-    {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_diary_book.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/diary_book.png"
-    },
-    {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-hdpi/ic_launcher.webp"
-    },
-    {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_spinner_item_myplant.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/spinner_item_myplant.xml"
-    },
-    {
-        "merged": "com.example.farmmate1.app-merged_res-43:/xml_backup_rules.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/xml/backup_rules.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
         "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_home.xml.flat",
         "source": "com.example.farmmate1.app-main-45:/layout/fragment_home.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/ic_launcher_foreground.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_five.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_five.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_cloudy.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/cloudy.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/menu_bottom_menu.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/menu/bottom_menu.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_diagnosis_select.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_diagnosis_select.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_activity_main.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/activity_main.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_strawberry.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/strawberry.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_plant_info.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_plant_info.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_list_item_history.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/list_item_history.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_list_item_plant.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/list_item_plant.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_back.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/back.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_todo.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_todo.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_spinner_item_anyplant.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/spinner_item_anyplant.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_cloudy.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/cloudy.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/xml_network_security_config.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/xml/network_security_config.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/menu_bottom_menu.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/menu/bottom_menu.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_list_item_history.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/list_item_history.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_user.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_user.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_four.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_four.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_baseline_image_24.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/baseline_image_24.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-anydpi-v33_ic_launcher.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-anydpi-v33/ic_launcher.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_ten.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_ten.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_stethoscope.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/stethoscope.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_strawberry_h.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/strawberry_h.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_img.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/img.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_diary_book.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/diary_book.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_strawberry.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/strawberry.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_write_diary.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_write_diary.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_eleven.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_eleven.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_activity_test_result_list.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/activity_test_result_list.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_baseline_arrow_drop_down_24.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/baseline_arrow_drop_down_24.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_list_item_plant.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/list_item_plant.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_ic_info.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/ic_info.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_home.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/home.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_six.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_six.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_leaves_of_a_plant.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/leaves_of_a_plant.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_rainy.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/rainy.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_one.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_one.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_btn_edit_round.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/btn_edit_round.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_img.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/img.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_activity_plant_list.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/activity_plant_list.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_sunny.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/sunny.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_sunny.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/sunny.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_fragment_test_result.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/fragment_test_result.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_trash.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/trash.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_activity_test_result.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/activity_test_result.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_star.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/star.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_six.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_six.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/xml_network_security_config.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/xml/network_security_config.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_spinner_item_plant.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/spinner_item_plant.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/xml_data_extraction_rules.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/xml/data_extraction_rules.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_activity_intro.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/activity_intro.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_user.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/user.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_diagnosis_select.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_diagnosis_select.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-anydpi-v33_ic_launcher.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-anydpi-v33/ic_launcher.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_todo.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_todo.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_leaves_of_a_plant.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/leaves_of_a_plant.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_eight.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_eight.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_user.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_user.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/ic_launcher_background.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_write_diary.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_write_diary.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_diary.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/diary.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_back.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/back.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_rainy.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/rainy.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_spinner_item_plant.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/spinner_item_plant.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_ic_home.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/ic_home.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_location.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/location.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_three.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_three.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_stethoscope.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/stethoscope.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_location.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/location.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.farmmate1.app-main-45:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_one.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_one.png"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_two.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_two.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_baseline_image_24.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/baseline_image_24.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_activity_plant_info.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/activity_plant_info.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_fragment_diary.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/fragment_diary.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_btn_edit_round.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/btn_edit_round.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/layout_spinner_item_anyplant.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/layout/spinner_item_anyplant.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/layout_activity_plant_add.xml.flat",
-        "source": "com.example.farmmate1.app-main-45:/layout/activity_plant_add.xml"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.example.farmmate1.app-merged_res-43:/drawable_number_three.png.flat",
-        "source": "com.example.farmmate1.app-main-45:/drawable/number_three.png"
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-merged_res-43:/drawable_number_eight.png.flat",
+        "source": "/Users/bamgee/.gradle/daemon/7.5/com.example.farmmate1.app-main-45:/drawable/number_eight.png"
     }
 ]

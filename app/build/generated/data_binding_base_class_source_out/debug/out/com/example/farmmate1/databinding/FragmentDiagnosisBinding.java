@@ -4,20 +4,97 @@ package com.example.farmmate1.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
+import android.widget.ListView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
 import com.example.farmmate1.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentDiagnosisBinding implements ViewBinding {
   @NonNull
   private final FrameLayout rootView;
 
-  private FragmentDiagnosisBinding(@NonNull FrameLayout rootView) {
+  @NonNull
+  public final Button diagnosisBtnFragment1;
+
+  @NonNull
+  public final Button diagnosisBtnFragment2;
+
+  @NonNull
+  public final Button diagnosisBtnFragment3;
+
+  @NonNull
+  public final Button diagnosisBtnFragment4;
+
+  @NonNull
+  public final Button diagnosisBtnFragment5;
+
+  @NonNull
+  public final Button diagnosisBtnFragment6;
+
+  @NonNull
+  public final ConstraintLayout diagnosisFragmentHistoryCl;
+
+  @NonNull
+  public final HorizontalScrollView diagnosisFragmentHsv;
+
+  @NonNull
+  public final ConstraintLayout diagnosisFragmentLayoutCl;
+
+  @NonNull
+  public final ConstraintLayout diagnosisFragmentTopCl;
+
+  @NonNull
+  public final Button diagnosisHistoryBtnDiagnosis;
+
+  @NonNull
+  public final Button diagnosisHistoryBtnEdit;
+
+  @NonNull
+  public final TextView diagnosisHistoryTitleTv;
+
+  @NonNull
+  public final ListView diagnosisListLvHistory;
+
+  @NonNull
+  public final TextView diagnosisTitleTv;
+
+  private FragmentDiagnosisBinding(@NonNull FrameLayout rootView,
+      @NonNull Button diagnosisBtnFragment1, @NonNull Button diagnosisBtnFragment2,
+      @NonNull Button diagnosisBtnFragment3, @NonNull Button diagnosisBtnFragment4,
+      @NonNull Button diagnosisBtnFragment5, @NonNull Button diagnosisBtnFragment6,
+      @NonNull ConstraintLayout diagnosisFragmentHistoryCl,
+      @NonNull HorizontalScrollView diagnosisFragmentHsv,
+      @NonNull ConstraintLayout diagnosisFragmentLayoutCl,
+      @NonNull ConstraintLayout diagnosisFragmentTopCl,
+      @NonNull Button diagnosisHistoryBtnDiagnosis, @NonNull Button diagnosisHistoryBtnEdit,
+      @NonNull TextView diagnosisHistoryTitleTv, @NonNull ListView diagnosisListLvHistory,
+      @NonNull TextView diagnosisTitleTv) {
     this.rootView = rootView;
+    this.diagnosisBtnFragment1 = diagnosisBtnFragment1;
+    this.diagnosisBtnFragment2 = diagnosisBtnFragment2;
+    this.diagnosisBtnFragment3 = diagnosisBtnFragment3;
+    this.diagnosisBtnFragment4 = diagnosisBtnFragment4;
+    this.diagnosisBtnFragment5 = diagnosisBtnFragment5;
+    this.diagnosisBtnFragment6 = diagnosisBtnFragment6;
+    this.diagnosisFragmentHistoryCl = diagnosisFragmentHistoryCl;
+    this.diagnosisFragmentHsv = diagnosisFragmentHsv;
+    this.diagnosisFragmentLayoutCl = diagnosisFragmentLayoutCl;
+    this.diagnosisFragmentTopCl = diagnosisFragmentTopCl;
+    this.diagnosisHistoryBtnDiagnosis = diagnosisHistoryBtnDiagnosis;
+    this.diagnosisHistoryBtnEdit = diagnosisHistoryBtnEdit;
+    this.diagnosisHistoryTitleTv = diagnosisHistoryTitleTv;
+    this.diagnosisListLvHistory = diagnosisListLvHistory;
+    this.diagnosisTitleTv = diagnosisTitleTv;
   }
 
   @Override
@@ -43,10 +120,108 @@ public final class FragmentDiagnosisBinding implements ViewBinding {
 
   @NonNull
   public static FragmentDiagnosisBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.diagnosis_btn_fragment1;
+      Button diagnosisBtnFragment1 = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisBtnFragment1 == null) {
+        break missingId;
+      }
 
-    return new FragmentDiagnosisBinding((FrameLayout) rootView);
+      id = R.id.diagnosis_btn_fragment2;
+      Button diagnosisBtnFragment2 = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisBtnFragment2 == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_btn_fragment3;
+      Button diagnosisBtnFragment3 = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisBtnFragment3 == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_btn_fragment4;
+      Button diagnosisBtnFragment4 = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisBtnFragment4 == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_btn_fragment5;
+      Button diagnosisBtnFragment5 = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisBtnFragment5 == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_btn_fragment6;
+      Button diagnosisBtnFragment6 = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisBtnFragment6 == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_fragment_history_cl;
+      ConstraintLayout diagnosisFragmentHistoryCl = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisFragmentHistoryCl == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_fragment_hsv;
+      HorizontalScrollView diagnosisFragmentHsv = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisFragmentHsv == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_fragment_layout_cl;
+      ConstraintLayout diagnosisFragmentLayoutCl = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisFragmentLayoutCl == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_fragment_top_cl;
+      ConstraintLayout diagnosisFragmentTopCl = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisFragmentTopCl == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_history_btn_diagnosis;
+      Button diagnosisHistoryBtnDiagnosis = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisHistoryBtnDiagnosis == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_history_btn_edit;
+      Button diagnosisHistoryBtnEdit = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisHistoryBtnEdit == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_history_title_tv;
+      TextView diagnosisHistoryTitleTv = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisHistoryTitleTv == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_list_lv_history;
+      ListView diagnosisListLvHistory = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisListLvHistory == null) {
+        break missingId;
+      }
+
+      id = R.id.diagnosis_title_tv;
+      TextView diagnosisTitleTv = ViewBindings.findChildViewById(rootView, id);
+      if (diagnosisTitleTv == null) {
+        break missingId;
+      }
+
+      return new FragmentDiagnosisBinding((FrameLayout) rootView, diagnosisBtnFragment1,
+          diagnosisBtnFragment2, diagnosisBtnFragment3, diagnosisBtnFragment4,
+          diagnosisBtnFragment5, diagnosisBtnFragment6, diagnosisFragmentHistoryCl,
+          diagnosisFragmentHsv, diagnosisFragmentLayoutCl, diagnosisFragmentTopCl,
+          diagnosisHistoryBtnDiagnosis, diagnosisHistoryBtnEdit, diagnosisHistoryTitleTv,
+          diagnosisListLvHistory, diagnosisTitleTv);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

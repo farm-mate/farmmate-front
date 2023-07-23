@@ -4,24 +4,7 @@
             "outputFile": "com.example.farmmate1.app-mergeDebugResources-41:/values-bg/values-bg.xml",
             "map": [
                 {
-                    "source": "/Users/sujin/.gradle/caches/transforms-3/8ca989c75448dd2f78997c3f5666b57c/transformed/play-services-base-18.0.1/res/values-bg/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "193,298,459,590,697,860,991,1106,1211,1376,1484,1655,1789,1942,2104,2170,2225",
-                        "endColumns": "104,160,130,106,162,130,114,104,164,107,170,133,152,161,65,54,68",
-                        "endOffsets": "297,458,589,696,859,990,1105,1210,1375,1483,1654,1788,1941,2103,2169,2224,2293"
-                    },
-                    "to": {
-                        "startLines": "41,42,43,44,45,46,47,48,50,51,52,53,54,55,56,57,58",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3854,3963,4128,4263,4374,4541,4676,4795,5042,5211,5323,5498,5636,5793,5959,6029,6088",
-                        "endColumns": "108,164,134,110,166,134,118,108,168,111,174,137,156,165,69,58,72",
-                        "endOffsets": "3958,4123,4258,4369,4536,4671,4790,4899,5206,5318,5493,5631,5788,5954,6024,6083,6156"
-                    }
-                },
-                {
-                    "source": "/Users/sujin/.gradle/caches/transforms-3/8d9343f569df63b726615d18b45679d4/transformed/appcompat-1.6.1/res/values-bg/values-bg.xml",
+                    "source": "/Users/bamgee/.gradle/caches/transforms-3/8d9343f569df63b726615d18b45679d4/transformed/appcompat-1.6.1/res/values-bg/values-bg.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/sujin/.gradle/caches/transforms-3/d649d9c67c5c3249d68797ba31f23ddd/transformed/play-services-basement-18.0.0/res/values-bg/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "133",
-                        "endOffsets": "328"
-                    },
-                    "to": {
-                        "startLines": "49",
-                        "startColumns": "4",
-                        "startOffsets": "4904",
-                        "endColumns": "137",
-                        "endOffsets": "5037"
-                    }
-                },
-                {
-                    "source": "/Users/sujin/.gradle/caches/transforms-3/7c17ec530a582ee93364914402f6f204/transformed/material-1.9.0/res/values-bg/values-bg.xml",
+                    "source": "/Users/bamgee/.gradle/caches/transforms-3/7c17ec530a582ee93364914402f6f204/transformed/material-1.9.0/res/values-bg/values-bg.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -74,7 +40,41 @@
                     }
                 },
                 {
-                    "source": "/Users/sujin/.gradle/caches/transforms-3/c73afc1fa215d9ca128620a3c01802b0/transformed/core-1.9.0/res/values-bg/values-bg.xml",
+                    "source": "/Users/bamgee/.gradle/caches/transforms-3/8ca989c75448dd2f78997c3f5666b57c/transformed/play-services-base-18.0.1/res/values-bg/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "193,298,459,590,697,860,991,1106,1211,1376,1484,1655,1789,1942,2104,2170,2225",
+                        "endColumns": "104,160,130,106,162,130,114,104,164,107,170,133,152,161,65,54,68",
+                        "endOffsets": "297,458,589,696,859,990,1105,1210,1375,1483,1654,1788,1941,2103,2169,2224,2293"
+                    },
+                    "to": {
+                        "startLines": "41,42,43,44,45,46,47,48,50,51,52,53,54,55,56,57,58",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3854,3963,4128,4263,4374,4541,4676,4795,5042,5211,5323,5498,5636,5793,5959,6029,6088",
+                        "endColumns": "108,164,134,110,166,134,118,108,168,111,174,137,156,165,69,58,72",
+                        "endOffsets": "3958,4123,4258,4369,4536,4671,4790,4899,5206,5318,5493,5631,5788,5954,6024,6083,6156"
+                    }
+                },
+                {
+                    "source": "/Users/bamgee/.gradle/caches/transforms-3/d649d9c67c5c3249d68797ba31f23ddd/transformed/play-services-basement-18.0.0/res/values-bg/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "133",
+                        "endOffsets": "328"
+                    },
+                    "to": {
+                        "startLines": "49",
+                        "startColumns": "4",
+                        "startOffsets": "4904",
+                        "endColumns": "137",
+                        "endOffsets": "5037"
+                    }
+                },
+                {
+                    "source": "/Users/bamgee/.gradle/caches/transforms-3/c73afc1fa215d9ca128620a3c01802b0/transformed/core-1.9.0/res/values-bg/values-bg.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
