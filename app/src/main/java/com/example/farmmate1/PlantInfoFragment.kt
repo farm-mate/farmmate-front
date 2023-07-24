@@ -38,10 +38,10 @@ class PlantInfoFragment : Fragment() {
                 if (response.isSuccessful) {
                     val plant = response.body()
                     // 데이터를 받아온 후에 해당 데이터를 View에 설정해주는 작업을 수행
-                    binding.plantInfoTvNickname.text = plant?.name
-                    binding.plantInfoTvFirstdate.text = plant?.name
-                    binding.plantInfoTvGetlocation.text = plant?.name
-                    binding.plantInfoTvMemo.text = plant?.name
+                    binding.plantInfoTvWaterdate.text = plant?.name
+                    binding.plantInfoTvFertdate.text = plant?.name
+                    binding.plantInfoTvPestdate.text = plant?.name
+
                 } else {
                     // API 요청 실패 처리
                     Log.e("PlantInfoFragment", "Failed to fetch plant: ${response.message()}")
