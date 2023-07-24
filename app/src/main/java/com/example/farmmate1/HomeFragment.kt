@@ -44,6 +44,7 @@ class HomeFragment : Fragment() {
     private lateinit var weatherTip: TextView
     private lateinit var weatherIcon: ImageView
     private lateinit var humidity:TextView
+    private lateinit var temperature2:TextView
 
     private lateinit var mLocationManager: LocationManager
     private lateinit var mLocationListener: LocationListener
@@ -67,6 +68,7 @@ class HomeFragment : Fragment() {
             //weatherTip = weatherTipTv
             weatherIcon = weatherIc
             humidity = homeFragmentWeatherClHumid
+            temperature2 = homeFragmentWeatherClTempe
         }
     }
 
@@ -142,6 +144,7 @@ class HomeFragment : Fragment() {
         )
         humidity.text= "습도 :"+weather.humidityString + " %"
         weatherIcon.setImageResource(resourceID)
+        temperature2.text = "기온 :"+weather.tempString + " ℃"
     }
 
     override fun onPause() {
