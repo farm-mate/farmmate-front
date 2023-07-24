@@ -1,59 +1,82 @@
 package com.example.farmmate1
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.example.farmmate1.databinding.FragmentDiagnosisBinding
+import com.example.farmmate1.databinding.FragmentDiagnosisResultBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DiagnosisResultFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DiagnosisResultFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentDiagnosisResultBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diagnosis_result, container, false)
+        _binding = FragmentDiagnosisResultBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DiagnosisResultFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DiagnosisResultFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val retrofit = RetrofitClient.instance
+        val apiService = retrofit.create(ApiService::class.java)
+
+        // 데이터 요청
+//        apiService.getHistoryList().enqueue(object : Callback<List<History>> {
+//            override fun onResponse(call: Call<List<History>>, response: Response<List<History>>) {
+//                if (response.isSuccessful) {
+//                    val historyList = response.body() as? ArrayList<History>
+//                    if (historyList != null) {
+//                        val adapter = HistoryAdapter(requireContext(), historyList)
+//                        binding.diagnosisListLvHistory.adapter = adapter
+//                    }
+//                } else {
+//                    // API 요청 실패 처리
+//                    Log.e("DiagnosisResultFragment", "Failed to fetch plant list: ${response.message()}")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<History>>, t: Throwable) {
+//                // 통신 오류 처리
+//                Log.e("DiagnosisResultFragment", "Network error: ${t.message}")
+//            }
+//        })
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // 메모리 누수를 방지하기 위해 Fragment View에 대한 참조를 제거하여 가비지 컬렉터가 수거
+        _binding = null
+    }
+
+    class MainViewModel : ViewModel() {
+
+        private val _count = MutableLiveData<Int>()
+        val count : LiveData<Int> get() = _count
+        init {
+            _count.value = 5
+        }
+        fun getUpdatedCount(plusCount: Int){
+            _count.value = (_count.value)?.plus(plusCount)
+        }
     }
 }

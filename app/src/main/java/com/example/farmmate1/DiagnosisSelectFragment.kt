@@ -32,6 +32,30 @@ class DiagnosisSelectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val retrofit = RetrofitClient.instance
+        val apiService = retrofit.create(ApiService::class.java)
+
+        // 데이터 요청
+//        apiService.getHistoryList().enqueue(object : Callback<List<History>> {
+//            override fun onResponse(call: Call<List<History>>, response: Response<List<History>>) {
+//                if (response.isSuccessful) {
+//                    val historyList = response.body() as? ArrayList<History>
+//                    if (historyList != null) {
+//                        val adapter = HistoryAdapter(requireContext(), historyList)
+//                        binding.diagnosisListLvHistory.adapter = adapter
+//                    }
+//                } else {
+//                    // API 요청 실패 처리
+//                    Log.e("DiagnosisResultFragment", "Failed to fetch plant list: ${response.message()}")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<History>>, t: Throwable) {
+//                // 통신 오류 처리
+//                Log.e("DiagnosisResultFragment", "Network error: ${t.message}")
+//            }
+//        })
+
         // 작물 종류 선택 (등록한 작물)
         setUpSpinnerMyplants()
 

@@ -17,6 +17,18 @@ interface ApiService {
     fun getPlant(): Call<Plant>
 
 
+    @GET("history")
+    fun getHistoryList(): Call<List<History>>
+    // 서버에서 진단 결과를 가져오는 GET 요청을 정의
+
+    @POST("history")
+    @Headers("Content-Type: application/json")
+    fun saveResult(@Body history: History): Call<History>
+
+    @GET("history")
+    fun getHistory(): Call<History>
+
+
 //    @GET("plants")
 //    suspend fun getPlants(@Query("page") page: Int, @Query("limit") limit: Int): Response<List<Plant>>
 
