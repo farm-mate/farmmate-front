@@ -131,7 +131,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/write_diary_layout_fer"
+                    android:id="@+id/write_diary_layout_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -163,19 +163,117 @@
                         app:layout_constraintTop_toBottomOf="@+id/write_diary_tv_weather"/>
 
                     <EditText
+                        android:id="@+id/write_diary_et_temperature"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:hint="온도기록하기"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/write_diary_et_weather"
+                        app:layout_constraintTop_toBottomOf="@+id/write_diary_et_weather"
+                        tools:ignore="TouchTargetSizeCheck" />
+                    <EditText
+                        android:id="@+id/write_diary_et_humidity"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:hint="습도기록하기"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/write_diary_et_temperature"
+                        app:layout_constraintTop_toBottomOf="@+id/write_diary_et_temperature"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/write_diary_layout_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="137dp">
+
+                    <TextView
+                        android:id="@+id/write_diary_tv_water"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="오늘 물을 주었나요?"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/write_diary_fragment_cb_water"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="118dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/write_diary_tv_water"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/write_diary_layout_fer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/plant_add_layout_name">
+
+                    <TextView
+                        android:id="@+id/write_diary_tv_fertle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="오늘 비료를 주었나요?"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/write_diary_et_fertle"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:hint="비료 이름"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/write_diary_tv_fertle"
+                        app:layout_constraintTop_toBottomOf="@+id/write_diary_tv_fertle" />
+
+                    <EditText
                         android:id="@+id/write_diary_et_fertle_usage"
                         android:layout_width="300dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="8dp"
                         android:ems="10"
-                        android:hint="온습도 기록하기(숫자만 입력하세요)"
+                        android:hint="비료 용량을 10a 당 kg단위로 적어주세요"
                         android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="@+id/write_diary_et_weather"
-                        app:layout_constraintTop_toBottomOf="@+id/write_diary_et_weather"
+                        app:layout_constraintStart_toStartOf="@+id/write_diary_et_fertle"
+                        app:layout_constraintTop_toBottomOf="@+id/write_diary_et_fertle"
                         tools:ignore="TouchTargetSizeCheck" />
 
-
+                    <CheckBox
+                        android:id="@+id/write_diary_cb_fertle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="103dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/write_diary_tv_fertle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/write_diary_tv_fertle"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/write_diary_layout_pes"
                     android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.example.farmmate1
 
+import DiaryFragment
 import HomeFragment
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
