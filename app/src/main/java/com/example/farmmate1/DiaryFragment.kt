@@ -112,6 +112,7 @@ class DiaryFragment : Fragment(), DiaryDataListener {
 
     companion object {
         private const val ARG_DATE = "arg_date"
+        const val DIARY_URI: String = "http://localhost:1000/api/plantDiary"
 
         fun newInstance(date: Calendar): WriteDiaryFragment {
             val args = Bundle().apply {
