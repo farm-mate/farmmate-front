@@ -44,46 +44,46 @@ class PlantFragment : Fragment() {
         return view
     }
 
-//    var PlantList = arrayListOf<Plant>(
-//        Plant(R.drawable.strawberry, "포도", "2023-05-19", R.drawable.star_filled),
-//        Plant(R.drawable.strawberry, "딸기", "2023-05-19", R.drawable.star_filled),
-//        Plant(R.drawable.strawberry, "고추", "2023-05-19", R.drawable.star_filled),
-//        Plant(R.drawable.strawberry, "토마토", "2023-05-19", R.drawable.star_filled),
-//        Plant(R.drawable.strawberry, "포도", "2023-05-19", R.drawable.star_filled),
-//        Plant(R.drawable.strawberry, "고추", "2023-05-19", R.drawable.star_filled),
-//        Plant(R.drawable.strawberry, "토마토", "2023-05-19", R.drawable.star_filled),
-//        Plant(R.drawable.strawberry, "딸기", "2023-05-19", R.drawable.star_filled)
-//    )
+    var PlantList = arrayListOf<Plant>(
+        Plant(R.drawable.strawberry, "포도", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "딸기", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "고추", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "토마토", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "포도", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "고추", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "토마토", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "딸기", "2023-05-19", R.drawable.star_filled)
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val retrofit = RetrofitClient.instance
-        val apiService = retrofit.create(ApiService::class.java)
+//        val retrofit = RetrofitClient.instance
+//        val apiService = retrofit.create(ApiService::class.java)
+//
+//        // 데이터 요청
+//        apiService.getPlantList().enqueue(object : Callback<List<Plant>> {
+//            override fun onResponse(call: Call<List<Plant>>, response: Response<List<Plant>>) {
+//                if (response.isSuccessful) {
+//                    val plantList = response.body() as? ArrayList<Plant>
+//                    if (plantList != null) {
+//                        val adapter = PlantAdapter(requireContext(), plantList)
+//                        binding.plantListLvPlants.adapter = adapter
+//                    }
+//                } else {
+//                    // API 요청 실패 처리
+//                    Log.e("PlantFragment", "Failed to fetch plant list: ${response.message()}")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<Plant>>, t: Throwable) {
+//                // 통신 오류 처리
+//                Log.e("PlantFragment", "Network error: ${t.message}")
+//            }
+//        })
 
-        // 데이터 요청
-        apiService.getPlantList().enqueue(object : Callback<List<Plant>> {
-            override fun onResponse(call: Call<List<Plant>>, response: Response<List<Plant>>) {
-                if (response.isSuccessful) {
-                    val plantList = response.body() as? ArrayList<Plant>
-                    if (plantList != null) {
-                        val adapter = PlantAdapter(requireContext(), plantList)
-                        binding.plantListLvPlants.adapter = adapter
-                    }
-                } else {
-                    // API 요청 실패 처리
-                    Log.e("PlantFragment", "Failed to fetch plant list: ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<List<Plant>>, t: Throwable) {
-                // 통신 오류 처리
-                Log.e("PlantFragment", "Network error: ${t.message}")
-            }
-        })
-
-//        val Adapter = PlantAdapter(requireContext(),PlantList)
-//        binding.plantListLvPlants.adapter = Adapter
+        val Adapter = PlantAdapter(requireContext(),PlantList)
+        binding.plantListLvPlants.adapter = Adapter
 
         // 리스트 객체 클릭 시 식물 정보 페이지로 이동
         // 각 객체에 따른 식물정보(페이지)를 보여줄 수 있도록 수정
