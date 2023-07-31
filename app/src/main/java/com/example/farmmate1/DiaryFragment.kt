@@ -61,21 +61,6 @@ class DiaryFragment : Fragment(), DiaryDataListener {
             //TODO: 선택된 날짜에 데이터 저장
         }
 
-        //캘린더 날짜 선택 이벤트 처리
-        calendarView.setOnDateChangeListener{_, year, month, dayOfMonth->
-            val selectedDate = Calendar.getInstance().apply{
-                set(year,month,dayOfMonth)
-            }
-            val todoList = getTodoList(selectedDate)
-            val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_list_item_1, todoList )
-            listView.adapter = adapter
-
-          /*  val hasData = checkDataExist(selectedDate)
-            if (hasData){
-
-            }*/
-        }
-
 
 
         // 버튼 클릭 시 Fragment2로 전환

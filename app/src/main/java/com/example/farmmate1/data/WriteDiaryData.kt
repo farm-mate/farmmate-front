@@ -1,26 +1,36 @@
 package com.example.farmmate1.data
 
-import retrofit2.http.Body
-import retrofit2.http.POST
-
+import com.google.gson.annotations.SerializedName
 
 class WriteDiaryData(
-    val plantUuid: String,
-    val weather: Int,
-    val temperature: Int,
-    val humidity: Int,val waterFlag : Boolean,
-    val fertlizeFlag : Boolean,
-    val fertilizeName: String,
-    val fertilizeUsage : String,
-    val pesticideFlag : Boolean,
-    val pesticideName : String,
-    val pesticideUsage : String,
-    val memo : String,
-
+    /*val plantId : Int,
+    val fertilizeUsage: String,
+    val pesticideName: String,
+    val pesticideUsage: String,
+    val spinnerSelectedItem: String*/)
+data class FertilizeData(
+@SerializedName("fertilizeFlag") val fertilizeFlag: Boolean,
+@SerializedName("fertilizeName") val fertilizeName: String,
+@SerializedName("fertilizeUsage") val fertilizeUsage: String
 )
 
-interface PlantDiaryApiService {
+data class PesticideData(
+    @SerializedName("pesticideFlag") val pesticideFlag: Boolean,
+    @SerializedName("pesticideName") val pesticideName: String,
+    @SerializedName("pesticideUsage") val pesticideUsage: String
+)
 
-    @POST("http://localhost:1000/api/plant/diary") // 해당 엔드포인트로 POST 요청을 보낼 것을 명시
-    fun postPlantDiary(@Body data: WriteDiaryData): retrofit2.Call<Void>
-}
+data class ContentData(
+    @SerializedName("plantWeather") val plantWeather: String,
+    @SerializedName("temperature") val temperature: Int,
+    @SerializedName("humidity") val humidity: Int,
+    @SerializedName("waterFlag") val waterFlag: Boolean,
+    @SerializedName("fertilize") val fertilize: FertilizeData,
+    @SerializedName("pesticide") val pesticide: PesticideData,
+    @SerializedName("memo") val memo: String
+)
+
+data class ApiData(
+    @SerializedName("content") val content: ContentData
+)
+
