@@ -45,15 +45,14 @@ class PlantFragment : Fragment() {
     }
 
     var PlantList = arrayListOf<Plant>(
-        Plant("딸기", "재배지1", "메모1", "2023-05-19"),
-        Plant("고추", "재배지2", "메모2", "2023-05-20"),
-        Plant("토마토", "재배지3", "메모3", "2023-05-21"),
-        Plant("포도", "재배지4", "메모4", "2023-05-22"),
-        Plant("파프리카", "재배지5", "메모5", "2023-05-23"),
-        Plant("딸기2", "재배지6", "메모6", "2023-05-24"),
-        Plant("딸기3", "재배지7", "메모7", "2023-05-25"),
-        Plant("딸기4", "재배지8", "메모8", "2023-05-26"),
-        Plant("딸기5", "재배지9", "메모9", "2023-05-27")
+        Plant(R.drawable.strawberry, "포도", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "딸기", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "고추", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "토마토", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "포도", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "고추", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "토마토", "2023-05-19", R.drawable.star_filled),
+        Plant(R.drawable.strawberry, "딸기", "2023-05-19", R.drawable.star_filled)
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
