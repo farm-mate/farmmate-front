@@ -322,7 +322,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/write_diary_et_pes" />
 
                     <CheckBox
-                        android:id="@+id/todo_cb_pes"
+                        android:id="@+id/write_diary_cb_pes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="103dp"

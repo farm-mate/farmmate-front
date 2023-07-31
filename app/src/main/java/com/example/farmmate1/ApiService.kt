@@ -1,7 +1,11 @@
 package com.example.farmmate1
 
+import com.example.farmmate1.data.TodoItem
+import com.example.farmmate1.network.ToDoListInterface
 import retrofit2.Call
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 interface ApiService {
@@ -28,8 +32,5 @@ interface ApiService {
     @GET("history")
     fun getHistory(): Call<History>
 
-
-//    @GET("plants")
-//    suspend fun getPlants(@Query("page") page: Int, @Query("limit") limit: Int): Response<List<Plant>>
 
 }

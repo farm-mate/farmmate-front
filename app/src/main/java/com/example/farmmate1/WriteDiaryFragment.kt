@@ -6,30 +6,24 @@ package com.example.farmmate1
 import TodoFragment
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import com.example.farmmate1.data.WriteDiaryData
 import com.example.farmmate1.network.WriteDiaryInterface
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import org.json.JSONException
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
@@ -50,6 +44,13 @@ class WriteDiaryFragment : Fragment() {
     private lateinit var imageView: ImageView
     private lateinit var writeDiaryInterface: WriteDiaryInterface
     private lateinit var writeDiaryTvDate: TextView
+    private lateinit var editTextWeather : EditText
+    private lateinit var editTextTemperature : EditText
+    private lateinit var editTextHumidity : EditText
+    private lateinit var checkBoxWater : CheckBox
+    private lateinit var checkBoxPes: CheckBox
+    private lateinit var checkBoxFertle: CheckBox
+
 
     companion object {
         private const val ARG_DATE = "arg_date"
@@ -99,22 +100,29 @@ class WriteDiaryFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_write_diary, container, false)
 
+        checkBoxWater = view.findViewById(R.id.write_diary_fragment_cb_water)
+        checkBoxFertle = view.findViewById(R.id.write_diary_cb_fertle)
         editTextFertle = view.findViewById(R.id.write_diary_et_fertle)
         editTextFertleUsage = view.findViewById(R.id.write_diary_et_fertle_usage)
+        checkBoxPes = view.findViewById(R.id.write_diary_cb_pes)
         editTextPes = view.findViewById(R.id.write_diary_et_pes)
         editTextPesUsage = view.findViewById(R.id.write_diary_et_pes_usage)
         spinner = view.findViewById(R.id.write_diary_spinner_select)
         saveButton = view.findViewById(R.id.write_diary_register_btn)
+        editTextWeather = view.findViewById(R.id.write_diary_et_weather)
+        editTextTemperature = view.findViewById(R.id.write_diary_et_temperature)
+        editTextHumidity = view.findViewById(R.id.write_diary_et_humidity)
 
 
-//        saveButton.setOnClickListener {
-//            sendDataToServer()
-//        }
+
+        saveButton.setOnClickListener {
+            sendDataToServer()
+        }
 
         // Retrofit 인스턴스 초기화
         val gson: Gson = GsonBuilder().setLenient().create()
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://bd301c46-a122-477e-ace3-1d7b47fa9610.mock.pstmn.io") // 서버 URL을 여기에 입력하세요
+            .baseUrl("https://localhost:1000/plant/diary") // 서버 URL을 여기에 입력하세요
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
@@ -155,7 +163,7 @@ class WriteDiaryFragment : Fragment() {
             val formattedDate = dateFormat.format(it.time)
             writeDiaryTvDate.text = formattedDate
         } ?: run {
-            writeDiaryTvDate.text = "에러 발" // 날짜가 없을 경우에 대한 처리 (빈 문자열로 표시)
+            writeDiaryTvDate.text = "에러 발생" // 날짜가 없을 경우에 대한 처리 (빈 문자열로 표시)
         }
 
         view.findViewById<Button>(R.id.write_diary_title_todobtn).setOnClickListener {
@@ -234,7 +242,7 @@ class WriteDiaryFragment : Fragment() {
     //가장 최근의 날짜 가져오는 함수
     private fun getCurrentDate(): String {
         val currentDate = Date()
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault())
         return dateFormat.format(currentDate)
     }
 
@@ -247,33 +255,36 @@ class WriteDiaryFragment : Fragment() {
         }
     }
 
-//    private fun sendDataToServer() {
-//        val fertleValue = editTextFertle.text.toString()
-//        val fertleUsageValue = editTextFertleUsage.text.toString()
-//        val pesValue = editTextPes.text.toString()
-//        val pesUsageValue = editTextPesUsage.text.toString()
-//        val spinnerSelectedItem = spinner.selectedItem.toString()
-//
-//        // 데이터 객체 생성
-//        val data = WriteDiaryData(spinnerSelectedItem,fertleValue,fertleUsageValue,pesValue,pesUsageValue)
-//
-//        // 데이터 전송 요청
-//        val call: Call<Void> = writeDiaryInterface.sendData(data)
-//        call.enqueue(object : Callback<Void> {
-//            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-//                if (response.isSuccessful) {
-//                    Toast.makeText(getActivity(),"Registered",Toast.LENGTH_SHORT).show();
-//                    // 서버 응답이 성공적으로 받아졌을 때의 처리
-//                } else {
-//                    // 서버 응답이 실패일 때의 처리
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<Void>, t: Throwable) {
-//                // 네트워크 오류 처리
-//            }
-//        })
-//    }
+    private fun sendDataToServer() {
+       val fertleValue = editTextFertle.text.toString().toInt()
+       val fertleUsageValue = editTextFertleUsage.text.toString().toInt()
+        val pesValue = editTextPes.text.toString().toInt()
+       val pesUsageValue = editTextPesUsage.text.toString().toInt()
+        val spinnerSelectedItem = spinner.selectedItem.toString()
+        val weatherValue = editTextWeather.text.toString()
+        val temperatureValue = editTextTemperature.text.toString()
+        val humidityValue = editTextHumidity.text.toString()
+
+        // 데이터 객체 생성
+        val data = WriteDiaryData(plantUuid = "12e",weather =12, temperature = 13, humidity = 1, waterFlag = false, fertilizeName = "happy", fertilizeUsage = "12", fertlizeFlag = true, pesticideFlag = true, pesticideName = "sad", pesticideUsage = "13", memo = "딸기기키우기"  )
+
+       // 데이터 전송 요청
+        val call: Call<Void> = writeDiaryInterface.sendData(data)
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(getActivity(),"Registered",Toast.LENGTH_SHORT).show();
+                    // 서버 응답이 성공적으로 받아졌을 때의 처리
+                } else {
+                    Log.d("서버응답 실패","서버응답실패")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d("데이터 전송실패","데이터전송실패")
+            }
+        })
+    }
 }
 
 
