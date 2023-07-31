@@ -57,6 +57,7 @@ class WeatherData {
             mintempString = roundedminTemp.toString()
             mintempInt = roundedminTemp
 
+
             val roundedmaxTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp_max") - 273.15).toInt()
             maxtempString = roundedmaxTemp.toString()
             maxtempInt = roundedmaxTemp
