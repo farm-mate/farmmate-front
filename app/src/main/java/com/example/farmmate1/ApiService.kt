@@ -7,17 +7,18 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import com.example.farmmate1.data.PlantData
 
 interface ApiService {
-    @GET("plants")
+    @GET("plant")
     fun getPlantList(): Call<List<Plant>>
     // 서버에서 식물 정보를 가져오는 GET 요청을 정의
 
-    @POST("plants")
+    @POST("plant")
     @Headers("Content-Type: application/json")
-    fun createPlant(@Body plant: Plant): Call<Plant>
+    fun postPlant(@Body plant: Plant): Call<Plant>
 
-    @GET("plants")
+    @GET("plant")
     fun getPlant(): Call<Plant>
 
 
