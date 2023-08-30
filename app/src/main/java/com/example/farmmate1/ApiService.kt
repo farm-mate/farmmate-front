@@ -9,6 +9,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 interface ApiService {
+
+    @POST("device")
+    @Headers("Content-Type: application/json")
+    fun saveDiviceInfo(@Body deviceId: String): Call<Void>
+
     @GET("plant")
     fun getPlantList(): Call<List<Plant>>
     // 서버에서 식물 정보를 가져오는 GET 요청을 정의
@@ -18,7 +23,7 @@ interface ApiService {
     fun postPlant(@Body plant: Plant): Call<Plant>
 
     @GET("plant")
-    fun getPlant(): Call<Plant>
+    fun getPlant(): Call<List<Plant>>
 
 
     @GET("history")

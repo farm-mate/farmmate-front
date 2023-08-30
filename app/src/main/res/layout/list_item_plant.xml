@@ -50,7 +50,7 @@
         android:layout_marginEnd="24dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        android:src="@drawable/star_filled"
+        android:src="@drawable/star"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/list_item_profile" />
 
