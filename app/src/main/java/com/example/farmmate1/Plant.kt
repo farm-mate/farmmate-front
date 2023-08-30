@@ -4,7 +4,7 @@ class Plant (
     val plantType: String,
     val plantLocation: String,
     val memo: String,
-    val firstPlantingDate: String
+    var firstPlantingDate: String
 )
 
 
