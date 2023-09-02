@@ -1,6 +1,7 @@
 package com.example.farmmate1
 
 import HomeFragment
+import android.content.ContentValues.TAG
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -52,35 +53,33 @@ class MainActivity : AppCompatActivity(), DiaryDataListener {
         if (isFirstRun) {
             // 처음 설치 시에만 실행되는 코드
             val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-            Log.d("deviceid", "Device ID: $deviceId")
 
             // Retrofit 인스턴스 생성
             val retrofit = RetrofitClient.instance
             val apiService = retrofit.create(ApiService::class.java)
 
-            val call = apiService.saveDiviceInfo(deviceId)
-
-            call.enqueue(object : Callback<Void> {
+            apiService.saveDeviceInfo(DeviceInfo(deviceId)).enqueue(object : Callback<Void>{
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     // 성공 처리
                     if (response.isSuccessful) {
-                        Log.d("divicecheck", "Saved deviceId: $deviceId")
+                        Log.d(TAG, "----log check response.issuccessful");
+                        Log.d(TAG, "----log check response: ${deviceId}")
 
                         // 설치 여부를 저장
                         val editor = sharedPreferences.edit()
                         editor.putBoolean(IS_FIRST_RUN, false)
                         editor.apply()
                     } else {
-                        Log.e("divicecheck", "Request failed with code: ${response.code()}")
+                        Log.d(TAG, "----log check respose issuccessful else: ${response.message()}")
                     }
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Log.e("divicecheck", "Network error: ${t.message}")
+                    Log.e("----log check onFailure devicecheck", "Network error: ${t.message}")
                 }
             })
         } else {
-            Log.d("divicecheck", "App has been run before.")
+            Log.d("----log check isFirstRun else devicecheck", "App has been run before.")
         }
 
         val btm_nav = findViewById<BottomNavigationView>(R.id.main_btm_nav)

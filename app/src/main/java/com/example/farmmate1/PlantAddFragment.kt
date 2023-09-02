@@ -88,7 +88,7 @@ class PlantAddFragment : Fragment() {
                 override fun onResponse(call: Call<Plant>, response: Response<Plant>) {
                     if (response.isSuccessful) {
                         val postPlant = response.body()
-                        Log.d("PlantAddFragment", "Plant created: $postPlant")
+                        Log.d("PlantAddFragment", "Plant created: ${postPlant}")
                         Log.d("check--- plant", "plantType: " + plant.plantType + "\n" +"plantLocation: " + plant.plantLocation + "\n" + "plantMemo: " +  plant.memo + "\n" +"firstPlantingDate: "  + plant.firstPlantingDate);
 
 
