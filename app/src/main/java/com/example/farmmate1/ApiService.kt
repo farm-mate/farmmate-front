@@ -12,7 +12,7 @@ interface ApiService {
 
     @POST("device")
     @Headers("Content-Type: application/json")
-    fun saveDiviceInfo(@Body deviceId: String): Call<Void>
+    fun saveDeviceInfo(@Body deviceInfo: DeviceInfo): Call<Void>
 
     @GET("plant")
     fun getPlantList(): Call<List<Plant>>
