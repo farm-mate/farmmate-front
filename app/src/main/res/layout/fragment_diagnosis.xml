@@ -62,35 +62,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
-                    android:text="고추"/>
+                    android:text="딸기"/>
 
                 <Button
                     android:id="@+id/diagnosis_btn_fragment3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
-                    android:text="딸기"/>
+                    android:text="오이"/>
 
                 <Button
                     android:id="@+id/diagnosis_btn_fragment4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
-                    android:text="토마토"/>
+                    android:text="파프리카"/>
 
                 <Button
                     android:id="@+id/diagnosis_btn_fragment5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
-                    android:text="오이"/>
+                    android:text="토마토"/>
 
                 <Button
                     android:id="@+id/diagnosis_btn_fragment6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:text="파프리카"/>
+                    android:text="고추"/>
 
             </LinearLayout>
 

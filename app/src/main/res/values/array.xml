@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="plants">
-        <item>고추</item>
         <item>포도</item>
         <item>딸기</item>
+        <item>오이</item>
+        <item>파프리카</item>
         <item>토마토</item>
+        <item>고추</item>
     </string-array>
 
     <string-array name="myplants">
+        <item>선택되지 않음</item>
         <item>등록한 작물1</item>
         <item>등록한 작물2</item>
         <item>등록한 작물3</item>
@@ -15,9 +18,12 @@
     </string-array>
 
     <string-array name="anyplants">
-        <item>고추</item>
+        <item>선택되지 않음</item>
         <item>포도</item>
         <item>딸기</item>
+        <item>오이</item>
+        <item>파프리카</item>
         <item>토마토</item>
+        <item>고추</item>
     </string-array>
 </resources>

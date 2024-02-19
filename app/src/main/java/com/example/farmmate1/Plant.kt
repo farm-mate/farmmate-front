@@ -1,6 +1,7 @@
 package com.example.farmmate1
 
 class Plant (
+    val deviceId: String,
     val plantType: String,
     val plantLocation: String,
     val memo: String,

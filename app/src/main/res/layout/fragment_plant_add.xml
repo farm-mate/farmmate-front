@@ -278,14 +278,25 @@
 
                     <TextView
                         android:id="@+id/plant_add_tv_image_explain"
-                        android:layout_width="153dp"
+                        android:layout_width="190dp"
                         android:layout_height="39dp"
-                        android:layout_marginStart="16dp"
                         android:text="사진 첨부는 5MB 미만의 JPG, PNG 파일만 가능"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/plant_add_ib_image"
-                        app:layout_constraintTop_toTopOf="@+id/plant_add_ib_image" />
+                        app:layout_constraintTop_toBottomOf="@+id/plant_add_tv_image" />
+
+                    <TextView
+                        android:id="@+id/plant_add_tv_upload_fileinfo"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="(좌측 버튼 선택)"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/plant_add_ib_image"
+                        app:layout_constraintTop_toBottomOf="@+id/plant_add_tv_image_explain" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
