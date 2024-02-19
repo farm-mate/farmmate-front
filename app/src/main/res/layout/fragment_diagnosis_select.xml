@@ -113,6 +113,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/diagnosis_select_tv_anyplant" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <Button
+                android:id="@+id/diagnosis_btn_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="촬영"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diagnosis_select_layout_anyplant" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

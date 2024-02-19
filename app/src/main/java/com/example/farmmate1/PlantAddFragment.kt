@@ -15,10 +15,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.math.log
-import android.content.Context
+import android.content.Intent
+import android.provider.MediaStore
+import androidx.activity.result.contract.ActivityResultContracts
+import android.net.Uri
+import android.provider.OpenableColumns
+import android.provider.Settings
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.provider.Settings.Secure
 
 
 class PlantAddFragment : Fragment() {
@@ -62,7 +68,12 @@ class PlantAddFragment : Fragment() {
             selectLocation()
         }
 
-        plant = Plant("", "", "", "") // 초기화
+        binding.plantAddIbImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            getContent.launch(intent)
+        }
+
+        plant = Plant("", "", "", "", "") // 초기화
 
         // 등록하기 버튼 클릭 후 나의 식물 페이지로 이동, 새로운 아이템 추가됨
         binding.plantAddBtnEnroll.setOnClickListener{
@@ -73,8 +84,9 @@ class PlantAddFragment : Fragment() {
             val firstPlantingDate = binding.plantAddTvSelectdate.text.toString() // 사용자가 선택한 시작일
             val plantLocation = binding.plantAddEtLocation.text.toString() // 사용자가 선택한 재배지
             val memo = binding.plantAddEtMemo.text.toString() // 사용자가 입력한 메모
+            val deviceId = Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
 
-            plant = Plant(plantType, plantLocation, memo, selectedDate?.let {
+            plant = Plant(deviceId, plantType, plantLocation, memo, selectedDate?.let {
                 SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(it)
             } ?: "")
 
@@ -83,13 +95,14 @@ class PlantAddFragment : Fragment() {
             val retrofit = RetrofitClient.instance
             val apiService = retrofit.create(ApiService::class.java)
 
+
             // 데이터 요청
             apiService.postPlant(plant).enqueue(object : Callback<Plant> {
                 override fun onResponse(call: Call<Plant>, response: Response<Plant>) {
                     if (response.isSuccessful) {
                         val postPlant = response.body()
                         Log.d("PlantAddFragment", "Plant created: ${postPlant}")
-                        Log.d("check--- plant", "plantType: " + plant.plantType + "\n" +"plantLocation: " + plant.plantLocation + "\n" + "plantMemo: " +  plant.memo + "\n" +"firstPlantingDate: "  + plant.firstPlantingDate);
+                        Log.d("check--- plant", "deviceid" + plant.deviceId+ "\n" +"plantType: " + plant.plantType + "\n" +"plantLocation: " + plant.plantLocation + "\n" + "plantMemo: " +  plant.memo + "\n" +"firstPlantingDate: "  + plant.firstPlantingDate);
 
 
                         // 콜백 완료 후에 프래그먼트 이동
@@ -145,6 +158,38 @@ class PlantAddFragment : Fragment() {
 
     private fun selectLocation() {
         TODO("Not yet implemented")
+    }
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == android.app.Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val selectedImageUri = data?.data
+            // 선택한 이미지 처리
+            if (selectedImageUri != null) {
+                val fileName = getFileInfo(selectedImageUri)
+                val textView = binding.plantAddTvUploadFileinfo
+                textView.text = "파일 선택됨: $fileName"
+            }
+        }
+    }
+
+    private fun getFileInfo(uri: Uri): String {
+        var fileInfo = ""
+        val contentResolver = requireContext().contentResolver
+        val cursor = contentResolver.query(uri, null, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val columnIndex = it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME)
+                if (columnIndex != -1) {
+                    fileInfo = it.getString(columnIndex) ?: ""
+                } else {
+                    fileInfo = "열이 없음"
+                }
+            } else {
+                fileInfo = "데이터 없음"
+            }
+        }
+        return fileInfo
     }
 
 }
