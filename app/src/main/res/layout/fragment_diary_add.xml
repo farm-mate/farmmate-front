@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DiaryAddFragment">
+
+    <ScrollView
+        android:id="@+id/diary_add_fragment_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/diary_add_fragment_layout_cl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".DiaryAddFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/diary_add_fragment_top_cl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">>
+
+                <ImageButton
+                    android:id="@+id/diary_add_back_ib"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/back"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/diary_add_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="일지 작성"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/diary_add_back_ib"
+                    app:layout_constraintBottom_toBottomOf="@id/diary_add_back_ib"/>
+
+<!--                <Button-->
+<!--                    android:id="@+id/write_diary_title_btn"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginEnd="60dp"-->
+<!--                    android:text="일지작성"-->
+<!--                    android:textAlignment="center"-->
+
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/diary_add_back_ib"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/write_diary_title_todobtn"-->
+<!--                    app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/diary_add_back_ib"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/diary_add_back_ib"-->
+<!--                    app:layout_constraintVertical_bias="0.551" />-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/write_diary_title_todobtn"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginEnd="48dp"-->
+                <!--                        android:text="할 일"-->
+                <!--                        android:textAlignment="center"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="20sp"-->
+
+                <!--                        android:textStyle="bold"-->
+                <!--                        app:layout_constraintBottom_toBottomOf="@id/write_diary_fragment_back_ib"-->
+                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                        app:layout_constraintStart_toEndOf="@+id/write_diary_title_btn"-->
+                <!--                        app:layout_constraintTop_toTopOf="@id/write_diary_fragment_back_ib" />-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/diary_add_fragment_select_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diary_add_fragment_top_cl">
+
+                <TextView
+                    android:id="@+id/diary_add_tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="2023년 4월 14일"
+                    android:textColor="#036635"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/diary_add_select_cl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:id="@+id/diary_add_tv_select"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="기록할 작물 선택"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/diary_add_spinner_select"
+                        android:layout_width="300dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@+id/diary_add_tv_select"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_select" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/diary_add_layout_weather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/diary_add_select_cl">
+
+                    <TextView
+                        android:id="@+id/diary_add_tv_weather"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="날씨"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/diary_add_et_weather"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:hint="날씨 기록하기"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/diary_add_tv_weather"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_weather" />
+
+                    <EditText
+                        android:id="@+id/diary_add_et_temperature"
+                        android:layout_width="140dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:hint="온도 기록하기"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/diary_add_et_weather"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_et_weather"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <EditText
+                        android:id="@+id/diary_add_et_humidity"
+                        android:layout_width="140dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="15dp"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:hint="습도 기록하기"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/diary_add_et_temperature"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_et_weather"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/diary_add_layout_water"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/diary_add_layout_weather">
+
+                    <TextView
+                        android:id="@+id/diary_add_tv_water"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="오늘 물을 주었나요?"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/diary_add_cb_water"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/diary_add_tv_water"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/diary_add_layout_fert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/diary_add_layout_water">
+
+                    <TextView
+                        android:id="@+id/diary_add_tv_fert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="오늘 비료를 주었나요?"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/diary_add_cb_fert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/diary_add_tv_fert"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        android:id="@+id/diary_add_et_fert"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:hint="비료 이름"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/diary_add_tv_fert"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_fert" />
+
+                    <EditText
+                        android:id="@+id/diary_add_et_fertuse"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:hint="비료 용량(10a 당 kg)을 입력하세요"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/diary_add_et_fert"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_et_fert" />
+                        <!--tools:ignore="TouchTargetSizeCheck"-->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/diary_add_layout_pes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/diary_add_layout_fert">
+
+                    <TextView
+                        android:id="@+id/diary_add_tv_pes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="오늘 농약을 주었나요?"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/diary_add_cb_pes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/diary_add_tv_pes"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/diary_add_et_pes"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:hint="농약 이름"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/diary_add_tv_pes"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_pes" />
+
+                    <EditText
+                        android:id="@+id/diary_add_et_pesuse"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:hint="농약 용량(10a 당 L)을 입력하세요"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/diary_add_et_pes"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_et_pes" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/diary_add_layout_memo"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/write_diary_layout_location">
+
+                    <TextView
+                        android:id="@+id/diary_add_tv_memo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="메모"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/diary_add_et_memo"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:imeOptions="actionDone"
+                        android:hint="메모 작성"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:lines="5"
+                        android:minLines="3"
+                        android:gravity="top|start"
+                        android:maxLines="10"
+                        android:scrollbars="vertical"
+                        android:textSize="16sp"
+                        android:background="@drawable/edittext_border"
+                        app:layout_constraintStart_toStartOf="@+id/diary_add_tv_memo"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_memo" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/diary_add_layout_image"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:paddingBottom="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/diary_add_layout_memo">
+
+                    <TextView
+                        android:id="@+id/diary_add_tv_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="사진 첨부"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/diary_add_ib_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="#E0F8EE"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:paddingLeft="23dp"
+                        android:paddingTop="13dp"
+                        android:paddingRight="23dp"
+                        android:paddingBottom="13dp"
+                        app:layout_constraintStart_toStartOf="@+id/diary_add_tv_image"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_image"
+                        app:srcCompat="@drawable/baseline_image_24" />
+
+                    <TextView
+                        android:id="@+id/diary_add_tv_image_explain"
+                        android:layout_width="190dp"
+                        android:layout_height="39dp"
+                        android:text="사진 첨부는 5MB 미만의 JPG, PNG 파일만 가능"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/diary_add_ib_image"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_image" />
+
+                    <TextView
+                        android:id="@+id/diary_add_tv_upload_fileinfo"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="(좌측 버튼 선택)"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/diary_add_ib_image"
+                        app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_image_explain" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/diary_add_btn_enroll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="등록하기"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/diary_add_fragment_select_ll" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>
