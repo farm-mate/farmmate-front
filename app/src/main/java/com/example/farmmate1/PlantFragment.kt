@@ -98,7 +98,6 @@ class PlantFragment : Fragment() {
             }
         }
 
-
         // 식물 추가 버튼 클릭 후 식물 추가 페이지로 이동
         binding.plantAddBtn.setOnClickListener{
             moveToAddPlantFragment()
