@@ -72,20 +72,7 @@ class DiaryFragment : Fragment(), DiaryDataListener {
                 moveToAddDiaryFragment(date)
             }
         }
-
-//        val diaryAddFragment = DiaryAddFragment()
-//        val selectedDate = diaryAddFragment.getSelectedDate()
-//        val checkedItems = diaryAddFragment.getCheckedItems()
-//
-//        // 날짜와 체크된 항목을 기반으로 EventDecorator 생성
-//        val eventDecorator = EventDecorator(requireContext(), checkedItems, selectedDate)
-
-        fetchDiaryListFromServer()
-
-        // MaterialCalendarView에 EventDecorator 추가
-//        calendarView.addDecorator(eventDecorator)
-
-
+        //fetchDiaryListFromServer()
     }
 
     override fun onDestroyView() {
