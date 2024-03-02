@@ -6,14 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AlertDialog
 import com.example.farmmate1.databinding.FragmentDiagnosisBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 class DiagnosisFragment : Fragment() {
 
@@ -22,9 +23,7 @@ class DiagnosisFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,9 +78,11 @@ class DiagnosisFragment : Fragment() {
 //        val Adapter = HistoryAdapter(requireContext(),HistoryList)
 //        binding.diagnosisListLvHistory.adapter = Adapter
 
-        // 진단하기 버튼 클릭 시 페이지 이동 (진단할 작물 선택)
-        binding.diagnosisHistoryBtnDiagnosis.setOnClickListener{
-            moveToDiagnosisSelectFragment()
+        // 진단하기 버튼 클릭 시 알림창 (진단할 작물 선택)
+        binding.diagnosisBtnDiagnosis.setOnClickListener{
+            //moveToDiagnosisSelectFragment()
+            //moveToDiagnosisCameraFragment()
+            showCropSelectionDialog()
         }
 
         // 리스트 객체 클릭 시 진단 결과 페이지로 이동..
@@ -90,10 +91,32 @@ class DiagnosisFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // 메모리 누수를 방지하기 위해 Fragment View에 대한 참조를 제거하여 가비지 컬렉터가 수거
+        _binding = null
+    }
+
     private fun moveToDiagnosisSelectFragment() {
         val transaction = parentFragmentManager
             .beginTransaction()
             .replace(R.id.main_fl, DiagnosisSelectFragment())
+        transaction.commit()
+    }
+
+    private fun moveToDiagnosisCameraFragment(selectedCrop: String?) {
+        val bundle = Bundle().apply {
+            putString("selectedCrop", selectedCrop) // 선택한 작물을 번들에 저장
+        }
+
+        val fragment = DiagnosisCameraFragment().apply {
+            arguments = bundle // 번들을 프래그먼트에 전달
+        }
+
+        val transaction = parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fl, fragment)
         transaction.commit()
     }
 
@@ -104,22 +127,44 @@ class DiagnosisFragment : Fragment() {
         transaction.commit()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    private var selectedCrop: String? = null // 선택한 작물을 저장할 변수
 
-        // 메모리 누수를 방지하기 위해 Fragment View에 대한 참조를 제거하여 가비지 컬렉터가 수거
-        _binding = null
+    private fun showCropSelectionDialog() {
+        val crops = arrayOf("가지", "고추", "단호박", "딸기", "상추", "수박", "애호박", "오이", "쥬키니호박", "참외", "토마토", "포도")
+        val checkedItem = -1
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("작물 종류를 선택하세요")
+            .setSingleChoiceItems(crops, checkedItem) { dialog, which ->
+                // 라디오 버튼을 클릭한 경우의 동작 설정
+                selectedCrop = crops[which] // 선택한 작물 저장
+            }
+            .setPositiveButton("다음") { dialog, which ->
+                // "다음" 버튼을 클릭한 경우의 동작 설정
+                if (selectedCrop != null) {
+                    moveToDiagnosisCameraFragment(selectedCrop!!)
+                    dialog.dismiss() // 다이얼로그 닫기
+                } else {
+                    Toast.makeText(requireContext(), "진단할 작물을 선택하세요", Toast.LENGTH_SHORT).show()
+                    // 왜 알림창이 닫힐까 ^^
+                }
+            }
+            .setNegativeButton("취소") { dialog, which ->
+                // "취소" 버튼을 클릭한 경우의 동작 설정
+                dialog.dismiss() // 다이얼로그 닫기
+            }
+            .show() // 다이얼로그 표시
     }
 
-    class MainViewModel : ViewModel() {
-
-        private val _count = MutableLiveData<Int>()
-        val count : LiveData<Int> get() = _count
-        init {
-            _count.value = 5
-        }
-        fun getUpdatedCount(plusCount: Int){
-            _count.value = (_count.value)?.plus(plusCount)
-        }
-    }
+//    class MainViewModel : ViewModel() {
+//
+//        private val _count = MutableLiveData<Int>()
+//        val count : LiveData<Int> get() = _count
+//        init {
+//            _count.value = 5
+//        }
+//        fun getUpdatedCount(plusCount: Int){
+//            _count.value = (_count.value)?.plus(plusCount)
+//        }
+//    }
 }
