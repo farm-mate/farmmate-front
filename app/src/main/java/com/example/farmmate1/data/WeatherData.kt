@@ -1,5 +1,6 @@
 package com.example.farmmate1.data
 
+import android.util.Log
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -12,28 +13,27 @@ class WeatherData {
     private var weatherId: Int = 0
     private var tempInt: Int =0
     lateinit var humidityString:String
-    var humidityInt:Int =0
-    private var mintempInt : Int=0
-    private var maxtempInt : Int=0
+    lateinit var windSpeed:String
+    lateinit var windDirection:String
 
 
     fun fromJson(jsonObject: JSONObject?): WeatherData? {
         try{
+            Log.d("WeatherData", "JSON Object: $jsonObject")
             var weatherData = WeatherData()
             weatherData.weatherId = jsonObject?.getJSONArray("weather")?.getJSONObject(0)?.getInt("id")!!
             weatherData.weatherType = jsonObject.getJSONArray("weather").getJSONObject(0).getString("main")
             weatherData.icon = updateWeatherIcon(weatherData.weatherId)
+
             val roundedTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp")-273.15).toInt()
             weatherData.tempString = roundedTemp.toString()
             weatherData.tempInt = roundedTemp
 
-            val roundedminTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp_min")-273.15).toInt()
-            weatherData.mintempString = roundedminTemp.toString()
-            weatherData.mintempInt = roundedminTemp
+            val windSpeed: Double = jsonObject.getJSONObject("wind").getDouble("speed")
+            weatherData.windSpeed = windSpeed.toString()
 
-            val roundedmaxTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp_max")-273.15).toInt()
-            weatherData.maxtempString = roundedmaxTemp.toString()
-            weatherData.mintempInt = roundedminTemp
+            val windDirection: Double = jsonObject.getJSONObject("wind").getDouble("deg")
+            weatherData.windDirection = updateWindDirection(windDirection.toInt())
 
             val roundedHumidity: Int = (jsonObject.getJSONObject("main").getDouble("humidity")).toInt()
             weatherData.humidityString = roundedHumidity.toString()
@@ -44,28 +44,28 @@ class WeatherData {
         }
     }
 
-    fun updateData(jsonObject: JSONObject?) {
-        try {
-            weatherId = jsonObject?.getJSONArray("weather")?.getJSONObject(0)?.getInt("id")!!
-            weatherType = jsonObject.getJSONArray("weather").getJSONObject(0).getString("main")
-            icon = updateWeatherIcon(weatherId)
-            val roundedTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp") - 273.15).toInt()
-            tempString = roundedTemp.toString()
-            tempInt = roundedTemp
-
-            val roundedminTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp_min") - 273.15).toInt()
-            mintempString = roundedminTemp.toString()
-            mintempInt = roundedminTemp
-
-
-            val roundedmaxTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp_max") - 273.15).toInt()
-            maxtempString = roundedmaxTemp.toString()
-            maxtempInt = roundedmaxTemp
-            
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-    }
+//    fun updateData(jsonObject: JSONObject?) {
+//        try {
+//            weatherId = jsonObject?.getJSONArray("weather")?.getJSONObject(0)?.getInt("id")!!
+//            weatherType = jsonObject.getJSONArray("weather").getJSONObject(0).getString("main")
+//            icon = updateWeatherIcon(weatherId)
+//            val roundedTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp") - 273.15).toInt()
+//            tempString = roundedTemp.toString()
+//            tempInt = roundedTemp
+//
+//            val roundedminTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp_min") - 273.15).toInt()
+//            mintempString = roundedminTemp.toString()
+//            mintempInt = roundedminTemp
+//
+//
+//            val roundedmaxTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp_max") - 273.15).toInt()
+//            maxtempString = roundedmaxTemp.toString()
+//            maxtempInt = roundedmaxTemp
+//
+//        } catch (e: JSONException) {
+//            e.printStackTrace()
+//        }
+//    }
 
     private fun updateWeatherIcon(condition: Int): String {
         if (condition in 200..299) {
@@ -96,6 +96,19 @@ class WeatherData {
         return if (condition in 905..1000) {
             "thunderstorm"
         } else "dunno"
+    }
 
+    private fun updateWindDirection(degrees: Int): String {
+        return when (degrees) {
+            in 0..45 -> "북풍"
+            in 46..90 -> "북동풍"
+            in 91..135 -> "동풍"
+            in 136..180 -> "남동풍"
+            in 181..225 -> "남풍"
+            in 226..270 -> "남서풍"
+            in 271..315 -> "서풍"
+            in 316..360 -> "북서풍"
+            else -> "알 수 없음"
+        }
     }
 }
