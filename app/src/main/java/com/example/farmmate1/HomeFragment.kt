@@ -1,6 +1,7 @@
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
@@ -25,6 +26,7 @@ import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,12 +43,11 @@ class HomeFragment : Fragment() {
     private var binding: FragmentHomeBinding? = null
     private lateinit var weatherState: TextView
     private lateinit var temperature: TextView
-    private lateinit var weatherTip: TextView
     private lateinit var weatherIcon: ImageView
     private lateinit var humidity:TextView
-    private lateinit var temperature2:TextView
-    private lateinit var mintemp : TextView
-    private lateinit var maxtemp : TextView
+    private lateinit var wind: TextView
+    private lateinit var weatherDate : TextView
+    private lateinit var location: TextView
     private lateinit var mLocationManager: LocationManager
     private lateinit var mLocationListener: LocationListener
 
@@ -66,12 +67,11 @@ class HomeFragment : Fragment() {
         binding?.apply {
             temperature = temperatureTv
             weatherState = weatherTv
-            //weatherTip = weatherTipTv
             weatherIcon = weatherIc
-            humidity = homeFragmentWeatherClHumid
-            temperature2 = homeFragmentWeatherClTempe
-            mintemp = homeFragmentWeatherClMinTempe
-            maxtemp = homeFragmentWeatherClMaxTempe
+            humidity = homeWeatherHumid
+            wind = homeWeatherWind
+            weatherDate = homeWeatherDate
+            location = locationTv
         }
     }
 
@@ -84,11 +84,14 @@ class HomeFragment : Fragment() {
         mLocationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         mLocationListener = LocationListener { p0 ->
+            Log.d("Location", "Latitude: ${p0.latitude}, Longitude: ${p0.longitude}")
             val params: RequestParams = RequestParams()
             params.put("lat", p0.latitude)
             params.put("lon", p0.longitude)
             params.put("appid", Companion.API_KEY)
             doNetworking(params)
+            getAddressFromLocation(p0.latitude, p0.longitude)
+
         }
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
@@ -119,6 +122,21 @@ class HomeFragment : Fragment() {
         )
     }
 
+    private fun getAddressFromLocation(latitude: Double, longitude: Double) {
+        val geoCoder = Geocoder(requireContext(), Locale.getDefault())
+        try {
+            val addresses = geoCoder.getFromLocation(latitude, longitude, 1)
+            if (addresses != null && addresses.isNotEmpty()) {
+                val address = addresses[0]
+                val thoroughfare = address.thoroughfare
+                val addressText = "$thoroughfare"
+                location.text = addressText
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
     private fun doNetworking(params: RequestParams) {
         val client = AsyncHttpClient()
 
@@ -145,11 +163,11 @@ class HomeFragment : Fragment() {
             "drawable",
             activity?.packageName
         )
-        humidity.text= "습도 :"+weather.humidityString + " %"
         weatherIcon.setImageResource(resourceID)
-        temperature2.text = "기온 :"+weather.tempString + " ℃"
-        mintemp.text = "최저 "+ weather.mintempString + " ℃"
-        maxtemp.text = "최저 "+ weather.maxtempString + " ℃"
+        wind.text = "바람 "+ weather.windSpeed + "m/s " + weather.windDirection
+        humidity.text= "현재습도 "+weather.humidityString + " %"
+        val currentDate = SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault()).format(Date())
+        weatherDate.text = currentDate
     }
 
     override fun onPause() {

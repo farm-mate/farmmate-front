@@ -45,19 +45,6 @@ class DiagnosisCameraFragment : Fragment() {
         val selectedCrop = arguments?.getString("selectedCrop")
         binding.diagnosisCameraTvPlant.text = "진단 할 식물: $selectedCrop"
 
-//        if (!checkPermission()) {
-//            requestPermission()
-//        }
-//
-//        binding.diagnosisCameraBtnOpencam.setOnClickListener{
-//            if(checkPermission()){
-//                dispatchTakePictureIntent()
-//            }
-//            else{
-//                requestPermission()
-//            }
-//        }
-
         binding.diagnosisCameraBtnOpencam.setOnClickListener{
             checkCameraPermission()
         }
@@ -68,23 +55,12 @@ class DiagnosisCameraFragment : Fragment() {
 
         // 초기에 진단하기 버튼 비활성화
         binding.diagnosisCameraBtnNext.visibility = View.INVISIBLE
-        binding.diagnosisCameraIvImage.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
-            // 이미지 변경시 버튼 활성화
-            binding.diagnosisCameraBtnNext.visibility = View.VISIBLE
+
+        binding.diagnosisCameraBackIb.setOnClickListener {
+            moveToDiagnosisFragment()
         }
 
-        //startCamera()
     }
-
-//    private fun requestPermission() {
-//        requestPermissions(
-//            arrayOf(
-//                Manifest.permission.READ_EXTERNAL_STORAGE,
-//                Manifest.permission.CAMERA
-//            ),
-//            REQUEST_PERMISSION_CODE
-//        )
-//    }
 
     private fun checkPermission(): Boolean {
         val cameraPermission = ContextCompat.checkSelfPermission(
@@ -185,6 +161,7 @@ class DiagnosisCameraFragment : Fragment() {
 
             // 이미지를 ImageView에 표시
             binding.diagnosisCameraIvImage.setImageBitmap(imageBitmap)
+            binding.diagnosisCameraBtnNext.visibility = View.VISIBLE
         }
     }
 
@@ -197,6 +174,7 @@ class DiagnosisCameraFragment : Fragment() {
 
         // 이미지를 ImageView에 표시
         binding.diagnosisCameraIvImage.setImageBitmap(imageBitmap)
+        binding.diagnosisCameraBtnNext.visibility = View.VISIBLE
     }
 
     private fun saveImageToFile(bitmap: Bitmap): String {
@@ -215,6 +193,11 @@ class DiagnosisCameraFragment : Fragment() {
         return imageFile.absolutePath
     }
 
-
+    private fun moveToDiagnosisFragment() {
+        val transaction = parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fl, DiagnosisFragment())
+        transaction.commit()
+    }
 
 }

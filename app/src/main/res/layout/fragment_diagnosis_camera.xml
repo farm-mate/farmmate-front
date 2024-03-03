@@ -6,123 +6,131 @@
     android:layout_height="match_parent"
     tools:context=".DiagnosisCameraFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/diagnosis_camera_fragment_layout_cl"
+    <ScrollView
+        android:id="@+id/diagnosis_camera_fragment_sv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".PlantAddFragment">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/diagnosis_camera_fragment_top_cl"
+            android:id="@+id/diagnosis_camera_fragment_layout_cl"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                android:id="@+id/diagnosis_camera_back_ib"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="30dp"
-                android:src="@drawable/back"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"/>
-
-            <TextView
-                android:id="@+id/diagnosis_camera_title_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="진단하기"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/diagnosis_camera_back_ib"
-                app:layout_constraintBottom_toBottomOf="@id/diagnosis_camera_back_ib"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/diagnosis_camera_fragment_select_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:paddingTop="20dp"
-            android:paddingBottom="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/diagnosis_camera_fragment_top_cl">
-
-            <TextView
-                android:id="@+id/diagnosis_camera_tv_plant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="진단 할 식물: "
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+            android:layout_height="match_parent"
+            tools:context=".PlantAddFragment">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/diagnosis_camera_layout_btn"
-                android:layout_width="wrap_content"
+                android:id="@+id/diagnosis_camera_fragment_top_cl"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/diagnosis_camera_tv_plant">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <Button
-                    android:id="@+id/diagnosis_camera_btn_opencam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="카메라 열기"
+                <ImageButton
+                    android:id="@+id/diagnosis_camera_back_ib"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/back"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"/>
 
-                <Button
-                    android:id="@+id/diagnosis_camera_btn_gallery"
+                <TextView
+                    android:id="@+id/diagnosis_camera_title_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="갤러리 열기"
-                    android:layout_marginLeft="40dp"
-                    app:layout_constraintStart_toEndOf="@+id/diagnosis_camera_btn_opencam"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    android:text="진단하기"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/diagnosis_camera_back_ib"
+                    app:layout_constraintBottom_toBottomOf="@id/diagnosis_camera_back_ib"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--            <ImageView-->
-<!--                android:id="@+id/diagnosis_camera_iv_image"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="384dp"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:paddingHorizontal="40dp"-->
-<!--                android:src="@drawable/upload_image" />-->
-
-            <ImageView
-                android:id="@+id/diagnosis_camera_iv_image"
+            <LinearLayout
+                android:id="@+id/diagnosis_camera_fragment_select_ll"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:paddingHorizontal="4dp"
-                android:src="@drawable/upload_image" />
-
-            <Button
-                android:id="@+id/diagnosis_camera_btn_next"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="진단하기"
-                android:layout_marginTop="20dp"
-                />
-        </LinearLayout>
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="20dp"
+                android:paddingHorizontal="30dp"
+                android:paddingBottom="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diagnosis_camera_fragment_top_cl">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/diagnosis_camera_tv_plant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="진단 할 식물: "
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/diagnosis_camera_layout_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/diagnosis_camera_tv_plant">
+
+                    <Button
+                        android:id="@+id/diagnosis_camera_btn_opencam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="카메라 열기"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <Button
+                        android:id="@+id/diagnosis_camera_btn_gallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="갤러리 열기"
+                        android:layout_marginLeft="40dp"
+                        app:layout_constraintStart_toEndOf="@+id/diagnosis_camera_btn_opencam"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/diagnosis_camera_iv_image"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="384dp"-->
+    <!--                android:layout_marginTop="20dp"-->
+    <!--                android:paddingHorizontal="40dp"-->
+    <!--                android:src="@drawable/upload_image" />-->
+
+                <ImageView
+                    android:id="@+id/diagnosis_camera_iv_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/upload_image" />
+
+                <Button
+                    android:id="@+id/diagnosis_camera_btn_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="진단하기"
+                    android:layout_marginTop="20dp"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </FrameLayout>
