@@ -128,7 +128,7 @@ class HomeFragment : Fragment() {
             val addresses = geoCoder.getFromLocation(latitude, longitude, 1)
             if (addresses != null && addresses.isNotEmpty()) {
                 val address = addresses[0]
-                val thoroughfare = address.thoroughfare
+                val thoroughfare = address.thoroughfare ?: ""
                 val addressText = "$thoroughfare"
                 location.text = addressText
             }

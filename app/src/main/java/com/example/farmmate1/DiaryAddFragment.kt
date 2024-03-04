@@ -1,12 +1,20 @@
 package com.example.farmmate1
 
+import android.Manifest
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.farmmate1.data.*
 import com.example.farmmate1.databinding.FragmentDiaryAddBinding
@@ -33,8 +41,13 @@ class DiaryAddFragment : Fragment() {
         }
     }
 
+    private val REQUEST_IMAGE_FROM_GALLERY = 103
+    private val REQUEST_PERMISSION_CODE = 104
+
     private var _binding: FragmentDiaryAddBinding? = null
     private val binding get() = _binding!!      // !! -> non-null assertion
+
+    private var imageData: ByteArray? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,13 +85,18 @@ class DiaryAddFragment : Fragment() {
             binding.diaryAddTvDate.text = "에러 발생" // 날짜가 없을 경우에 대한 처리 (빈 문자열로 표시)
         }
 
+        binding.diaryAddIbImage.setOnClickListener {
+            openGallery()
+        }
+
         binding.diaryAddBtnEnroll.setOnClickListener {
             val selectedPlant = binding.diaryAddSpinnerSelect.selectedItem.toString()
             val temperatureText = binding.diaryAddEtTemperature.text.toString()
             val humidityText = binding.diaryAddEtHumidity.text.toString()
+            val diaryImageData = if (imageData != null) imageData else byteArrayOf()
 
             if (validateTemperature(temperatureText) && validateHumidity(humidityText)) {
-                postDiary(selectedPlant)
+                postDiary(selectedPlant, diaryImageData)
             }
         }
 
@@ -117,7 +135,7 @@ class DiaryAddFragment : Fragment() {
         })
     }
 
-    private fun postDiary(selectedPlant: String) {
+    private fun postDiary(selectedPlant: String, diaryImageData: ByteArray?) {
 
         // Diary 객체 생성
         val diary = Diary(
@@ -133,7 +151,8 @@ class DiaryAddFragment : Fragment() {
             pesticideFlag = binding.diaryAddCbPes.isChecked,
             pesticideName = binding.diaryAddEtPes.text.toString(),
             pesticideUsage = binding.diaryAddEtPesuse.text.toString(),
-            memo = binding.diaryAddEtMemo.text.toString()
+            memo = binding.diaryAddEtMemo.text.toString(),
+            imageData = diaryImageData
         )
 
         // Retrofit 인스턴스 생성
@@ -201,6 +220,74 @@ class DiaryAddFragment : Fragment() {
         }
 
         return true
+    }
+
+    private fun openGallery() {
+        if (checkStoragePermission()) {
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(galleryIntent, REQUEST_IMAGE_FROM_GALLERY)
+        } else {
+            requestStoragePermission()
+        }
+    }
+
+    private fun checkStoragePermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestStoragePermission() {
+        requestPermissions(
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            REQUEST_PERMISSION_CODE
+        )
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openGallery()
+            } else {
+                Toast.makeText(requireContext(), "저장소 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_IMAGE_FROM_GALLERY -> {
+                    data?.data?.let { uri ->
+                        // Plant 객체에 이미지 데이터 설정
+                        val inputStream = requireActivity().contentResolver.openInputStream(uri)
+                        val bytes = inputStream?.readBytes()
+                        inputStream?.close()
+                        imageData = bytes
+
+                        val fileName = getFileNameFromUri(uri)
+                        binding.diaryAddTvUploadFileinfo.text = "파일 선택됨: $fileName"
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getFileNameFromUri(uri: Uri): String {
+        var fileName = ""
+        val cursor = requireActivity().contentResolver.query(uri, null, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val displayNameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                if (displayNameIndex >= 0) {
+                    fileName = it.getString(displayNameIndex)
+                }
+            }
+        }
+        return fileName
     }
 
 
