@@ -5,7 +5,8 @@ class Plant (
     val plantType: String,
     val plantLocation: String,
     val memo: String,
-    var firstPlantingDate: String
+    var firstPlantingDate: String,
+    val imageData: ByteArray? = null
 )
 
 

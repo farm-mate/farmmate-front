@@ -21,17 +21,27 @@ import androidx.activity.result.contract.ActivityResultContracts
 import android.net.Uri
 import android.provider.OpenableColumns
 import android.provider.Settings
+import android.Manifest
+import android.app.Activity
+import android.content.pm.PackageManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.provider.Settings.Secure
+import androidx.core.content.ContextCompat
+import android.util.Base64
+
 
 
 class PlantAddFragment : Fragment() {
 
+    private val REQUEST_IMAGE_FROM_GALLERY = 103
+    private val REQUEST_PERMISSION_CODE = 104
+
     private var _binding: FragmentPlantAddBinding? = null
     private val binding get() = _binding!!
 
+    private var imageData: ByteArray? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,15 +75,16 @@ class PlantAddFragment : Fragment() {
         }
 
         binding.plantAddLocationIb.setOnClickListener {
-            selectLocation()
+            //selectLocation()
         }
 
         binding.plantAddIbImage.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            getContent.launch(intent)
+//            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//            getContent.launch(intent)
+            openGallery()
         }
 
-        plant = Plant("", "", "", "", "") // 초기화
+        plant = Plant("", "", "", "", "", null) // 초기화
 
         // 등록하기 버튼 클릭 후 나의 식물 페이지로 이동, 새로운 아이템 추가됨
         binding.plantAddBtnEnroll.setOnClickListener{
@@ -85,10 +96,12 @@ class PlantAddFragment : Fragment() {
             val plantLocation = binding.plantAddEtLocation.text.toString() // 사용자가 선택한 재배지
             val memo = binding.plantAddEtMemo.text.toString() // 사용자가 입력한 메모
             val deviceId = Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
+            val plantImageData = if (imageData != null) imageData else byteArrayOf()
+
 
             plant = Plant(deviceId, plantType, plantLocation, memo, selectedDate?.let {
                 SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(it)
-            } ?: "")
+            } ?: "", plantImageData)
 
 
             // Retrofit 인스턴스 생성
@@ -101,10 +114,8 @@ class PlantAddFragment : Fragment() {
                 override fun onResponse(call: Call<Plant>, response: Response<Plant>) {
                     if (response.isSuccessful) {
                         val postPlant = response.body()
-                        Log.d("PlantAddFragment", "Plant created: ${postPlant}")
-                        Log.d("check--- plant", "deviceid" + plant.deviceId+ "\n" +"plantType: " + plant.plantType + "\n" +"plantLocation: " + plant.plantLocation + "\n" + "plantMemo: " +  plant.memo + "\n" +"firstPlantingDate: "  + plant.firstPlantingDate);
-
-
+                        //Log.d("PlantAddFragment", "Plant created: ${postPlant}")
+                        Log.d("check--- plant", "deviceid: ${plant.deviceId}, plantType: ${plant.plantType}, plantLocation: ${plant.plantLocation}, plantMemo: ${plant.memo}, firstPlantingDate: ${plant.firstPlantingDate}")
                         // 콜백 완료 후에 프래그먼트 이동
                         moveToPlantFragment()
                     } else {
@@ -156,40 +167,108 @@ class PlantAddFragment : Fragment() {
         ).show()
     }
 
-    private fun selectLocation() {
-        TODO("Not yet implemented")
+    private fun openGallery() {
+        if (checkStoragePermission()) {
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(galleryIntent, REQUEST_IMAGE_FROM_GALLERY)
+        } else {
+            requestStoragePermission()
+        }
     }
 
-    private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == android.app.Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            val selectedImageUri = data?.data
-            // 선택한 이미지 처리
-            if (selectedImageUri != null) {
-                val fileName = getFileInfo(selectedImageUri)
-                val textView = binding.plantAddTvUploadFileinfo
-                textView.text = "파일 선택됨: $fileName"
+    private fun checkStoragePermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestStoragePermission() {
+        requestPermissions(
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            REQUEST_PERMISSION_CODE
+        )
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openGallery()
+            } else {
+                Toast.makeText(requireContext(), "저장소 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun getFileInfo(uri: Uri): String {
-        var fileInfo = ""
-        val contentResolver = requireContext().contentResolver
-        val cursor = contentResolver.query(uri, null, null, null, null)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_IMAGE_FROM_GALLERY -> {
+                    data?.data?.let { uri ->
+                        // Plant 객체에 이미지 데이터 설정
+                        val inputStream = requireActivity().contentResolver.openInputStream(uri)
+                        val bytes = inputStream?.readBytes()
+                        inputStream?.close()
+                        imageData = bytes
+
+                        val fileName = getFileNameFromUri(uri)
+                        binding.plantAddTvUploadFileinfo.text = "파일 선택됨: $fileName"
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getFileNameFromUri(uri: Uri): String {
+        var fileName = ""
+        val cursor = requireActivity().contentResolver.query(uri, null, null, null, null)
         cursor?.use {
             if (it.moveToFirst()) {
-                val columnIndex = it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME)
-                if (columnIndex != -1) {
-                    fileInfo = it.getString(columnIndex) ?: ""
-                } else {
-                    fileInfo = "열이 없음"
+                val displayNameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                if (displayNameIndex >= 0) {
+                    fileName = it.getString(displayNameIndex)
                 }
-            } else {
-                fileInfo = "데이터 없음"
             }
         }
-        return fileInfo
+        return fileName
     }
+
+//    private fun selectLocation() {
+//        TODO("Not yet implemented")
+//    }
+//
+//    private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//        if (result.resultCode == android.app.Activity.RESULT_OK) {
+//            val data: Intent? = result.data
+//            val selectedImageUri = data?.data
+//            // 선택한 이미지 처리
+//            if (selectedImageUri != null) {
+//                val fileName = getFileInfo(selectedImageUri)
+//                val textView = binding.plantAddTvUploadFileinfo
+//                textView.text = "파일 선택됨: $fileName"
+//            }
+//        }
+//    }
+//
+//    private fun getFileInfo(uri: Uri): String {
+//        var fileInfo = ""
+//        val contentResolver = requireContext().contentResolver
+//        val cursor = contentResolver.query(uri, null, null, null, null)
+//        cursor?.use {
+//            if (it.moveToFirst()) {
+//                val columnIndex = it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME)
+//                if (columnIndex != -1) {
+//                    fileInfo = it.getString(columnIndex) ?: ""
+//                } else {
+//                    fileInfo = "열이 없음"
+//                }
+//            } else {
+//                fileInfo = "데이터 없음"
+//            }
+//        }
+//        return fileInfo
+//    }
 
 }

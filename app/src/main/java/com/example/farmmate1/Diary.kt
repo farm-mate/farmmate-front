@@ -13,5 +13,6 @@ data class Diary(
     val pesticideFlag: Boolean,
     val pesticideName: String,
     val pesticideUsage: String,
-    val memo: String
+    val memo: String,
+    val imageData: ByteArray? = null
 )

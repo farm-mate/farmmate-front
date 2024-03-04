@@ -97,8 +97,7 @@
                             android:id="@+id/location_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:text="00동" />
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -114,14 +113,13 @@
                             android:id="@+id/home_weather_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="yyyy년 MM월 dd일"
                             android:textSize="15sp"/>
 
                         <TextView
                             android:id="@+id/home_weather_wind"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="바람 2m/s 북서풍"
+                            android:text="날씨 정보 가져오는 중..."
                             android:textSize="15sp"
                             android:layout_marginTop="4dp"/>
 
@@ -129,7 +127,6 @@
                             android:id="@+id/home_weather_humid"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="습도 : 00 %"
                             android:textSize="15sp"
                             android:layout_marginTop="4dp"/>
 
