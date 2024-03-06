@@ -134,8 +134,9 @@
                     <Spinner
                         android:id="@+id/diary_add_spinner_select"
                         android:layout_width="300dp"
-                        android:layout_height="30dp"
+                        android:layout_height="35dp"
                         android:layout_marginTop="8dp"
+                        android:background="@drawable/spinner_background"
                         app:layout_constraintStart_toStartOf="@+id/diary_add_tv_select"
                         app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_select" />
 
@@ -170,6 +171,8 @@
                         android:ems="10"
                         android:imeOptions="actionDone"
                         android:hint="날씨 기록하기"
+                        android:padding="4dp"
+                        android:background="@drawable/edittext_background"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="@+id/diary_add_tv_weather"
                         app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_weather" />
@@ -182,6 +185,8 @@
                         android:ems="10"
                         android:imeOptions="actionDone"
                         android:hint="온도 기록하기"
+                        android:padding="4dp"
+                        android:background="@drawable/edittext_background"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="@+id/diary_add_et_weather"
                         app:layout_constraintTop_toBottomOf="@+id/diary_add_et_weather"
@@ -189,13 +194,15 @@
 
                     <EditText
                         android:id="@+id/diary_add_et_humidity"
-                        android:layout_width="140dp"
+                        android:layout_width="150dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="10dp"
                         android:ems="10"
                         android:imeOptions="actionDone"
                         android:hint="습도 기록하기"
+                        android:padding="4dp"
+                        android:background="@drawable/edittext_background"
                         android:textSize="16sp"
                         app:layout_constraintStart_toEndOf="@+id/diary_add_et_temperature"
                         app:layout_constraintTop_toBottomOf="@+id/diary_add_et_weather"
@@ -275,6 +282,8 @@
                         android:ems="10"
                         android:imeOptions="actionDone"
                         android:hint="비료 이름"
+                        android:padding="4dp"
+                        android:background="@drawable/edittext_background"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="@+id/diary_add_tv_fert"
                         app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_fert" />
@@ -287,6 +296,8 @@
                         android:ems="10"
                         android:imeOptions="actionDone"
                         android:hint="비료 용량(10a 당 kg)을 입력하세요"
+                        android:padding="4dp"
+                        android:background="@drawable/edittext_background"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="@+id/diary_add_et_fert"
                         app:layout_constraintTop_toBottomOf="@+id/diary_add_et_fert" />
@@ -333,6 +344,8 @@
                         android:ems="10"
                         android:imeOptions="actionDone"
                         android:hint="농약 이름"
+                        android:padding="4dp"
+                        android:background="@drawable/edittext_background"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="@+id/diary_add_tv_pes"
                         app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_pes" />
@@ -345,6 +358,8 @@
                         android:ems="10"
                         android:imeOptions="actionDone"
                         android:hint="농약 용량(10a 당 L)을 입력하세요"
+                        android:padding="4dp"
+                        android:background="@drawable/edittext_background"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="@+id/diary_add_et_pes"
                         app:layout_constraintTop_toBottomOf="@+id/diary_add_et_pes" />
@@ -380,6 +395,8 @@
                         android:layout_marginTop="8dp"
                         android:imeOptions="actionDone"
                         android:hint="메모 작성"
+                        android:paddingHorizontal="4dp"
+                        android:background="@drawable/edittext_background"
                         android:inputType="textMultiLine|textCapSentences"
                         android:lines="5"
                         android:minLines="3"
@@ -387,7 +404,6 @@
                         android:maxLines="10"
                         android:scrollbars="vertical"
                         android:textSize="16sp"
-                        android:background="@drawable/edittext_border"
                         app:layout_constraintStart_toStartOf="@+id/diary_add_tv_memo"
                         app:layout_constraintTop_toBottomOf="@+id/diary_add_tv_memo" />
 
@@ -456,9 +472,11 @@
 
                 <Button
                     android:id="@+id/diary_add_btn_enroll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
                     android:text="등록하기"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/diary_add_fragment_select_ll" />

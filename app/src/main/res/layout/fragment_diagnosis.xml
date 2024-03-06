@@ -42,53 +42,67 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
             android:paddingVertical="4dp"
+            android:scrollbars="none"
             app:layout_constraintTop_toBottomOf="@+id/diagnosis_fragment_top_cl">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
 
                 <Button
                     android:id="@+id/diagnosis_btn_fragment1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
+                    android:layout_marginRight="4dp"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     android:text="포도" />
 
                 <Button
                     android:id="@+id/diagnosis_btn_fragment2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     android:text="딸기"/>
 
                 <Button
                     android:id="@+id/diagnosis_btn_fragment3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     android:text="오이"/>
 
                 <Button
                     android:id="@+id/diagnosis_btn_fragment4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     android:text="파프리카"/>
 
                 <Button
                     android:id="@+id/diagnosis_btn_fragment5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     android:text="토마토"/>
 
                 <Button
                     android:id="@+id/diagnosis_btn_fragment6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     android:text="고추"/>
 
             </LinearLayout>
@@ -99,7 +113,8 @@
             android:id="@+id/diagnosis_fragment_history_cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
+            android:paddingHorizontal="30dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/diagnosis_fragment_hsv">
@@ -113,24 +128,28 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/diagnosis_btn_diagnosis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="70dp"
+                android:layout_height="33dp"
                 android:layout_marginEnd="8dp"
                 android:text="진단하기"
+                android:textColor="#000000"
+                android:background="@drawable/rounded_btn"
                 app:layout_constraintBottom_toBottomOf="@+id/diagnosis_history_title_tv"
                 app:layout_constraintEnd_toStartOf="@+id/diagnosis_history_btn_edit" />
 
             <Button
                 android:id="@+id/diagnosis_history_btn_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="편집"
+                android:layout_width="60dp"
+                android:layout_height="33dp"
+                android:text="수정"
+                android:textColor="#000000"
+                android:background="@drawable/rounded_btn"
                 app:layout_constraintBottom_toBottomOf="@+id/diagnosis_history_title_tv"
                 app:layout_constraintEnd_toEndOf="parent" />
 

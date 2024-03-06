@@ -10,7 +10,7 @@
     <ScrollView
         android:id="@+id/diary_fragment_sv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/diary_fragment_cl"
@@ -48,51 +48,63 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="4dp"
+                android:scrollbars="none"
                 app:layout_constraintTop_toBottomOf="@id/diary_fragment_top_cl">
 
                 <LinearLayout
                     android:id="@+id/diary_linearlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/diary_strawberry_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="70dp"
+                        android:layout_height="33dp"
+                        android:layout_marginRight="4dp"
+                        android:textColor="#000000"
+                        android:background="@drawable/rounded_btn"
                         android:layout_weight="1"
                         android:text="딸기" />
 
                     <Button
                         android:id="@+id/diary_pepper_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="70dp"
+                        android:layout_height="33dp"
+                        android:layout_marginHorizontal="4dp"
+                        android:textColor="#000000"
+                        android:background="@drawable/rounded_btn"
                         android:layout_weight="1"
                         android:text="고추" />
 
                     <Button
                         android:id="@+id/diary_cucumber_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="70dp"
+                        android:layout_height="33dp"
+                        android:layout_marginHorizontal="4dp"
+                        android:textColor="#000000"
+                        android:background="@drawable/rounded_btn"
                         android:layout_weight="1"
                         android:text="오이" />
 
                     <Button
                         android:id="@+id/diary_tomato_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="70dp"
+                        android:layout_height="33dp"
+                        android:layout_marginHorizontal="4dp"
+                        android:textColor="#000000"
+                        android:background="@drawable/rounded_btn"
                         android:layout_weight="1"
                         android:text="토마토" />
 
                     <Button
                         android:id="@+id/diary_paprica_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_width="70dp"
+                        android:layout_height="33dp"
+                        android:layout_marginHorizontal="4dp"
+                        android:textColor="#000000"
+                        android:background="@drawable/rounded_btn"
                         android:layout_weight="1"
                         android:text="파프리카" />
 
@@ -169,14 +181,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <!--내용요약 레이아웃, 수정필요-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="50dp"
-                android:layout_marginBottom="100dp"
                 app:layout_constraintEnd_toEndOf="@+id/diary_dotname_cl"
                 app:layout_constraintStart_toStartOf="@id/diary_fragment_cal"
                 app:layout_constraintTop_toBottomOf="@id/divider2">
@@ -186,6 +196,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="yyyy-MM-dd"
+                    android:textColor="#000000"
                     android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
@@ -195,6 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="날씨"
+                    android:textColor="#000000"
                     android:layout_marginTop="4dp"
                     app:layout_constraintTop_toBottomOf="@+id/diary_content_date"
                     app:layout_constraintStart_toStartOf="parent"/>
@@ -205,6 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="메모"
+                    android:textColor="#000000"
                     android:layout_marginTop="4dp"
                     app:layout_constraintTop_toBottomOf="@+id/diary_content_weather"
                     app:layout_constraintStart_toStartOf="parent"/>
@@ -221,11 +234,11 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="70dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="fitCenter"
-        android:src="@drawable/plus"/>
+        android:src="@drawable/add"/>
 
 </FrameLayout>
 
