@@ -7,35 +7,37 @@
 
     <ImageView
         android:id="@+id/list_item_ib_number"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/number_one"
-        app:layout_constraintEnd_toStartOf="@id/list_item_history_cl"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/list_item_history_cl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/list_item_ib_number"
-        app:layout_constraintStart_toEndOf="@id/list_item_ib_number">
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/list_item_history_cl"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="24dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/list_item_ib_number"-->
+<!--        app:layout_constraintStart_toEndOf="@id/list_item_ib_number">-->
 
         <TextView
             android:id="@+id/list_item_tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="50dp"
+            android:paddingRight="28dp"
+            android:layout_marginLeft="24dp"
             android:text="2023-05-10"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toEndOf="@+id/list_item_ib_number"
+            app:layout_constraintBottom_toBottomOf="@+id/list_item_ib_number"/>
 
         <TextView
             android:id="@+id/list_item_tv_result"
@@ -46,9 +48,8 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/list_item_history_cl"
             app:layout_constraintStart_toEndOf="@+id/list_item_tv_date"
-            app:layout_constraintTop_toTopOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintBottom_toBottomOf="@+id/list_item_ib_number"/>
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

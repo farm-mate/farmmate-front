@@ -108,7 +108,7 @@
                 android:id="@+id/diagnosis_result_layout_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider">
@@ -116,28 +116,33 @@
 
                 <Button
                     android:id="@+id/diagnosis_result_btn_symptom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
                     android:text="증상"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <Button
                     android:id="@+id/diagnosis_result_btn_cause"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
+                    android:layout_marginStart="36dp"
                     android:text="원인"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     app:layout_constraintStart_toEndOf="@id/diagnosis_result_btn_symptom"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/diagnosis_result_btn_cure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_width="70dp"
+                    android:layout_height="33dp"
+                    android:layout_marginStart="36dp"
                     android:text="치료법"
-                    app:layout_constraintEnd_toEndOf="@id/diagnosis_result_layout_detail"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     app:layout_constraintStart_toEndOf="@id/diagnosis_result_btn_cause"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -159,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:paddingBottom="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -168,18 +173,22 @@
 
                 <Button
                     android:id="@+id/diagnosis_result_btn_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
                     android:text="저장하기"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/diagnosis_result_btn_recheck"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="32dp"
                     android:text="재측정"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/diagnosis_result_btn_save"
                     app:layout_constraintTop_toTopOf="parent" />
