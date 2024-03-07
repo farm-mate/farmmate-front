@@ -1,7 +1,6 @@
 package com.example.farmmate1
 
 import android.os.Bundle
-import android.util.Log
 import android.app.DatePickerDialog
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,23 +13,18 @@ import java.text.SimpleDateFormat
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 import android.content.Intent
 import android.provider.MediaStore
-import androidx.activity.result.contract.ActivityResultContracts
 import android.net.Uri
 import android.provider.OpenableColumns
 import android.provider.Settings
 import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.provider.Settings.Secure
 import androidx.core.content.ContextCompat
-import android.util.Base64
-
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 
 class PlantAddFragment : Fragment() {
@@ -56,7 +50,8 @@ class PlantAddFragment : Fragment() {
         return view
     }
 
-    private lateinit var plant: Plant
+    private lateinit var plant: PlantPost
+    private var plantImg: MultipartBody.Part? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,55 +74,14 @@ class PlantAddFragment : Fragment() {
         }
 
         binding.plantAddIbImage.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//            getContent.launch(intent)
             openGallery()
         }
 
-        plant = Plant("", "", "", "", "", null) // 초기화
-
         // 등록하기 버튼 클릭 후 나의 식물 페이지로 이동, 새로운 아이템 추가됨
         binding.plantAddBtnEnroll.setOnClickListener{
-
-            //val profile = R.drawable.strawberry // 프로필 이미지
-            val plantType = binding.plantAddSpinnerSelect.selectedItem.toString()
-            //val nickname = binding.plantAddEtName.text.toString() // 사용자가 입력한 식물 닉네임
-            val firstPlantingDate = binding.plantAddTvSelectdate.text.toString() // 사용자가 선택한 시작일
-            val plantLocation = binding.plantAddEtLocation.text.toString() // 사용자가 선택한 재배지
-            val memo = binding.plantAddEtMemo.text.toString() // 사용자가 입력한 메모
-            val deviceId = Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
-            val plantImageData = if (imageData != null) imageData else byteArrayOf()
-
-
-            plant = Plant(deviceId, plantType, plantLocation, memo, selectedDate?.let {
-                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(it)
-            } ?: "", plantImageData)
-
-
-            // Retrofit 인스턴스 생성
-            val retrofit = RetrofitClient.instance
-            val apiService = retrofit.create(ApiService::class.java)
-
-
-            // 데이터 요청
-            apiService.postPlant(plant).enqueue(object : Callback<Plant> {
-                override fun onResponse(call: Call<Plant>, response: Response<Plant>) {
-                    if (response.isSuccessful) {
-                        val postPlant = response.body()
-                        //Log.d("PlantAddFragment", "Plant created: ${postPlant}")
-                        Log.d("check--- plant", "deviceid: ${plant.deviceId}, plantType: ${plant.plantType}, plantLocation: ${plant.plantLocation}, plantMemo: ${plant.memo}, firstPlantingDate: ${plant.firstPlantingDate}")
-                        // 콜백 완료 후에 프래그먼트 이동
-                        moveToPlantFragment()
-                    } else {
-                        Log.e("PlantAddFragment", "Failed to create plant: ${response.message()}")
-                    }
-                }
-
-                override fun onFailure(call: Call<Plant>, t: Throwable) {
-                    Log.e("PlantAddFragment", "Network error: ${t.message}")
-                }
-            })
+            enrollPlant()
         }
+
     }
 
     private fun setUpSpinnerPlants() {
@@ -149,14 +103,10 @@ class PlantAddFragment : Fragment() {
     private fun selectStartPlantDate() {
         val cal = Calendar.getInstance()
         val datePickerListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-            cal.set(Calendar.YEAR, year)
-            cal.set(Calendar.MONTH, month)
-            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            cal.set(year, month, dayOfMonth)
             selectedDate = cal.time // 선택한 날짜를 저장
 
-            val dateTimeString = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(selectedDate)
             binding.plantAddTvSelectdate.text = "${year}년 ${month + 1}월 ${dayOfMonth}일"
-            plant.firstPlantingDate = dateTimeString // Plant 객체에 저장
         }
         DatePickerDialog(
             requireContext(),
@@ -213,8 +163,16 @@ class PlantAddFragment : Fragment() {
                         inputStream?.close()
                         imageData = bytes
 
+                        // 이미지 파일의 MIME 타입 가져오기
+                        val contentType = requireActivity().contentResolver.getType(uri)
+                        //파일명
                         val fileName = getFileNameFromUri(uri)
                         binding.plantAddTvUploadFileinfo.text = "파일 선택됨: $fileName"
+
+                        // 이미지 파일을 MultipartBody.Part로 변환
+                        val requestBody = RequestBody.create(MediaType.parse(contentType), bytes)
+                        val multipart = MultipartBody.Part.createFormData("plantImg", fileName, requestBody)
+                        plantImg = multipart
                     }
                 }
             }
@@ -235,40 +193,56 @@ class PlantAddFragment : Fragment() {
         return fileName
     }
 
+    private fun enrollPlant() {
+        val plantType = binding.plantAddSpinnerSelect.selectedItem.toString()
+        val plantName = binding.plantAddEtName.text.toString()
+        val plantLocation = binding.plantAddEtLocation.text.toString()
+        val memo = binding.plantAddEtMemo.text.toString()
+        val deviceId = Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
+
+        val selectedDateFormatted = selectedDate?.let {
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(it)
+        } ?: ""
+
+        val requestBodyMap = hashMapOf<String, RequestBody>()
+        requestBodyMap["plantType"] = RequestBody.create(MediaType.parse("text/plain"), plantType)
+        requestBodyMap["plantName"] = RequestBody.create(MediaType.parse("text/plain"), plantName)
+        requestBodyMap["firstPlantingDate"] = RequestBody.create(MediaType.parse("text/plain"), selectedDateFormatted)
+        requestBodyMap["plantLocation"] = RequestBody.create(MediaType.parse("text/plain"), plantLocation)
+        requestBodyMap["memo"] = RequestBody.create(MediaType.parse("text/plain"), memo)
+        requestBodyMap["deviceId"] = RequestBody.create(MediaType.parse("text/plain"), deviceId)
+
+        val retrofit = RetrofitClient.instance
+        val apiService = retrofit.create(ApiService::class.java)
+
+        plant = PlantPost(deviceId, plantName, plantType, plantLocation, memo, selectedDateFormatted, plantImg)
+
+        val call = apiService.postPlant(requestBodyMap, plant.plantImg)
+        call.enqueue(object : Callback<PlantPost> {
+            override fun onResponse(call: Call<PlantPost>, response: Response<PlantPost>) {
+                if (response.isSuccessful) {
+                    val postPlant = response.body()
+                    Toast.makeText(requireContext(), "식물 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    moveToPlantFragment()
+                    // 식물 등록이 성공하면 화면을 초기화하거나 다른 작업을 수행할 수 있음
+                } else {
+                    Toast.makeText(requireContext(), "식물 등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<PlantPost>, t: Throwable) {
+                Toast.makeText(requireContext(), "네트워크 오류: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 //    private fun selectLocation() {
 //        TODO("Not yet implemented")
-//    }
-//
-//    private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//        if (result.resultCode == android.app.Activity.RESULT_OK) {
-//            val data: Intent? = result.data
-//            val selectedImageUri = data?.data
-//            // 선택한 이미지 처리
-//            if (selectedImageUri != null) {
-//                val fileName = getFileInfo(selectedImageUri)
-//                val textView = binding.plantAddTvUploadFileinfo
-//                textView.text = "파일 선택됨: $fileName"
-//            }
-//        }
-//    }
-//
-//    private fun getFileInfo(uri: Uri): String {
-//        var fileInfo = ""
-//        val contentResolver = requireContext().contentResolver
-//        val cursor = contentResolver.query(uri, null, null, null, null)
-//        cursor?.use {
-//            if (it.moveToFirst()) {
-//                val columnIndex = it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME)
-//                if (columnIndex != -1) {
-//                    fileInfo = it.getString(columnIndex) ?: ""
-//                } else {
-//                    fileInfo = "열이 없음"
-//                }
-//            } else {
-//                fileInfo = "데이터 없음"
-//            }
-//        }
-//        return fileInfo
 //    }
 
 }

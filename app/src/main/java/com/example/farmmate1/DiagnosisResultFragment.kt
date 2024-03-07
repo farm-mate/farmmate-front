@@ -59,6 +59,11 @@ class DiagnosisResultFragment : Fragment() {
 //            }
 //        })
 
+        // back button
+        binding.diagnosisResultBackIb.setOnClickListener {
+            moveToDiagnosisFragment()
+        }
+
     }
 
     override fun onDestroyView() {
@@ -66,6 +71,13 @@ class DiagnosisResultFragment : Fragment() {
 
         // 메모리 누수를 방지하기 위해 Fragment View에 대한 참조를 제거하여 가비지 컬렉터가 수거
         _binding = null
+    }
+
+    private fun moveToDiagnosisFragment() {
+        val transaction = parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fl, DiagnosisFragment())
+        transaction.commit()
     }
 
     class MainViewModel : ViewModel() {
