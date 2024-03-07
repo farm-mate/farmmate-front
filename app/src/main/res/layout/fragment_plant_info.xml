@@ -61,7 +61,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/plant_add_fragment_top_cl"
-                app:srcCompat="@drawable/strawberry_h" />
+                app:srcCompat="@drawable/strawberry_h"
+                />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/plant_info_layout_testdiary"
@@ -74,10 +75,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/plant_info_iv_profile">
 
                 <TextView
-                    android:id="@+id/plant_info_tv_name"
+                    android:id="@+id/plant_info_tv_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="딸기"
+                    android:text="딸기12"
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -85,14 +86,14 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/plant_info_tv_nickname"
+                    android:id="@+id/plant_info_tv_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="딸기1"
+                    android:text="딸기"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/plant_info_tv_name"
-                    app:layout_constraintStart_toEndOf="@+id/plant_info_tv_name" />
+                    app:layout_constraintBottom_toBottomOf="@+id/plant_info_tv_nickname"
+                    app:layout_constraintStart_toEndOf="@+id/plant_info_tv_nickname" />
 
                 <Button
                     android:id="@+id/plan_info_btn_diary"
@@ -105,7 +106,7 @@
                     android:background="@drawable/rounded_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/plant_info_tv_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/plant_info_tv_type" />
 
                 <Button
                     android:id="@+id/plant_info_btn_test"

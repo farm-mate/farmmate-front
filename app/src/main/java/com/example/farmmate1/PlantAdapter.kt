@@ -26,6 +26,7 @@ class PlantAdapter (val context: Context, val PlantList: ArrayList<PlantGet>) : 
         val plantName = view.findViewById<TextView>(R.id.list_item_name)
         val plantType = view.findViewById<TextView>(R.id.list_item_type)
         val firstPlantingDate = view.findViewById<TextView>(R.id.list_item_startdate)
+        val plantImg = view.findViewById<ImageView>(R.id.list_item_profile)
 
         val plant = PlantList[position]
 
@@ -33,6 +34,9 @@ class PlantAdapter (val context: Context, val PlantList: ArrayList<PlantGet>) : 
         plantType.text = plant.plant_type
         firstPlantingDate.text = plant.first_planting_date
         // 북마크
+
+        val imageUrl = plant.image_url
+        ImageLoaderTask(plantImg).execute(imageUrl)
 
         return view
     }

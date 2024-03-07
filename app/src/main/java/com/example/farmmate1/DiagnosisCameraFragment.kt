@@ -17,8 +17,18 @@ import android.graphics.Bitmap
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.example.farmmate1.databinding.FragmentDiagnosisCameraBinding
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.FileOutputStream
 import java.io.IOException
+import android.util.Base64
+import java.io.ByteArrayOutputStream
+import java.io.FileInputStream
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class DiagnosisCameraFragment : Fragment() {
 
@@ -26,6 +36,8 @@ class DiagnosisCameraFragment : Fragment() {
     private val CAMERA_PERMISSION_CODE = 102
     private val REQUEST_IMAGE_FROM_GALLERY = 103
     private val REQUEST_PERMISSION_CODE = 104
+
+    private var imagePath: String = ""
 
     private var _binding: FragmentDiagnosisCameraBinding? = null
     private val binding get() = _binding!!
@@ -58,6 +70,12 @@ class DiagnosisCameraFragment : Fragment() {
 
         binding.diagnosisCameraBackIb.setOnClickListener {
             moveToDiagnosisFragment()
+        }
+
+        binding.diagnosisCameraBtnNext.setOnClickListener {
+            // 서버에 이미지 보내기
+            sendDiagnosisToServer(selectedCrop)
+            moveToDiagnosisResultFragment()
         }
 
     }
@@ -157,7 +175,7 @@ class DiagnosisCameraFragment : Fragment() {
             val imageBitmap = data.extras!!.get("data") as Bitmap
 
             // 이미지를 파일로 저장
-            val imagePath = saveImageToFile(imageBitmap)
+            imagePath = saveImageToFile(imageBitmap)
 
             // 이미지를 ImageView에 표시
             binding.diagnosisCameraIvImage.setImageBitmap(imageBitmap)
@@ -170,7 +188,7 @@ class DiagnosisCameraFragment : Fragment() {
         val imageBitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, imageUri)
 
         // 이미지를 파일로 저장
-        val imagePath = saveImageToFile(imageBitmap)
+        imagePath = saveImageToFile(imageBitmap)
 
         // 이미지를 ImageView에 표시
         binding.diagnosisCameraIvImage.setImageBitmap(imageBitmap)
@@ -198,6 +216,79 @@ class DiagnosisCameraFragment : Fragment() {
             .beginTransaction()
             .replace(R.id.main_fl, DiagnosisFragment())
         transaction.commit()
+    }
+
+    private fun moveToDiagnosisResultFragment() {
+        val transaction = parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fl, DiagnosisResultFragment())
+        transaction.commit()
+    }
+
+    fun sendDiagnosisToServer(plantType: String?) {
+
+        val retrofit = RetrofitClient.instance
+        val apiService = retrofit.create(ApiService::class.java)
+
+        val imageBase64 = encodeImageToBase64(imagePath)
+
+        try {
+            val plantTypeBody = RequestBody.create(MediaType.parse("text/plain"), plantType)
+
+            val imageRequestBody = RequestBody.create(MediaType.parse("image/*"), imageBase64)
+            val imageBody = MultipartBody.Part.createFormData("image", "image.jpg", imageRequestBody)
+
+
+
+            apiService.postDiagnosis(plantTypeBody, imageBody)
+                .enqueue(object : Callback<DiagnosisPost> {
+                    override fun onResponse(
+                        call: Call<DiagnosisPost>,
+                        response: Response<DiagnosisPost>
+                    ) {
+                        // 요청 성공 시 처리
+                        if (response.isSuccessful) {
+                            val diagnosisPost = response.body()
+                            // 서버로부터의 응답 처리
+                        } else {
+                            // 요청은 성공했으나 서버에서 오류 응답
+                        }
+                    }
+
+                    override fun onFailure(call: Call<DiagnosisPost>, t: Throwable) {
+                        // 요청 실패 시 처리
+                    }
+                })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun encodeImageToBase64(imagePath: String): String {
+        val imageFile = File(imagePath)
+        val byteArrayOutputStream = ByteArrayOutputStream()
+
+        try {
+            val fileInputStream = FileInputStream(imageFile)
+            val buffer = ByteArray(1024)
+            var bytesRead = 0
+            while (fileInputStream.read(buffer).also { bytesRead = it } != -1) {
+                byteArrayOutputStream.write(buffer, 0, bytesRead)
+            }
+            fileInputStream.close()
+
+            val byteArray = byteArrayOutputStream.toByteArray()
+            return Base64.encodeToString(byteArray, Base64.DEFAULT)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            try {
+                byteArrayOutputStream.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+        return ""
     }
 
 }

@@ -20,18 +20,6 @@ interface ApiService {
     fun getPlantList(@Path("deviceId") deviceId: String): Call<List<PlantGet>>
     // 서버에서 식물 정보를 가져오는 GET 요청을 정의
 
-//    @Multipart
-//    @POST("plant")
-//    fun postPlant(
-//        @Part("deviceId") deviceId: RequestBody,
-//        @Part("plantType") plantType: RequestBody,
-//        @Part("plantName") plantName: RequestBody,
-//        @Part("firstPlantingDate") firstPlantingDate: RequestBody,
-//        @Part("plantLocation") plantLocation: RequestBody,
-//        @Part("memo") memo: RequestBody,
-//        @Part image: MultipartBody.Part? // 이미지 파일을 MultipartBody.Part로 전송
-//    ): Call<PlantPost>
-
     @Multipart
     @POST("plant")
     fun postPlant(
@@ -40,8 +28,8 @@ interface ApiService {
     ): Call<PlantPost>
 
 
-    @GET("plant")
-    fun getPlant(): Call<List<Plant>>
+    @GET("plant/{plantUuid}")
+    fun getPlant(@Path("plantUuid") plantUuid: String): Call<PlantGet>
 
     // 일지 post 요청
     @POST("")
@@ -59,6 +47,14 @@ interface ApiService {
     // 모든 일지 GET 요청
     @GET("")
     fun getDiaryList(): Call<List<Diary>>
+
+    // 진단 POST 요청
+    @Multipart
+    @POST("plant/diagnose")
+    fun postDiagnosis(
+        @Part("plantType") plantType: RequestBody,
+        @Part image: MultipartBody.Part
+    ): Call<DiagnosisPost>
 
     @GET("history")
     fun getHistoryList(): Call<List<History>>
