@@ -14,6 +14,8 @@ import retrofit2.Response
 
 class PlantFragment : Fragment() {
 
+    private var plantList: ArrayList<PlantGet>? = null
+
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
 
@@ -64,12 +66,11 @@ class PlantFragment : Fragment() {
         // 데이터 요청
         apiService.getPlantList(deviceId).enqueue(object : Callback<List<PlantGet>> {
             override fun onResponse(call: Call<List<PlantGet>>, response: Response<List<PlantGet>>) {
-                val plantList = response.body() as? ArrayList<PlantGet>
+                plantList = response.body() as? ArrayList<PlantGet>
                 if (plantList != null) {
                     Log.d("PlantFragment", "$plantList")
-                    val adapter = PlantAdapter(requireContext(),plantList)
+                    val adapter = PlantAdapter(requireContext(),plantList!!)
                     binding.plantListLvPlants.adapter = adapter
-                    //Log.d("view","$plant[0]")
                 } else {
                     // API 요청 실패 처리
                     Log.e("PlantFragment", "Failed to fetch plant list: ${response.message()}")
@@ -86,16 +87,23 @@ class PlantFragment : Fragment() {
 //        binding.plantListLvPlants.adapter = Adapter
 
         // 리스트 객체 클릭 시 식물 정보 페이지로 이동
-        // 각 객체에 따른 식물정보(페이지)를 보여줄 수 있도록 수정
+        // 각 객체에 따른 식물정보(페이지)를 보여줄 수 있도록 plant_uuid 넘겨주기
         binding.plantListLvPlants.setOnItemClickListener { parent, view, position, id ->
-            Log.d("test", "event listener clicked . .")
-            requireActivity().runOnUiThread {
-                val transaction = parentFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.main_fl, PlantInfoFragment())
-                transaction.commit()
+            val selectedPlantUuid = plantList?.get(position)?.plant_uuid
+            val bundle = Bundle()
+            selectedPlantUuid?.let {
+                bundle.putString("plantUuid", it)
             }
+
+            val plantInfoFragment = PlantInfoFragment()
+            plantInfoFragment.arguments = bundle
+
+            parentFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_fl, plantInfoFragment)
+                .commit()
         }
+
 
         // 식물 추가 버튼 클릭 후 식물 추가 페이지로 이동
         binding.plantAddBtn.setOnClickListener{

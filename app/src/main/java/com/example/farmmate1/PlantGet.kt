@@ -5,6 +5,8 @@ class PlantGet (
     val plant_uuid: String = "",
     val plant_type: String = "",
     val plant_name: String = "",
-    val first_planting_date: String = ""
-    //val image_url
+    val first_planting_date: String = "",
+    val plant_location: String = "",
+    val memo:String = "",
+    val image_url: String = ""
 )
