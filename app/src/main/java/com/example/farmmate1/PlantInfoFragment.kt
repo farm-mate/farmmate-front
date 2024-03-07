@@ -73,7 +73,9 @@ class PlantInfoFragment : Fragment() {
         }
 
         // 다이어리 확인하기 버튼
-
+        binding.planInfoBtnDiary.setOnClickListener {
+            moveToDiaryFragment()
+        }
     }
 
     private fun moveToPlantFragment() {
@@ -88,6 +90,14 @@ class PlantInfoFragment : Fragment() {
         val transaction = parentFragmentManager
             .beginTransaction()
             .replace(R.id.main_fl, DiagnosisFragment())
+        // 뒤로가기 하면 이전 페이지로 갈 수 있도록.. transaction.addToBackStack(data)
+        transaction.commit()
+    }
+
+    private fun moveToDiaryFragment() {
+        val transaction = parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fl, DiaryFragment())
         // 뒤로가기 하면 이전 페이지로 갈 수 있도록.. transaction.addToBackStack(data)
         transaction.commit()
     }

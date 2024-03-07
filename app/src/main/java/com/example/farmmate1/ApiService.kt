@@ -7,6 +7,8 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 interface ApiService {
 
@@ -14,13 +16,29 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     fun saveDeviceInfo(@Body deviceInfo: DeviceInfo): Call<Void>
 
-    @GET("plant")
-    fun getPlantList(): Call<List<Plant>>
+    @GET("plant/device/{deviceId}")
+    fun getPlantList(@Path("deviceId") deviceId: String): Call<List<PlantGet>>
     // 서버에서 식물 정보를 가져오는 GET 요청을 정의
 
+//    @Multipart
+//    @POST("plant")
+//    fun postPlant(
+//        @Part("deviceId") deviceId: RequestBody,
+//        @Part("plantType") plantType: RequestBody,
+//        @Part("plantName") plantName: RequestBody,
+//        @Part("firstPlantingDate") firstPlantingDate: RequestBody,
+//        @Part("plantLocation") plantLocation: RequestBody,
+//        @Part("memo") memo: RequestBody,
+//        @Part image: MultipartBody.Part? // 이미지 파일을 MultipartBody.Part로 전송
+//    ): Call<PlantPost>
+
+    @Multipart
     @POST("plant")
-    @Headers("Content-Type: application/json")
-    fun postPlant(@Body plant: Plant): Call<Plant>
+    fun postPlant(
+        @PartMap data: HashMap<String, RequestBody>,
+        @Part image: MultipartBody.Part? // 이미지 파일을 MultipartBody.Part로 전송
+    ): Call<PlantPost>
+
 
     @GET("plant")
     fun getPlant(): Call<List<Plant>>

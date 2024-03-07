@@ -1,12 +1,13 @@
 package com.example.farmmate1
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 
-class PlantAdapter (val context: Context, val PlantList: ArrayList<Plant>) : BaseAdapter()
+class PlantAdapter (val context: Context, val PlantList: ArrayList<PlantGet>) : BaseAdapter()
 {
     override fun getCount(): Int {
         return PlantList.size
@@ -21,23 +22,20 @@ class PlantAdapter (val context: Context, val PlantList: ArrayList<Plant>) : Bas
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_plant,null)
-        val profile = view.findViewById<ImageView>(R.id.list_item_profile)
-        val plantType = view.findViewById<TextView>(R.id.list_item_name)
-        //val nickname
+        val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_plant, null)
+        val plantName = view.findViewById<TextView>(R.id.list_item_name)
+        val plantType = view.findViewById<TextView>(R.id.list_item_type)
         val firstPlantingDate = view.findViewById<TextView>(R.id.list_item_startdate)
-        val favorite = view.findViewById<ImageView>(R.id.plant_info_back_ib)
 
         val plant = PlantList[position]
 
-        //profile.setImageResource(plant.)
-        plantType.text = plant.plantType
-        //nickname.text = plant.
-        firstPlantingDate.text = plant.firstPlantingDate
-        //북마크
-        // favorite.setImageResource(plant.favorite)
+        plantName.text = plant.plant_name
+        plantType.text = plant.plant_type
+        firstPlantingDate.text = plant.first_planting_date
+        // 북마크
 
         return view
     }
+
 
 }

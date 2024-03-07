@@ -8,7 +8,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 
 object RetrofitClient {
-    private const val BASE_URL = "http://10.0.2.2:1000/api/"
+    //에뮬레이터
+    //private const val BASE_URL = "http://10.0.2.2:3000/api/"
+    //기기
+    private const val BASE_URL = "http://172.20.6.232:3000/api/"
 
     // HttpLoggingInterceptor 생성
     private val loggingInterceptor = HttpLoggingInterceptor().apply {

@@ -19,13 +19,14 @@ import retrofit2.Response
 import android.provider.Settings
 import android.util.Log
 
+const val DEVICE_ID_KEY = "device_id"
+const val PREFS_NAME = "MyPrefs"
 
 class MainActivity : AppCompatActivity(), DiaryDataListener {
     override fun onDiaryDataReceived(date: Calendar, data: String) {
         // 데이터 처리 로직을 여기에 구현합니다.
     }
 
-    private val PREFS_NAME = "MyPrefs"
     private val IS_FIRST_RUN = "isFirstRun"
 
 //    private var mBinding: ActivityMainBinding? = null
@@ -53,6 +54,12 @@ class MainActivity : AppCompatActivity(), DiaryDataListener {
         if (isFirstRun) {
             // 처음 설치 시에만 실행되는 코드
             val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
+            // MainActivity에서 디바이스 ID를 SharedPreferences에 저장
+            val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString(DEVICE_ID_KEY, deviceId)
+            editor.apply()
 
             // Retrofit 인스턴스 생성
             val retrofit = RetrofitClient.instance

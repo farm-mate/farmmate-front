@@ -1,14 +1,12 @@
 package com.example.farmmate1
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.farmmate1.databinding.FragmentPlantBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,47 +42,48 @@ class PlantFragment : Fragment() {
         return view
     }
 
-    var PlantList = arrayListOf<Plant>(
-        Plant("","딸기", "재배지1", "메모1", "2023-05-19"),
-        Plant("","고추", "재배지2", "메모2", "2023-05-20"),
-        Plant("","토마토", "재배지3", "메모3", "2023-05-21"),
-        Plant("","포도", "재배지4", "메모4", "2023-05-22"),
-        Plant("","파프리카", "재배지5", "메모5", "2023-05-23"),
-//        Plant("","딸기2", "재배지6", "메모6", "2023-05-24"),
-//        Plant("","딸기3", "재배지7", "메모7", "2023-05-25"),
-//        Plant("","딸기4", "재배지8", "메모8", "2023-05-26"),
-        Plant("","딸기5", "재배지9", "메모9", "2023-05-27")
-    )
+//    var PlantList = arrayListOf<Plant>(
+//        Plant("","딸기",  "재배지1", "메모1", "2023-05-19"),
+//        Plant("","고추",  "재배지2", "메모2", "2023-05-20"),
+//        Plant("","토마토",  "재배지3", "메모3", "2023-05-21"),
+//        Plant("","포도",  "재배지4", "메모4", "2023-05-22"),
+//        Plant("","파프리카",  "재배지5", "메모5", "2023-05-23"),
+//        Plant("","딸기5",  "재배지9", "메모9", "2023-05-27")
+//    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val retrofit = RetrofitClient.instance
-//        val apiService = retrofit.create(ApiService::class.java)
-//
-//        // 데이터 요청
-//        apiService.getPlantList().enqueue(object : Callback<List<Plant>> {
-//            override fun onResponse(call: Call<List<Plant>>, response: Response<List<Plant>>) {
-//                if (response.isSuccessful) {
-//                    val plantList = response.body() as? ArrayList<Plant>
-//                    if (plantList != null) {
-//                        val adapter = PlantAdapter(requireContext(), plantList)
-//                        binding.plantListLvPlants.adapter = adapter
-//                    }
-//                } else {
-//                    // API 요청 실패 처리
-//                    Log.e("PlantFragment", "Failed to fetch plant list: ${response.message()}")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<List<Plant>>, t: Throwable) {
-//                // 통신 오류 처리
-//                Log.e("PlantFragment", "Network error: ${t.message}")
-//            }
-//        })
+        val retrofit = RetrofitClient.instance
+        val apiService = retrofit.create(ApiService::class.java)
 
-        val Adapter = PlantAdapter(requireContext(),PlantList)
-        binding.plantListLvPlants.adapter = Adapter
+        // SharedPreferences에서 디바이스 ID 가져오기
+        val sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val deviceId: String = sharedPreferences.getString(DEVICE_ID_KEY, "") ?: ""
+
+        // 데이터 요청
+        apiService.getPlantList(deviceId).enqueue(object : Callback<List<PlantGet>> {
+            override fun onResponse(call: Call<List<PlantGet>>, response: Response<List<PlantGet>>) {
+                val plantList = response.body() as? ArrayList<PlantGet>
+                if (plantList != null) {
+                    Log.d("PlantFragment", "$plantList")
+                    val adapter = PlantAdapter(requireContext(),plantList)
+                    binding.plantListLvPlants.adapter = adapter
+                    //Log.d("view","$plant[0]")
+                } else {
+                    // API 요청 실패 처리
+                    Log.e("PlantFragment", "Failed to fetch plant list: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<PlantGet>>, t: Throwable) {
+                // 통신 오류 처리
+                Log.e("PlantFragment", "Network error: ${t.message}")
+            }
+        })
+
+//        val Adapter = PlantAdapter(requireContext(),PlantList)
+//        binding.plantListLvPlants.adapter = Adapter
 
         // 리스트 객체 클릭 시 식물 정보 페이지로 이동
         // 각 객체에 따른 식물정보(페이지)를 보여줄 수 있도록 수정
@@ -118,16 +117,4 @@ class PlantFragment : Fragment() {
         transaction.commit()
     }
 
-
-    class MainViewModel : ViewModel() {
-
-        private val _count = MutableLiveData<Int>()
-        val count : LiveData<Int> get() = _count
-        init {
-            _count.value = 5
-        }
-        fun getUpdatedCount(plusCount: Int){
-            _count.value = (_count.value)?.plus(plusCount)
-        }
-    }
 }
