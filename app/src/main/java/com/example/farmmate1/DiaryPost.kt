@@ -1,11 +1,14 @@
 package com.example.farmmate1
 
-data class Diary(
+import okhttp3.MultipartBody
+
+class DiaryPost (
     val plantName: String,
+    val plantUuid: String? = "",
     val diaryDate: String,
     val plantWeather: String,
-    val temperature: Int,
-    val humidity: Int,
+    val temperature: String,
+    val humidity: String,
     val waterFlag: Boolean,
     val fertilizeFlag: Boolean,
     val fertilizeName: String,
@@ -14,5 +17,5 @@ data class Diary(
     val pesticideName: String,
     val pesticideUsage: String,
     val memo: String,
-    val imageData: ByteArray? = null
-)
+    var image: MultipartBody.Part? = null
+        )

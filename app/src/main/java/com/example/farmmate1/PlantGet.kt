@@ -8,5 +8,7 @@ class PlantGet (
     val first_planting_date: String = "",
     val plant_location: String = "",
     val memo:String = "",
-    val image_url: String = ""
+    val image_url: String = "",
+
+    var isBookmarked: Boolean
 )

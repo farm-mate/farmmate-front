@@ -46,6 +46,7 @@
             app:layout_constraintTop_toBottomOf="@+id/diagnosis_fragment_top_cl">
 
             <LinearLayout
+                android:id="@+id/diagnosis_linearlayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"

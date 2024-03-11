@@ -64,6 +64,22 @@ class DiagnosisResultFragment : Fragment() {
             moveToDiagnosisFragment()
         }
 
+        binding.diagnosisResultBtnRecheck.setOnClickListener {
+            moveToDiagnosisCameraFragment()
+        }
+
+        binding.diagnosisResultBtnCause.setOnClickListener {
+            binding.diagnosisResultTvDetail.text = "자낭각의 형태로 병든 식물체의 잔재에서 겨울을 지내고 1차 전염원이 되며, 시설재배에서는 분생포자가 공기전염 되어 계속해서 발생한다. 본 병은 일반적으로 15～28℃에서 많이 발생되며, 32℃이상의 고온에서는 병 발생이 억제된다. 노지포장에서는 억제재배 참외에서 심하게 발생한다. 특히 일조가 부족하고, 밤,낮의 온도차가 심하며, 다비재배를 할 때 병 발생이 많아진다."
+        }
+
+        binding.diagnosisResultBtnCure.setOnClickListener {
+            binding.diagnosisResultTvDetail.text = "- 수확 후 병든 잔재물을 제거, 불태운다.\n" +
+                    "- 질소질 비료의 편용을 피하고, 균형시비를 한다.\n" +
+                    "- 하우스내에서는 기온의 일교차를 줄여준다.\n" +
+                    "- 밀식을 피하고, 통풍이 잘되게 한다.\n" +
+                    "- 발병 초기에 등록약제를 살포하여 초기의 병원균 밀도를 줄여준다."
+        }
+
     }
 
     override fun onDestroyView() {
@@ -77,6 +93,13 @@ class DiagnosisResultFragment : Fragment() {
         val transaction = parentFragmentManager
             .beginTransaction()
             .replace(R.id.main_fl, DiagnosisFragment())
+        transaction.commit()
+    }
+
+    private fun moveToDiagnosisCameraFragment() {
+        val transaction = parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fl, DiagnosisCameraFragment())
         transaction.commit()
     }
 

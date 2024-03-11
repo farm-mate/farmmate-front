@@ -142,6 +142,28 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/bookmark_list_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="즐겨찾기"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_fragment_weather_cl"/>
+
+            <ListView
+                android:id="@+id/bookmark_list_lv_plants"
+                android:layout_width="match_parent"
+                android:layout_height="430dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bookmark_list_tv" />
+
 <!--            <TextView-->
 <!--                android:id="@+id/favorite_tv"-->
 <!--                android:layout_width="wrap_content"-->

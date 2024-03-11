@@ -24,6 +24,9 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 import com.prolificinteractive.materialcalendarview.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class DiaryAddFragment : Fragment() {
 
@@ -44,10 +47,14 @@ class DiaryAddFragment : Fragment() {
     private val REQUEST_IMAGE_FROM_GALLERY = 103
     private val REQUEST_PERMISSION_CODE = 104
 
+    private var selectedPlantUuid: String = ""
+    private var plantList: ArrayList<PlantGet>? = null
+
     private var _binding: FragmentDiaryAddBinding? = null
     private val binding get() = _binding!!      // !! -> non-null assertion
 
     private var imageData: ByteArray? = null
+    private var image: MultipartBody.Part? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,6 +82,24 @@ class DiaryAddFragment : Fragment() {
         // 스피너에 사용자 작물 목록 설정
         loadUserCropsToSpinner()
 
+        // 스피너에서 항목을 선택할 때마다 선택한 작물의 plant_uuid를 저장
+        binding.diaryAddSpinnerSelect.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                // 선택한 작물의 plant_uuid 저장
+                selectedPlantUuid = (binding.diaryAddSpinnerSelect.selectedItem as? Pair<String, String>)?.second ?: ""
+                Log.d("DiaryAdd-- plant_uuid", "$selectedPlantUuid")
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // 아무것도 선택하지 않았을 때, 첫 번째 항목을 기본값으로 설정
+                selectedPlantUuid = (binding.diaryAddSpinnerSelect.getItemAtPosition(0) as? Pair<String, String>)?.second ?: ""
+
+            }
+        }
+
+        // Post 요청할 때 selectedPlantUuid 사용
+        // 예: saveDiaryEntry(selectedPlantUuid, ...)
+
         // 일지 작성 페이지 상단에 기록하는 날짜 표시
         val selectedDate = arguments?.getSerializable(ARG_DATE) as? Calendar
         selectedDate?.let {
@@ -93,17 +118,15 @@ class DiaryAddFragment : Fragment() {
             val selectedPlant = binding.diaryAddSpinnerSelect.selectedItem.toString()
             val temperatureText = binding.diaryAddEtTemperature.text.toString()
             val humidityText = binding.diaryAddEtHumidity.text.toString()
-            val diaryImageData = if (imageData != null) imageData else byteArrayOf()
 
             if (validateTemperature(temperatureText) && validateHumidity(humidityText)) {
-                postDiary(selectedPlant, diaryImageData)
+                postDiary()
             }
         }
 
         //back button
-        val backButton: ImageButton = binding.diaryAddBackIb
-        backButton.setOnClickListener {
-            requireActivity().onBackPressed()
+        binding.diaryAddBackIb.setOnClickListener {
+            moveToDiaryFragment()
         }
     }
 
@@ -113,67 +136,111 @@ class DiaryAddFragment : Fragment() {
         val retrofit = RetrofitClient.instance
         val apiService = retrofit.create(ApiService::class.java)
 
-        // 데이터 요청
-        apiService.getUserCrops().enqueue(object : Callback<List<String>> {
-            override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
-                if (response.isSuccessful) {
-                    val userCrops = response.body() // 서버에서 받은 사용자 작물 목록
-                    userCrops?.let {
-                        // 스피너에 사용자 작물 목록 설정
-                        val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, it)
-                        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                        binding.diaryAddSpinnerSelect.adapter = spinnerAdapter
+        // SharedPreferences에서 디바이스 ID 가져오기
+        val sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val deviceId: String = sharedPreferences.getString(DEVICE_ID_KEY, "") ?: ""
+
+        apiService.getPlantList(deviceId).enqueue(object : Callback<List<PlantGet>> {
+            override fun onResponse(call: Call<List<PlantGet>>, response: Response<List<PlantGet>>) {
+                val plantList = response.body() as? ArrayList<PlantGet>
+                if (plantList != null) {
+                    // 작물 이름과 plant_uuid를 매핑하여 리스트에 저장
+                    val plantData = plantList.map { (it.plant_name ?: "Unknown") to it.plant_uuid }
+                    val spinnerAdapter = object : ArrayAdapter<Pair<String, String>>(
+                        requireContext(),
+                        android.R.layout.simple_spinner_item,
+                        plantData
+                    ) {
+                        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                            val view = super.getView(position, convertView, parent)
+                            val plantName = getItem(position)?.first
+                            val textView = view.findViewById<TextView>(android.R.id.text1)
+                            textView.text = plantName
+                            return view
+                        }
+
+                        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                            val view = super.getDropDownView(position, convertView, parent)
+                            val plantName = getItem(position)?.first
+                            val textView = view.findViewById<TextView>(android.R.id.text1)
+                            textView.text = plantName
+                            return view
+                        }
                     }
+                    spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.diaryAddSpinnerSelect.adapter = spinnerAdapter
                 } else {
                     Log.e("DiaryAddFragment", "Failed to fetch user crops: ${response.message()}")
                 }
             }
 
-            override fun onFailure(call: Call<List<String>>, t: Throwable) {
+            override fun onFailure(call: Call<List<PlantGet>>, t: Throwable) {
                 Log.e("DiaryAddFragment", "Network error: ${t.message}")
             }
         })
     }
 
-    private fun postDiary(selectedPlant: String, diaryImageData: ByteArray?) {
+    private fun postDiary() {
 
-        // Diary 객체 생성
-        val diary = Diary(
-            plantName = selectedPlant,
-            diaryDate = binding.diaryAddTvDate.text.toString(),
-            plantWeather = binding.diaryAddEtWeather.toString(),
-            temperature = binding.diaryAddEtTemperature.text.toString().toInt(),
-            humidity = binding.diaryAddEtHumidity.text.toString().toInt(),
-            waterFlag = binding.diaryAddCbWater.isChecked,
-            fertilizeFlag = binding.diaryAddCbFert.isChecked,
-            fertilizeName = binding.diaryAddEtFert.text.toString(),
-            fertilizeUsage = binding.diaryAddEtFertuse.text.toString(),
-            pesticideFlag = binding.diaryAddCbPes.isChecked,
-            pesticideName = binding.diaryAddEtPes.text.toString(),
-            pesticideUsage = binding.diaryAddEtPesuse.text.toString(),
-            memo = binding.diaryAddEtMemo.text.toString(),
-            imageData = diaryImageData
-        )
+        Log.d("DiaryAdd-- Post plant_uuid","$selectedPlantUuid")
+        val diaryDate = binding.diaryAddTvDate.text.toString()
+        val plantUuid = selectedPlantUuid
+        val plantWeather = binding.diaryAddEtWeather.text.toString()
+        val temperature = binding.diaryAddEtTemperature.text.toString()
+        val humidity = binding.diaryAddEtHumidity.text.toString()
+        val waterFlag = binding.diaryAddCbWater.isChecked.toString()
+        val fertilizeFlag = binding.diaryAddCbFert.isChecked.toString()
+        val fertilizeName = binding.diaryAddEtFert.text.toString()
+        val fertilizeUsage = binding.diaryAddEtFertuse.text.toString()
+        val pesticideFlag = binding.diaryAddCbPes.isChecked.toString()
+        val pesticideName = binding.diaryAddEtPes.text.toString()
+        val pesticideUsage = binding.diaryAddEtPesuse.text.toString()
+        val memo = binding.diaryAddEtMemo.text.toString()
+
+        val requestBodyMap = hashMapOf<String, RequestBody>()
+        requestBodyMap["plantUuid"] = createPartFromString(plantUuid)
+        requestBodyMap["diaryDate"] = createPartFromString(diaryDate)
+        requestBodyMap["plantWeather"] = createPartFromString(plantWeather)
+        requestBodyMap["temperature"] = createPartFromString(temperature)
+        requestBodyMap["humidity"] = createPartFromString(humidity)
+        requestBodyMap["waterFlag"] = createPartFromString(waterFlag)
+        requestBodyMap["fertilizeFlag"] = createPartFromString(fertilizeFlag)
+        requestBodyMap["fertilizeName"] = createPartFromString(fertilizeName)
+        requestBodyMap["fertilizeUsage"] = createPartFromString(fertilizeUsage)
+        requestBodyMap["pesticideFlag"] = createPartFromString(pesticideFlag)
+        requestBodyMap["pesticideName"] = createPartFromString(pesticideName)
+        requestBodyMap["pesticideUsage"] = createPartFromString(pesticideUsage)
+        requestBodyMap["memo"] = createPartFromString(memo)
+
+        // 이미지 데이터를 MultipartBody.Part로 변환
+        val imagePart = image
 
         // Retrofit 인스턴스 생성
         val retrofit = RetrofitClient.instance
         val apiService = retrofit.create(ApiService::class.java)
 
-        apiService.postDiary(diary).enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if (response.isSuccessful) {
-                    Log.d("전송성공","전송성공")
-                } else {
-                    // 전송 실패
-                    Log.d("전송실패","전송실패")
+        plantUuid?.let {
+            apiService.postDiary(requestBodyMap, imagePart).enqueue(object : Callback<DiaryPost> {
+                override fun onResponse(call: Call<DiaryPost>, response: Response<DiaryPost>) {
+                    if (response.isSuccessful) {
+                        Log.d("전송성공", "전송성공")
+                        moveToDiaryFragment()
+                    } else {
+                        // 전송 실패
+                        Log.d("전송실패", "전송실패")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                // 전송 실패
-                Log.d("전송실패who","전송실who패")
-            }
-        })
+                override fun onFailure(call: Call<DiaryPost>, t: Throwable) {
+                    // 전송 실패
+                    Log.d("전송실패who", "전송실who패")
+                }
+            })
+        } ?: Log.d("전송실패", "플랜트 UUID가 null입니다.")
+    }
+
+    private fun createPartFromString(string: String): RequestBody {
+        return RequestBody.create(MediaType.parse("text/plain"), string)
     }
 
     private fun validateTemperature(temperatureText: String): Boolean {
@@ -262,14 +329,21 @@ class DiaryAddFragment : Fragment() {
             when (requestCode) {
                 REQUEST_IMAGE_FROM_GALLERY -> {
                     data?.data?.let { uri ->
-                        // Plant 객체에 이미지 데이터 설정
                         val inputStream = requireActivity().contentResolver.openInputStream(uri)
                         val bytes = inputStream?.readBytes()
                         inputStream?.close()
                         imageData = bytes
 
+                        // 이미지 파일의 MIME 타입 가져오기
+                        val contentType = requireActivity().contentResolver.getType(uri)
+                        //파일명
                         val fileName = getFileNameFromUri(uri)
                         binding.diaryAddTvUploadFileinfo.text = "파일 선택됨: $fileName"
+
+                        // 이미지 파일을 MultipartBody.Part로 변환
+                        val requestBody = RequestBody.create(MediaType.parse(contentType), bytes)
+                        val multipart = MultipartBody.Part.createFormData("image", fileName, requestBody)
+                        image = multipart
                     }
                 }
             }
@@ -288,6 +362,13 @@ class DiaryAddFragment : Fragment() {
             }
         }
         return fileName
+    }
+
+    private fun moveToDiaryFragment() {
+        val transaction = parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fl, DiaryFragment())
+        transaction.commit()
     }
 
 

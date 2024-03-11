@@ -1,11 +1,6 @@
 package com.example.farmmate1
 
-import com.example.farmmate1.data.TodoItem
-import com.example.farmmate1.network.ToDoListInterface
 import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -27,26 +22,33 @@ interface ApiService {
         @Part image: MultipartBody.Part? // 이미지 파일을 MultipartBody.Part로 전송
     ): Call<PlantPost>
 
-
     @GET("plant/{plantUuid}")
     fun getPlant(@Path("plantUuid") plantUuid: String): Call<PlantGet>
 
-    // 일지 post 요청
-    @POST("")
-    @Headers("Content-Type: application/json")
-    fun postDiary(@Body diary: Diary): Call<Void>
+    @POST("plant/{plantUuid}/bookmark")
+    fun postBookmark(@Path("plantUuid")plantUuid: String): Call<Void>
 
-    // 사용자 작물 목록 받아오기,
-    @GET("")
-    fun getUserCrops(): Call<List<String>>
+    @GET("plant/device/{deviceId}/bookmark")
+    fun getBookmark(@Path("deviceId")deviceId: String): Call<List<PlantGet>>
+
+    // 일지 post 요청
+    @Multipart
+    @POST("diary")
+    fun postDiary(
+        //@Query("plant_uuid") plantUuid: String?,
+        //@Path("plantUuid") plantUuid: String,
+        @PartMap data: HashMap<String, RequestBody>,
+        @Part image: MultipartBody.Part? // 이미지 파일을 MultipartBody.Part로 전송
+    ): Call<DiaryPost>
 
     // 일지 GET 요청
     @GET("")
-    fun getDiary(): Call<Diary>
+    fun getDiary(): Call<DiaryPost>
 
     // 모든 일지 GET 요청
-    @GET("")
-    fun getDiaryList(): Call<List<Diary>>
+    @GET("diary")
+    //fun getDiaryList(@Query("plant.plant_name") plantName: String?): Call<List<DiaryGet>>
+    fun getDiaryList(): Call<List<DiaryGet>>
 
     // 진단 POST 요청
     @Multipart
