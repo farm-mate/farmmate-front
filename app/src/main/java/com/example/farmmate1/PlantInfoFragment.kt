@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.farmmate1.databinding.FragmentPlantAddBinding
 import com.example.farmmate1.databinding.FragmentPlantInfoBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -79,7 +78,7 @@ class PlantInfoFragment : Fragment() {
             Log.e("PlantInfoFragment", "Plant UUID is null")
         }
 
-        // 뒤로가기 (개별 식물 페이지로)
+        // 뒤로가기 (식물 페이지로)
         binding.plantInfoBackIb.setOnClickListener {
             moveToPlantFragment()
         }
@@ -92,6 +91,20 @@ class PlantInfoFragment : Fragment() {
         // 다이어리 확인하기 버튼
         binding.planInfoBtnDiary.setOnClickListener {
             moveToDiaryFragment()
+        }
+
+        // 수정 버튼
+        binding.plantInfoBtnEdit.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("plantUuid", plantUuid)
+
+            val plantEditFragment = PlantEditFragment()
+            plantEditFragment.arguments = bundle
+
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_fl, plantEditFragment)
+                .commit()
         }
     }
 

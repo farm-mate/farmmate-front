@@ -48,8 +48,8 @@
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/list_item_bookmark"
-                    app:layout_constraintBottom_toBottomOf="@id/list_item_bookmark"/>
+                    app:layout_constraintTop_toTopOf="@id/plant_info_back_ib"
+                    app:layout_constraintBottom_toBottomOf="@id/plant_info_back_ib"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -58,10 +58,11 @@
                 android:layout_width="262dp"
                 android:layout_height="109dp"
                 android:layout_marginTop="40dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/plant_add_fragment_top_cl"
-                app:srcCompat="@drawable/img"
+                app:srcCompat="@drawable/pic"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -132,7 +133,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/plant_info_layout_testdiary">
 
                 <TextView
-                    android:id="@+id/plant_infor_tv_basicinfo"
+                    android:id="@+id/plant_info_tv_basicinfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="기본 정보"
@@ -144,7 +145,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/plant_list_btn_edit"
+                    android:id="@+id/plant_info_btn_edit"
                     android:layout_width="60dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="16dp"
@@ -152,7 +153,7 @@
                     android:textColor="#000000"
                     android:background="@drawable/rounded_btn"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/plant_infor_tv_basicinfo"/>
+                    app:layout_constraintBottom_toBottomOf="@id/plant_info_tv_basicinfo"/>
 
                 <TextView
                     android:id="@+id/plant_info_tv_first"
@@ -163,8 +164,8 @@
                     android:text="처음 심은 날짜"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/plant_infor_tv_basicinfo"
-                    app:layout_constraintTop_toBottomOf="@+id/plant_infor_tv_basicinfo" />
+                    app:layout_constraintStart_toStartOf="@+id/plant_info_tv_basicinfo"
+                    app:layout_constraintTop_toBottomOf="@+id/plant_info_tv_basicinfo" />
 
                 <TextView
                     android:id="@+id/plant_info_tv_firstdate"
@@ -215,6 +216,30 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/plant_info_tv_memo"
                     app:layout_constraintTop_toBottomOf="@+id/plant_info_tv_memo" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/plant_info_layout_editdelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:paddingBottom="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/plant_info_layout_basic">
+
+                <Button
+                    android:id="@+id/plant_info_btn_delete"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="32dp"
+                    android:text="삭제"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_btn_delete"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
