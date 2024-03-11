@@ -22,10 +22,7 @@ import android.util.Log
 const val DEVICE_ID_KEY = "device_id"
 const val PREFS_NAME = "MyPrefs"
 
-class MainActivity : AppCompatActivity(), DiaryDataListener {
-    override fun onDiaryDataReceived(date: Calendar, data: String) {
-        // 데이터 처리 로직을 여기에 구현합니다.
-    }
+class MainActivity : AppCompatActivity() {
 
     private val IS_FIRST_RUN = "isFirstRun"
 

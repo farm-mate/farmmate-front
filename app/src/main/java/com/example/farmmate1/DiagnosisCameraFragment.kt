@@ -14,6 +14,7 @@ import android.provider.MediaStore
 import android.app.Activity
 import java.io.File
 import android.graphics.Bitmap
+import android.os.Handler
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.example.farmmate1.databinding.FragmentDiagnosisCameraBinding
@@ -23,6 +24,7 @@ import okhttp3.RequestBody
 import java.io.FileOutputStream
 import java.io.IOException
 import android.util.Base64
+import android.util.Log
 import java.io.ByteArrayOutputStream
 import java.io.FileInputStream
 import retrofit2.Call
@@ -219,10 +221,11 @@ class DiagnosisCameraFragment : Fragment() {
     }
 
     private fun moveToDiagnosisResultFragment() {
-        val transaction = parentFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_fl, DiagnosisResultFragment())
-        transaction.commit()
+        Handler().postDelayed({
+            val transaction = parentFragmentManager.beginTransaction()
+                .replace(R.id.main_fl, DiagnosisResultFragment())
+            transaction.commit()
+        }, 5000)
     }
 
     fun sendDiagnosisToServer(plantType: String?) {
@@ -238,7 +241,7 @@ class DiagnosisCameraFragment : Fragment() {
             val imageRequestBody = RequestBody.create(MediaType.parse("image/*"), imageBase64)
             val imageBody = MultipartBody.Part.createFormData("image", "image.jpg", imageRequestBody)
 
-
+            Log.d("객체 확인---", "$plantTypeBody, $imageBody")
 
             apiService.postDiagnosis(plantTypeBody, imageBody)
                 .enqueue(object : Callback<DiagnosisPost> {
@@ -249,14 +252,16 @@ class DiagnosisCameraFragment : Fragment() {
                         // 요청 성공 시 처리
                         if (response.isSuccessful) {
                             val diagnosisPost = response.body()
-                            // 서버로부터의 응답 처리
+                            Log.d("Camera 요청 성공", "$plantTypeBody, $imageBody")
                         } else {
-                            // 요청은 성공했으나 서버에서 오류 응답
+                            // API 요청 실패 처리
+                            Log.e("CameraFragment", "Failed to fetch plant list: ${response.message()}")
                         }
                     }
 
                     override fun onFailure(call: Call<DiagnosisPost>, t: Throwable) {
-                        // 요청 실패 시 처리
+                        // 통신 오류 처리
+                        Log.e("CameraFragment", "Network error: ${t.message}")
                     }
                 })
         } catch (e: Exception) {

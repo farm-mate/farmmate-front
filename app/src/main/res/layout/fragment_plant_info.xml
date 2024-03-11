@@ -48,8 +48,8 @@
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/plant_info_back_ib"
-                    app:layout_constraintBottom_toBottomOf="@id/plant_info_back_ib"/>
+                    app:layout_constraintTop_toTopOf="@id/list_item_bookmark"
+                    app:layout_constraintBottom_toBottomOf="@id/list_item_bookmark"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,7 +61,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/plant_add_fragment_top_cl"
-                app:srcCompat="@drawable/strawberry_h"
+                app:srcCompat="@drawable/img"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout

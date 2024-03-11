@@ -1,3 +1,5 @@
+//package com.example.farmmate1
+
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
@@ -13,6 +15,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.example.farmmate1.*
 import com.example.farmmate1.R
 import com.example.farmmate1.component.common
 import com.example.farmmate1.data.*
@@ -25,6 +28,7 @@ import com.loopj.android.http.RequestParams
 import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -58,6 +62,22 @@ class HomeFragment : Fragment() {
     ): View? {
         val fragmentBinding = FragmentHomeBinding.inflate(inflater, container, false)
         binding = fragmentBinding
+
+//        var PlantList = arrayListOf<PlantGet>(
+//            PlantGet("","","딸기",  "딸기", "2023-05-19", "재배지1", ""),
+//            PlantGet("","","고추",  "고추", "2023-05-19", "재배지1", ""),
+//            PlantGet("","","토마토",  "토마토", "2023-05-19", "재배지1", ""),
+//            PlantGet("","","포도",  "포도", "2023-05-19", "재배지1", ""),
+//            PlantGet("","","파프리카",  "파프리카", "2023-05-19", "재배지1", ""),
+//            PlantGet("","","딸기5",  "딸기5", "2023-05-19", "재배지1", "")
+//        )
+//
+//
+//        val Adapter = BookmarkAdapter(requireContext(),PlantList)
+//        binding?.bookmarkListLvPlants?.adapter = Adapter
+
+        getBookmarkedPlants()
+
         return fragmentBinding.root
     }
 
@@ -168,6 +188,30 @@ class HomeFragment : Fragment() {
         humidity.text= "현재습도 "+weather.humidityString + " %"
         val currentDate = SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault()).format(Date())
         weatherDate.text = currentDate
+    }
+
+    private fun getBookmarkedPlants() {
+        val retrofit = RetrofitClient.instance
+        val apiService = retrofit.create(ApiService::class.java)
+
+        val sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val deviceId: String = sharedPreferences.getString(DEVICE_ID_KEY, "") ?: ""
+
+        apiService.getBookmark(deviceId).enqueue(object : Callback<List<PlantGet>> {
+            override fun onResponse(call: Call<List<PlantGet>>, response: Response<List<PlantGet>>) {
+                // API 요청에 성공했을 때 북마크된 식물 목록을 업데이트합니다.
+                val bookmarkedPlants = response.body() ?: emptyList()
+
+                // 북마크된 식물 목록을 표시하는 어댑터를 생성하고 리스트뷰에 설정합니다.
+                val adapter = BookmarkAdapter(requireContext(), bookmarkedPlants)
+                binding?.bookmarkListLvPlants?.adapter = adapter
+            }
+
+            override fun onFailure(call: Call<List<PlantGet>>, t: Throwable) {
+                // API 요청에 실패했을 때 에러를 로그에 출력합니다.
+                Log.e("HomeFragment", "Failed to fetch bookmarked plants: ${t.message}")
+            }
+        })
     }
 
     override fun onPause() {

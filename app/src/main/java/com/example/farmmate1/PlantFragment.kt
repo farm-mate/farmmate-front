@@ -11,8 +11,10 @@ import com.example.farmmate1.databinding.FragmentPlantBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.example.farmmate1.PlantAdapter.PlantItemClickListener
 
-class PlantFragment : Fragment() {
+
+class PlantFragment : Fragment(), PlantItemClickListener {
 
     private var plantList: ArrayList<PlantGet>? = null
 
@@ -69,7 +71,7 @@ class PlantFragment : Fragment() {
                 plantList = response.body() as? ArrayList<PlantGet>
                 if (plantList != null) {
                     Log.d("PlantFragment", "$plantList")
-                    val adapter = PlantAdapter(requireContext(),plantList!!)
+                    val adapter = PlantAdapter(requireContext(),plantList!!, this@PlantFragment)
                     binding.plantListLvPlants.adapter = adapter
                 } else {
                     // API 요청 실패 처리
@@ -88,21 +90,22 @@ class PlantFragment : Fragment() {
 
         // 리스트 객체 클릭 시 식물 정보 페이지로 이동
         // 각 객체에 따른 식물정보(페이지)를 보여줄 수 있도록 plant_uuid 넘겨주기
-        binding.plantListLvPlants.setOnItemClickListener { parent, view, position, id ->
-            val selectedPlantUuid = plantList?.get(position)?.plant_uuid
-            val bundle = Bundle()
-            selectedPlantUuid?.let {
-                bundle.putString("plantUuid", it)
-            }
-
-            val plantInfoFragment = PlantInfoFragment()
-            plantInfoFragment.arguments = bundle
-
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.main_fl, plantInfoFragment)
-                .commit()
-        }
+//        binding.plantListLvPlants.setOnItemClickListener { parent, view, position, id ->
+//            val selectedPlantUuid = plantList?.get(position)?.plant_uuid
+//            Log.d("plant 선택---", "$selectedPlantUuid")
+//            val bundle = Bundle()
+//            selectedPlantUuid?.let {
+//                bundle.putString("plantUuid", it)
+//            }
+//
+//            val plantInfoFragment = PlantInfoFragment()
+//            plantInfoFragment.arguments = bundle
+//
+//            parentFragmentManager
+//                .beginTransaction()
+//                .replace(R.id.main_fl, plantInfoFragment)
+//                .commit()
+//        }
 
 
         // 식물 추가 버튼 클릭 후 식물 추가 페이지로 이동
@@ -110,6 +113,21 @@ class PlantFragment : Fragment() {
             moveToAddPlantFragment()
         }
     }
+
+    override fun onItemClick(plantUuid: String) {
+        val bundle = Bundle()
+        bundle.putString("plantUuid", plantUuid)
+
+        val plantInfoFragment = PlantInfoFragment()
+        plantInfoFragment.arguments = bundle
+
+//        parentFragmentManager
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fl, plantInfoFragment)
+            .commit()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
