@@ -43,21 +43,25 @@ class PlantAdapter (val context: Context, val PlantList: ArrayList<PlantGet>, va
         val imageUrl = plant.image_url
         ImageLoaderTask(plantImg).execute(imageUrl)
 
+        Log.d("bookmark", "${plant.plant_name}, ${plant.bookmark?.bookmark_uuid}")
+        var isBookmarked = false
         // 북마크 상태에 따라 이미지 설정
-        if (plant.isBookmarked) {
+        if (plant.bookmark != null) {
+            isBookmarked = true
             bookmarkButton.setImageResource(R.drawable.star_filled)
         } else {
+            isBookmarked = false
             bookmarkButton.setImageResource(R.drawable.star)
         }
 
         bookmarkButton.setOnClickListener {
             // 북마크 상태 토글
-            plant.isBookmarked = !plant.isBookmarked
+            //plant.bookmark = !plant.bookmark
             // 북마크 상태에 따라 이미지 변경
-            if (plant.isBookmarked) {
-                bookmarkButton.setImageResource(R.drawable.star_filled)
-            } else {
+            if (isBookmarked) {
                 bookmarkButton.setImageResource(R.drawable.star)
+            } else {
+                bookmarkButton.setImageResource(R.drawable.star_filled)
             }
 
             //post 요청

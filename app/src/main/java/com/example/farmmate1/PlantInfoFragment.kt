@@ -1,11 +1,13 @@
 package com.example.farmmate1
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.farmmate1.databinding.FragmentPlantInfoBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,6 +17,8 @@ class PlantInfoFragment : Fragment() {
 
     private var _binding: FragmentPlantInfoBinding? = null
     private val binding get() = _binding!!
+
+    private var plantUuid:String? = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +39,7 @@ class PlantInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val plantUuid = arguments?.getString("plantUuid")
+        plantUuid = arguments?.getString("plantUuid")
         plantUuid?.let { uuid ->
 
             // Retrofit 인스턴스 생성
@@ -106,6 +110,11 @@ class PlantInfoFragment : Fragment() {
                 .replace(R.id.main_fl, plantEditFragment)
                 .commit()
         }
+
+        // 삭제 버튼
+        binding.plantInfoBtnDelete.setOnClickListener {
+            showDeleteConfirmationDialog()
+        }
     }
 
     private fun moveToPlantFragment() {
@@ -131,4 +140,43 @@ class PlantInfoFragment : Fragment() {
         // 뒤로가기 하면 이전 페이지로 갈 수 있도록.. transaction.addToBackStack(data)
         transaction.commit()
     }
+
+    private fun showDeleteConfirmationDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("삭제 확인")
+        builder.setMessage("정말로 이 항목을 삭제하시겠습니까?")
+        builder.setPositiveButton("예") { _, _ ->
+            // 사용자가 확인을 눌렀을 때의 동작 수행
+            deletePlant()
+        }
+        builder.setNegativeButton("아니오") { dialog, _ ->
+            // 사용자가 취소를 눌렀을 때의 동작 수행 (아무것도 안 함)
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun deletePlant(){
+        val retrofit = RetrofitClient.instance
+        val apiService = retrofit.create(ApiService::class.java)
+
+        val call = apiService.deletePlant(plantUuid)
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(requireContext(), "삭제되었습니다", Toast.LENGTH_SHORT).show()
+                    moveToPlantFragment()
+                    // 식물 등록이 성공하면 화면을 초기화하거나 다른 작업을 수행할 수 있음
+                } else {
+                    Toast.makeText(requireContext(), "식물 삭제 실패", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(requireContext(), "네트워크 오류: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
 }

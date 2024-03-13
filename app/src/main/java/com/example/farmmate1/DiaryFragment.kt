@@ -29,6 +29,8 @@ class DiaryFragment : Fragment() {
     private var selectedPlantName: String? = null
     //private var filteredDiaryList: List<DiaryGet>? = null
 
+    private lateinit var diaryUuid: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +44,7 @@ class DiaryFragment : Fragment() {
         val oneDayDecorator = OneDayDecorator()
 
         calendarView.selectedDate = today
+        calendarView.setDateSelected(today, true)
         calendarView.addDecorators(
             SundayDecorator(),
             SaturdayDecorator(),
@@ -135,6 +138,19 @@ class DiaryFragment : Fragment() {
             selectedDate?.let { date ->
                 moveToAddDiaryFragment(date)
             }
+        }
+
+        binding.diaryContentLayout.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("diaryUuid", diaryUuid)
+
+            val diaryInfoFragment = DiaryInfoFragment()
+            diaryInfoFragment.arguments = bundle
+
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_fl, diaryInfoFragment)
+                .commit()
         }
 
     }
@@ -303,6 +319,7 @@ class DiaryFragment : Fragment() {
                 binding.diaryContentDate.text = matchingDiary.diary_date
                 binding.diaryContentWeather.text = matchingDiary.plant_weather
                 binding.diaryContentMemo.text = matchingDiary.memo
+                diaryUuid = matchingDiary.diary_uuid
 
             } else {
                 // 매칭되는 다이어리가 없는 경우

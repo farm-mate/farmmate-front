@@ -201,6 +201,7 @@ class HomeFragment : Fragment() {
             override fun onResponse(call: Call<List<PlantGet>>, response: Response<List<PlantGet>>) {
                 // API 요청에 성공했을 때 북마크된 식물 목록을 업데이트합니다.
                 val bookmarkedPlants = response.body() ?: emptyList()
+                Log.d("homefragment--", "$bookmarkedPlants")
 
                 // 북마크된 식물 목록을 표시하는 어댑터를 생성하고 리스트뷰에 설정합니다.
                 val adapter = BookmarkAdapter(requireContext(), bookmarkedPlants)

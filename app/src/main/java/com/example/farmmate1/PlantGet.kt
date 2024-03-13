@@ -10,5 +10,8 @@ class PlantGet (
     val memo:String = "",
     val image_url: String = "",
 
-    var isBookmarked: Boolean
+    val bookmark: Bookmark?
+)
+class Bookmark(
+    val bookmark_uuid:String
 )

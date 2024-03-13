@@ -75,7 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="작물 종류 선택"
+                        android:text="작물 종류"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="16dp"
@@ -112,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="작물 별칭 입력"
+                        android:text="작물 별칭"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="16dp"
@@ -151,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="심은 날짜 선택"
+                        android:text="심은 날짜"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="16dp"
@@ -190,23 +190,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="재배지 입력"
+                        android:text="재배지"
                         android:textColor="@color/black"
                         android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
-                        android:id="@+id/plant_edit_location_ib"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="8dp"
-                        android:background="@android:color/transparent"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/location"
-                        app:layout_constraintBottom_toBottomOf="@+id/plant_edit_tv_location"
-                        app:layout_constraintStart_toEndOf="@+id/plant_edit_tv_location" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/plant_edit_location_ib"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:src="@drawable/location"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/plant_edit_tv_location"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/plant_edit_tv_location" />-->
 
                     <EditText
                         android:id="@+id/plant_edit_et_location"
@@ -316,7 +316,7 @@
                         android:layout_width="190dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="(좌측 버튼 선택)"
+                        android:text="(좌측 이미지 선택)"
                         android:textSize="12sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
