@@ -143,6 +143,7 @@ class DiaryFragment : Fragment() {
         binding.diaryContentLayout.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("diaryUuid", diaryUuid)
+            bundle.putString("selectedPlantName", selectedPlantName)
 
             val diaryInfoFragment = DiaryInfoFragment()
             diaryInfoFragment.arguments = bundle

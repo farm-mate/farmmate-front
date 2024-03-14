@@ -82,6 +82,15 @@ interface ApiService {
         @Part image: MultipartBody.Part? // 이미지 파일을 MultipartBody.Part로 전송
     ): Call<DiaryPost>
 
+    // 이미지를 포함하지 않은 PUT 요청
+    @Multipart
+    @PUT("diary/{diaryUuid}")
+    fun editDiaryWithoutImage(
+        @Path("diaryUuid") diaryUuid: String,
+        @PartMap data: HashMap<String, RequestBody>,
+    ): Call<DiaryPost>
+
+
     // 일지 개별 DELETE 요청
     @DELETE("diary/{diaryUuid}")
     fun deleteDiary(@Path("diaryUuid")diaryUuid: String?): Call<Void>

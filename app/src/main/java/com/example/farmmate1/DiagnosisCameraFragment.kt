@@ -77,7 +77,7 @@ class DiagnosisCameraFragment : Fragment() {
         binding.diagnosisCameraBtnNext.setOnClickListener {
             // 서버에 이미지 보내기
             sendDiagnosisToServer(selectedCrop)
-            moveToDiagnosisResultFragment()
+            //moveToDiagnosisResultFragment()
         }
 
     }
@@ -149,11 +149,6 @@ class DiagnosisCameraFragment : Fragment() {
     }
 
     private fun dispatchTakePictureIntent() {
-//        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-//            takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
-//                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-//            }
-//        }
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
     }
@@ -221,27 +216,22 @@ class DiagnosisCameraFragment : Fragment() {
     }
 
     private fun moveToDiagnosisResultFragment() {
-        Handler().postDelayed({
-            val transaction = parentFragmentManager.beginTransaction()
-                .replace(R.id.main_fl, DiagnosisResultFragment())
-            transaction.commit()
-        }, 5000)
+        val transaction = parentFragmentManager.beginTransaction()
+            .replace(R.id.main_fl, DiagnosisResultFragment())
+        transaction.commit()
     }
 
-    fun sendDiagnosisToServer(plantType: String?) {
+    private fun sendDiagnosisToServer(plantType: String?) {
 
         val retrofit = RetrofitClient.instance
         val apiService = retrofit.create(ApiService::class.java)
 
-        val imageBase64 = encodeImageToBase64(imagePath)
-
         try {
             val plantTypeBody = RequestBody.create(MediaType.parse("text/plain"), plantType)
 
-            val imageRequestBody = RequestBody.create(MediaType.parse("image/*"), imageBase64)
-            val imageBody = MultipartBody.Part.createFormData("image", "image.jpg", imageRequestBody)
-
-            Log.d("객체 확인---", "$plantTypeBody, $imageBody")
+            val imageFile = File(imagePath)
+            val imageRequestBody = RequestBody.create(MediaType.parse("image/*"), imageFile)
+            val imageBody = MultipartBody.Part.createFormData("image", imageFile.name, imageRequestBody)
 
             apiService.postDiagnosis(plantTypeBody, imageBody)
                 .enqueue(object : Callback<DiagnosisPost> {
@@ -269,31 +259,31 @@ class DiagnosisCameraFragment : Fragment() {
         }
     }
 
-    private fun encodeImageToBase64(imagePath: String): String {
-        val imageFile = File(imagePath)
-        val byteArrayOutputStream = ByteArrayOutputStream()
-
-        try {
-            val fileInputStream = FileInputStream(imageFile)
-            val buffer = ByteArray(1024)
-            var bytesRead = 0
-            while (fileInputStream.read(buffer).also { bytesRead = it } != -1) {
-                byteArrayOutputStream.write(buffer, 0, bytesRead)
-            }
-            fileInputStream.close()
-
-            val byteArray = byteArrayOutputStream.toByteArray()
-            return Base64.encodeToString(byteArray, Base64.DEFAULT)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
-            try {
-                byteArrayOutputStream.close()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-        return ""
-    }
+//    private fun encodeImageToBase64(imagePath: String): String {
+//        val imageFile = File(imagePath)
+//        val byteArrayOutputStream = ByteArrayOutputStream()
+//
+//        try {
+//            val fileInputStream = FileInputStream(imageFile)
+//            val buffer = ByteArray(1024)
+//            var bytesRead = 0
+//            while (fileInputStream.read(buffer).also { bytesRead = it } != -1) {
+//                byteArrayOutputStream.write(buffer, 0, bytesRead)
+//            }
+//            fileInputStream.close()
+//
+//            val byteArray = byteArrayOutputStream.toByteArray()
+//            return Base64.encodeToString(byteArray, Base64.DEFAULT)
+//        } catch (e: IOException) {
+//            e.printStackTrace()
+//        } finally {
+//            try {
+//                byteArrayOutputStream.close()
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//        }
+//        return ""
+//    }
 
 }

@@ -39,6 +39,7 @@ class DiaryInfoFragment : Fragment() {
     //private lateinit var diary: DiaryPost
     private var image: MultipartBody.Part? = null
     private var imageData: ByteArray? = null
+    private var isImageChanged = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +47,10 @@ class DiaryInfoFragment : Fragment() {
     ): View? {
         _binding = FragmentDiaryInfoBinding.inflate(inflater, container, false)
         val view = binding.root
+
+
+        val selectedPlantName = arguments?.getString("selectedPlantName")
+        binding.diaryInfoTvType.text = selectedPlantName
 
         diaryUuid = arguments?.getString("diaryUuid") ?: ""
         diaryUuid?.let { uuid ->
@@ -64,7 +69,7 @@ class DiaryInfoFragment : Fragment() {
 
                         Log.d("PlantEditFragment", "$diaryget")
 
-                        binding.diaryInfoTvType.text = diaryget?.plant?.plant_name
+                        binding.diaryInfoTvDate.text = diaryget?.diary_date
                         binding.diaryInfoEtWeather.text = diaryget?.plant_weather.toEditable()
                         binding.diaryInfoEtTemperature.text = diaryget?.temperature.toEditable()
                         binding.diaryInfoEtHumidity.text = diaryget?.humidity.toEditable()
@@ -174,6 +179,9 @@ class DiaryInfoFragment : Fragment() {
                         val requestBody = RequestBody.create(MediaType.parse(contentType), bytes)
                         val multipart = MultipartBody.Part.createFormData("diaryImg", fileName, requestBody)
                         image = multipart
+
+                        // 이미지가 변경되었음을 표시
+                        isImageChanged = true
                     }
                 }
             }
@@ -199,6 +207,7 @@ class DiaryInfoFragment : Fragment() {
     }
 
     private fun editDiary() {
+        val diaryDate = binding.diaryInfoTvDate.text.toString()
         val plantName = binding.diaryInfoTvType.text.toString()
         val plantWeather = binding.diaryInfoEtWeather.text.toString()
         val temperature = binding.diaryInfoEtTemperature.text.toString()
@@ -217,7 +226,7 @@ class DiaryInfoFragment : Fragment() {
 
         val requestBodyMap = hashMapOf<String, RequestBody>()
         //requestBodyMap["plantUuid"] = createPartFromString(plantUuid)
-        //requestBodyMap["diaryDate"] = createPartFromString(diaryDate)
+        requestBodyMap["diaryDate"] = createPartFromString(diaryDate)
         requestBodyMap["plantName"] = createPartFromString(plantName)
         requestBodyMap["plantWeather"] = createPartFromString(plantWeather)
         requestBodyMap["temperature"] = createPartFromString(temperature)
@@ -238,7 +247,17 @@ class DiaryInfoFragment : Fragment() {
 
         val imagePart = image
 
-        val call = apiService.editDiary(diaryUuid, requestBodyMap, imagePart)
+        val call: Call<DiaryPost>
+
+        // 이미지가 변경된 경우에만 이미지 첨부
+        if (isImageChanged) {
+            // 이미지를 포함하여 PUT 요청 보내기
+            call = apiService.editDiary(diaryUuid, requestBodyMap, imagePart)
+        } else {
+            // 이미지가 변경되지 않은 경우에는 이미지를 첨부하지 않고 PUT 요청 보내기
+            call = apiService.editDiaryWithoutImage(diaryUuid, requestBodyMap)
+        }
+
         call.enqueue(object : Callback<DiaryPost> {
             override fun onResponse(call: Call<DiaryPost>, response: Response<DiaryPost>) {
                 if (response.isSuccessful) {
@@ -254,6 +273,7 @@ class DiaryInfoFragment : Fragment() {
                 Toast.makeText(requireContext(), "네트워크 오류: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+
     }
 
     private fun showDeleteConfirmationDialog() {

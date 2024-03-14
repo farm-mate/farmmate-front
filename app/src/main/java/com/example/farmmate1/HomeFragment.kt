@@ -16,12 +16,9 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.farmmate1.*
-import com.example.farmmate1.R
-import com.example.farmmate1.component.common
+import android.location.Location
 import com.example.farmmate1.data.*
 import com.example.farmmate1.databinding.FragmentHomeBinding
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.JsonHttpResponseHandler
 import com.loopj.android.http.RequestParams
@@ -53,7 +50,6 @@ class HomeFragment : Fragment() {
     private lateinit var weatherDate : TextView
     private lateinit var location: TextView
     private lateinit var mLocationManager: LocationManager
-    private lateinit var mLocationListener: LocationListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,20 +58,6 @@ class HomeFragment : Fragment() {
     ): View? {
         val fragmentBinding = FragmentHomeBinding.inflate(inflater, container, false)
         binding = fragmentBinding
-
-//        var PlantList = arrayListOf<PlantGet>(
-//            PlantGet("","","딸기",  "딸기", "2023-05-19", "재배지1", ""),
-//            PlantGet("","","고추",  "고추", "2023-05-19", "재배지1", ""),
-//            PlantGet("","","토마토",  "토마토", "2023-05-19", "재배지1", ""),
-//            PlantGet("","","포도",  "포도", "2023-05-19", "재배지1", ""),
-//            PlantGet("","","파프리카",  "파프리카", "2023-05-19", "재배지1", ""),
-//            PlantGet("","","딸기5",  "딸기5", "2023-05-19", "재배지1", "")
-//        )
-//
-//
-//        val Adapter = BookmarkAdapter(requireContext(),PlantList)
-//        binding?.bookmarkListLvPlants?.adapter = Adapter
-
         getBookmarkedPlants()
 
         return fragmentBinding.root
@@ -100,19 +82,26 @@ class HomeFragment : Fragment() {
         getWeatherInCurrentLocation()
     }
 
+    private val mLocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            Log.d("Location", "Latitude: ${location.latitude}, Longitude: ${location.longitude}")
+            val params: RequestParams = RequestParams()
+            params.put("lat", location.latitude)
+            params.put("lon", location.longitude)
+            params.put("appid", Companion.API_KEY)
+            doNetworking(params)
+            getAddressFromLocation(location.latitude, location.longitude)
+        }
+
+        override fun onProviderDisabled(provider: String) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+    }
+
     private fun getWeatherInCurrentLocation() {
         mLocationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        mLocationListener = LocationListener { p0 ->
-            Log.d("Location", "Latitude: ${p0.latitude}, Longitude: ${p0.longitude}")
-            val params: RequestParams = RequestParams()
-            params.put("lat", p0.latitude)
-            params.put("lon", p0.longitude)
-            params.put("appid", Companion.API_KEY)
-            doNetworking(params)
-            getAddressFromLocation(p0.latitude, p0.longitude)
-
-        }
+        // LocationListener를 사용하여 위치 업데이트를 수신합니다.
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -140,7 +129,9 @@ class HomeFragment : Fragment() {
             MIN_DISTANCE,
             mLocationListener
         )
+
     }
+
 
     private fun getAddressFromLocation(latitude: Double, longitude: Double) {
         val geoCoder = Geocoder(requireContext(), Locale.getDefault())
@@ -221,4 +212,5 @@ class HomeFragment : Fragment() {
             mLocationManager.removeUpdates(mLocationListener)
         }
     }
+
 }

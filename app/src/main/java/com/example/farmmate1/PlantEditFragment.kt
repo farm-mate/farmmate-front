@@ -40,6 +40,8 @@ class PlantEditFragment : Fragment() {
     private var plantImg: MultipartBody.Part? = null
     private var imageData: ByteArray? = null
 
+    private var selectedDate: Date? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,6 +68,9 @@ class PlantEditFragment : Fragment() {
 
                         binding.plantEditEtName.text = plantget?.plant_name.toEditable()
                         binding.plantEditTvType.text = plantget?.plant_type
+                        selectedDate = plantget?.first_planting_date?.let {
+                            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(it)
+                        }
                         binding.plantEditTvSelectdate.text = plantget?.first_planting_date
                         binding.plantEditEtLocation.text = plantget?.plant_location.toEditable()
                         binding.plantEditEtMemo.text = plantget?.memo.toEditable()
@@ -128,8 +133,6 @@ class PlantEditFragment : Fragment() {
             .replace(R.id.main_fl, plantInfoFragment)
             .commit()
     }
-
-    private var selectedDate: Date? = null
 
     private fun selectStartPlantDate() {
         val cal = Calendar.getInstance()
