@@ -7,40 +7,31 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 
-class EventDecorator(private val context: Context, private val checkedItems: Set<String>, private val dates: Set<CalendarDay>) : DayViewDecorator {
-    private val waterColor = Color.parseColor("#2196F3") // 물 점의 색상
-    private val fertilizerColor = Color.parseColor("#4CAF50") // 비료 점의 색상
-    private val pesticideColor = Color.parseColor("#FFC107") // 농약 점의 색상
+class EventDecorator(private val context: Context, private val checkedItems: Set<String>, private val date: CalendarDay) : DayViewDecorator {
 
     override fun shouldDecorate(day: CalendarDay): Boolean {
-        return dates.contains(day)
+        return date == day
     }
 
     override fun decorate(view: DayViewFacade) {
         val multiDots = mutableListOf<Int>()
 
-        // 물, 비료, 농약 체크 여부에 따라 점 추가
         if ("water" in checkedItems) {
-            Log.d("EventDecorator", "Water is checked")
-            multiDots.add(waterColor)
+            multiDots.add(Color.parseColor("#2196F3"))
         }
         if ("fertilizer" in checkedItems) {
-            Log.d("EventDecorator", "fertilizer is checked")
-            multiDots.add(fertilizerColor)
+            multiDots.add(Color.parseColor("#4CAF50"))
         }
         if ("pesticide" in checkedItems) {
-            Log.d("EventDecorator", "pesticide is checked")
-            multiDots.add(pesticideColor)
+            multiDots.add(Color.parseColor("#FFC107"))
         }
-
-        Log.d("EventDecorator", "MultiDots: $multiDots")
 
         view.addSpan(CustomMultipleDotSpan(colors = multiDots.toIntArray()))
     }
 }
 
 
-//class EventDecorator(private val context: Context, private val checkedItems: Set<String>, private val dates: HashSet<CalendarDay>) : DayViewDecorator {
+//class EventDecorator(private val context: Context, private val checkedItems: Set<String>, private val dates: Set<CalendarDay>) : DayViewDecorator {
 //    private val waterColor = Color.parseColor("#2196F3") // 물 점의 색상
 //    private val fertilizerColor = Color.parseColor("#4CAF50") // 비료 점의 색상
 //    private val pesticideColor = Color.parseColor("#FFC107") // 농약 점의 색상
@@ -50,24 +41,24 @@ class EventDecorator(private val context: Context, private val checkedItems: Set
 //    }
 //
 //    override fun decorate(view: DayViewFacade) {
-//        val multiDots = mutableListOf<Int>()
+//        for (date in dates) {
+//            val multiDots = mutableListOf<Int>()
 //
-//        // 물, 비료, 농약 체크 여부에 따라 점 추가
-//        if ("water" in checkedItems) {
-//            Log.d("EventDecorator", "Water is checked")
-//            multiDots.add(waterColor)
-//        }
-//        if ("fertilizer" in checkedItems) {
-//            Log.d("EventDecorator", "fertilizer is checked")
-//            multiDots.add(fertilizerColor)
-//        }
-//        if ("pesticide" in checkedItems) {
-//            Log.d("EventDecorator", "pesticide is checked")
-//            multiDots.add(pesticideColor)
-//        }
+//            if ("water" in checkedItems && CalendarDay.from(date.year, date.month, date.day) == date) {
+//                multiDots.add(waterColor)
+//            }
+//            if ("fertilizer" in checkedItems && CalendarDay.from(date.year, date.month, date.day) == date) {
+//                multiDots.add(fertilizerColor)
+//            }
+//            if ("pesticide" in checkedItems && CalendarDay.from(date.year, date.month, date.day) == date) {
+//                multiDots.add(pesticideColor)
+//            }
 //
-//        Log.d("EventDecorator", "MultiDots: $multiDots")
+//            Log.d("EventDecorator", "Selected Dates: $dates")
+//            Log.d("EventDecorator", "Checked Items: $checkedItems")
+//            Log.d("EventDecorator", "MultiDots: $multiDots")
 //
-//        view.addSpan(CustomMultipleDotSpan(colors = multiDots.toIntArray()))
+//            view.addSpan(CustomMultipleDotSpan(colors = multiDots.toIntArray()))
+//        }
 //    }
 //}

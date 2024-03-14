@@ -305,6 +305,7 @@ class DiaryFragment : Fragment() {
                 }
             }
         }
+        Log.d("CheckDiary","Triple: $waterCheckedDates, $fertilizerCheckedDates, $pesticideCheckedDates")
 
         return Triple(waterCheckedDates, fertilizerCheckedDates, pesticideCheckedDates)
     }
@@ -317,17 +318,92 @@ class DiaryFragment : Fragment() {
             calendarView.removeDecorator(decorator)
         }
 
-        // 데코레이터 리스트 생성
-        val decorators = mutableListOf<EventDecorator>()
-        decorators.add(EventDecorator(requireContext(), setOf("water"), waterCheckedDates))
-        decorators.add(EventDecorator(requireContext(), setOf("fertilizer"), fertilizerCheckedDates))
-        decorators.add(EventDecorator(requireContext(), setOf("pesticide"), pesticideCheckedDates))
+        // 각 날짜에 대한 항목들을 모으기
+        val dateToItems = mutableMapOf<CalendarDay, MutableSet<String>>()
 
-        // 새로운 데코레이터 추가
-        val decoratorsArray = decorators.toTypedArray()
-        eventDecorators.addAll(decorators)
-        calendarView.addDecorators(*decoratorsArray)
+        // 물 체크된 날짜 추가
+        for (date in waterCheckedDates) {
+            val items = dateToItems.getOrPut(date) { mutableSetOf() }
+            items.add("water")
+        }
+
+        // 비료 체크된 날짜 추가
+        for (date in fertilizerCheckedDates) {
+            val items = dateToItems.getOrPut(date) { mutableSetOf() }
+            items.add("fertilizer")
+        }
+
+        // 농약 체크된 날짜 추가
+        for (date in pesticideCheckedDates) {
+            val items = dateToItems.getOrPut(date) { mutableSetOf() }
+            items.add("pesticide")
+        }
+
+        // 새로운 이벤트 데코레이터 생성 및 추가
+        val newDecorators = dateToItems.map { (date, items) ->
+            EventDecorator(requireContext(), items, date)
+        }
+
+        // 캘린더에 새로운 데코레이터 추가
+        for (decorator in newDecorators) {
+            calendarView.addDecorator(decorator)
+        }
+
+        // 업데이트된 데코레이터 목록 저장
+        eventDecorators = newDecorators.toMutableList()
     }
+
+
+//    private fun updateEventDecorators(waterCheckedDates: Set<CalendarDay>, fertilizerCheckedDates: Set<CalendarDay>, pesticideCheckedDates: Set<CalendarDay>) {
+//        // 기존에 추가된 데코레이터 제거
+//        for (decorator in eventDecorators) {
+//            calendarView.removeDecorator(decorator)
+//        }
+//
+//        // 모든 날짜를 하나의 Set에 모으기
+//        val allDates = mutableSetOf<CalendarDay>()
+//        allDates.addAll(waterCheckedDates)
+//        allDates.addAll(fertilizerCheckedDates)
+//        allDates.addAll(pesticideCheckedDates)
+//
+//        // 각 날짜에 대해 물, 비료, 농약 여부를 확인하고 적절한 색상의 점 추가
+//        for (date in allDates) {
+//            val multiDots = mutableListOf<Int>()
+//
+//            if (waterCheckedDates.contains(date)) {
+//                multiDots.add(Color.parseColor("#2196F3"))
+//            }
+//            if (fertilizerCheckedDates.contains(date)) {
+//                multiDots.add(Color.parseColor("#4CAF50"))
+//            }
+//            if (pesticideCheckedDates.contains(date)) {
+//                multiDots.add(Color.parseColor("#FFC107"))
+//            }
+//
+//            // 해당 날짜에 점을 추가하는 데코레이터 생성 및 추가
+//            val decorator = EventDecorator(requireContext(), setOf("water", "fertilizer", "pesticide"), setOf(date))
+//            calendarView.addDecorator(decorator)
+//            eventDecorators.add(decorator)
+//        }
+//    }
+
+//    private fun updateEventDecorators(waterCheckedDates: Set<CalendarDay>, fertilizerCheckedDates: Set<CalendarDay>, pesticideCheckedDates: Set<CalendarDay>) {
+//        // 기존에 추가된 데코레이터 제거
+//        for (decorator in eventDecorators) {
+//            calendarView.removeDecorator(decorator)
+//        }
+//
+//        // 데코레이터 리스트 생성
+//        val decorators = mutableListOf<EventDecorator>()
+//        decorators.add(EventDecorator(requireContext(), setOf("water"), waterCheckedDates))
+//        decorators.add(EventDecorator(requireContext(), setOf("fertilizer"), fertilizerCheckedDates))
+//        decorators.add(EventDecorator(requireContext(), setOf("pesticide"), pesticideCheckedDates))
+//
+//        // 새로운 데코레이터 추가
+//        val decoratorsArray = decorators.toTypedArray()
+//        eventDecorators.addAll(decorators)
+//        calendarView.addDecorators(*decoratorsArray)
+//    }
 
     private fun displayDiaryInfo(selectedDate: CalendarDay, filteredDiaryList: List<DiaryGet>) {
         val month = selectedDate.month + 1
