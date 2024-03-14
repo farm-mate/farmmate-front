@@ -74,31 +74,31 @@
 
                 <TextView
                     android:id="@+id/diagnosis_result_tv_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="295dp"
                     android:layout_height="wrap_content"
                     android:text="참외 흰가루병"
                     android:textColor="@color/black"
-                    android:textSize="17sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/diagnosis_result_tv_describe"
-                    android:layout_width="295dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="흰가루병은 아마 가장 흔하고 눈에 잘띄며 널리 분포하고 쉽게 확인 할 수 있는 병으로 어린 식물조직위의 흰색에서 회색의 점무늬나 큰무늬 가루 모양으로 자라는 곰팡이가 잎의 표면에 가장 흔하게 나타난다."
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/diagnosis_result_tv_name" />
+<!--                <TextView-->
+<!--                    android:id="@+id/diagnosis_result_tv_describe"-->
+<!--                    android:layout_width="295dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text=""-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="17sp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/diagnosis_result_tv_name" />-->
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:id="@+id/divider"
                 android:layout_width="295dp"
-                android:layout_height="3dp"
-                android:layout_marginTop="32dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
                 android:background="?android:attr/listDivider"
                 android:backgroundTint="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/diagnosis_result_layout_resultabout"
@@ -151,7 +151,7 @@
                     android:layout_width="295dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="잎, 줄기, 과실에 발생하나 주로 잎에 많이 발생한다. 감염부위에는 하얀 균총이 표면에 부분적으로 나타나고, 심하면 잎 전면에 밀가루를 뿌려 놓은 것 같은 증상으로 나타난다."
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     app:layout_constraintStart_toStartOf="parent"

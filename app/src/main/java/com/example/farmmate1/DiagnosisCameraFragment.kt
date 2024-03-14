@@ -14,23 +14,18 @@ import android.provider.MediaStore
 import android.app.Activity
 import java.io.File
 import android.graphics.Bitmap
-import android.os.Handler
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.example.farmmate1.databinding.FragmentDiagnosisCameraBinding
+import com.example.farmmate1.DiagnosisResult
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.FileOutputStream
 import java.io.IOException
-import android.util.Base64
 import android.util.Log
-import java.io.ByteArrayOutputStream
-import java.io.FileInputStream
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 class DiagnosisCameraFragment : Fragment() {
 
@@ -215,11 +210,11 @@ class DiagnosisCameraFragment : Fragment() {
         transaction.commit()
     }
 
-    private fun moveToDiagnosisResultFragment() {
-        val transaction = parentFragmentManager.beginTransaction()
-            .replace(R.id.main_fl, DiagnosisResultFragment())
-        transaction.commit()
-    }
+//    private fun moveToDiagnosisResultFragment() {
+//        val transaction = parentFragmentManager.beginTransaction()
+//            .replace(R.id.main_fl, DiagnosisResultFragment())
+//        transaction.commit()
+//    }
 
     private fun sendDiagnosisToServer(plantType: String?) {
 
@@ -234,22 +229,42 @@ class DiagnosisCameraFragment : Fragment() {
             val imageBody = MultipartBody.Part.createFormData("image", imageFile.name, imageRequestBody)
 
             apiService.postDiagnosis(plantTypeBody, imageBody)
-                .enqueue(object : Callback<DiagnosisPost> {
+                .enqueue(object : Callback<DiagnosisResult> {
                     override fun onResponse(
-                        call: Call<DiagnosisPost>,
-                        response: Response<DiagnosisPost>
+                        call: Call<DiagnosisResult>,
+                        response: Response<DiagnosisResult>
                     ) {
                         // 요청 성공 시 처리
                         if (response.isSuccessful) {
-                            val diagnosisPost = response.body()
-                            Log.d("Camera 요청 성공", "$plantTypeBody, $imageBody")
+                            val diagnosisResult = response.body()?.let {
+                                // 응답 데이터를 DiagnosisResult 객체로 변환
+                                DiagnosisResult(
+                                    it.diseaseUuid,
+                                    it.plantName,
+                                    it.diseaseName,
+                                    it.diseaseCode,
+                                    it.diseaseSymptom,
+                                    it.diseaseCause,
+                                    it.diseaseTreatment,
+                                    it.diagnosisCode
+                                )
+                            }
+                            val bundle = Bundle().apply {
+                                putParcelable("diagnosisResult", diagnosisResult)
+                            }
+                            // Fragment 전환
+                            val diagnosisResultFragment = DiagnosisResultFragment()
+                            diagnosisResultFragment.arguments = bundle
+                            parentFragmentManager.beginTransaction()
+                                .replace(R.id.main_fl, diagnosisResultFragment)
+                                .commit()
                         } else {
                             // API 요청 실패 처리
                             Log.e("CameraFragment", "Failed to fetch plant list: ${response.message()}")
                         }
                     }
 
-                    override fun onFailure(call: Call<DiagnosisPost>, t: Throwable) {
+                    override fun onFailure(call: Call<DiagnosisResult>, t: Throwable) {
                         // 통신 오류 처리
                         Log.e("CameraFragment", "Network error: ${t.message}")
                     }

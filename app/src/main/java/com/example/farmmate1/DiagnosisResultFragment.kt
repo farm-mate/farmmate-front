@@ -32,54 +32,76 @@ class DiagnosisResultFragment : Fragment() {
         return view
     }
 
+    private var selectedButtonId: Int = R.id.diagnosis_result_btn_symptom
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val retrofit = RetrofitClient.instance
-        val apiService = retrofit.create(ApiService::class.java)
+        val diagnosisResult = arguments?.getParcelable<DiagnosisResult>("diagnosisResult")
 
-        // 데이터 요청
-//        apiService.getHistoryList().enqueue(object : Callback<List<History>> {
-//            override fun onResponse(call: Call<List<History>>, response: Response<List<History>>) {
-//                if (response.isSuccessful) {
-//                    val historyList = response.body() as? ArrayList<History>
-//                    if (historyList != null) {
-//                        val adapter = HistoryAdapter(requireContext(), historyList)
-//                        binding.diagnosisListLvHistory.adapter = adapter
-//                    }
-//                } else {
-//                    // API 요청 실패 처리
-//                    Log.e("DiagnosisResultFragment", "Failed to fetch plant list: ${response.message()}")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<List<History>>, t: Throwable) {
-//                // 통신 오류 처리
-//                Log.e("DiagnosisResultFragment", "Network error: ${t.message}")
-//            }
-//        })
+        var diseaseName: String? = ""
+        var symptom: String? = ""
+        var cause: String? = ""
+        var treatment: String? = ""
+        var plantType: String? = ""
+
+        if (diagnosisResult != null) {
+
+            // 결과
+            diseaseName = diagnosisResult.diseaseName
+            binding.diagnosisResultTvName.text = diseaseName
+            // 설명
+            //binding.diagnosisResultTvDescribe.text = diagnosisResult.
+            // 처음에는 증상
+            binding.diagnosisResultTvDetail.text = diagnosisResult.diseaseSymptom
+
+            plantType = diagnosisResult.plantName
+            symptom = diagnosisResult.diseaseSymptom
+            cause = diagnosisResult.diseaseCause
+            treatment = diagnosisResult.diseaseTreatment
+
+            if (diseaseName == "정상") {
+                binding.diagnosisResultBtnSymptom.visibility = View.GONE
+                binding.diagnosisResultBtnCause.visibility = View.GONE
+                binding.diagnosisResultBtnCure.visibility = View.GONE
+                binding.diagnosisResultTvDetail.text = "정상입니다."
+            }
+
+        } else {
+            Log.e("DiagnosisResultFragment", "DiagnosisResult object is null")
+        }
+
+        selectButton(binding.diagnosisResultBtnSymptom)
+
+        // 증상
+        binding.diagnosisResultBtnSymptom.setOnClickListener {
+            selectButton(it)
+            binding.diagnosisResultTvDetail.text = symptom
+        }
+
+        // 원인
+        binding.diagnosisResultBtnCause.setOnClickListener {
+            selectButton(it)
+            binding.diagnosisResultTvDetail.text = cause
+        }
+
+        // 치료법
+        binding.diagnosisResultBtnCure.setOnClickListener {
+            selectButton(it)
+            binding.diagnosisResultTvDetail.text = treatment
+        }
+
 
         // back button
         binding.diagnosisResultBackIb.setOnClickListener {
             moveToDiagnosisFragment()
         }
 
+        // 재측정
         binding.diagnosisResultBtnRecheck.setOnClickListener {
+            // TODO: plantName 전달
             moveToDiagnosisCameraFragment()
         }
-
-        binding.diagnosisResultBtnCause.setOnClickListener {
-            binding.diagnosisResultTvDetail.text = "자낭각의 형태로 병든 식물체의 잔재에서 겨울을 지내고 1차 전염원이 되며, 시설재배에서는 분생포자가 공기전염 되어 계속해서 발생한다. 본 병은 일반적으로 15～28℃에서 많이 발생되며, 32℃이상의 고온에서는 병 발생이 억제된다. 노지포장에서는 억제재배 참외에서 심하게 발생한다. 특히 일조가 부족하고, 밤,낮의 온도차가 심하며, 다비재배를 할 때 병 발생이 많아진다."
-        }
-
-        binding.diagnosisResultBtnCure.setOnClickListener {
-            binding.diagnosisResultTvDetail.text = "- 수확 후 병든 잔재물을 제거, 불태운다.\n" +
-                    "- 질소질 비료의 편용을 피하고, 균형시비를 한다.\n" +
-                    "- 하우스내에서는 기온의 일교차를 줄여준다.\n" +
-                    "- 밀식을 피하고, 통풍이 잘되게 한다.\n" +
-                    "- 발병 초기에 등록약제를 살포하여 초기의 병원균 밀도를 줄여준다."
-        }
-
     }
 
     override fun onDestroyView() {
@@ -101,6 +123,20 @@ class DiagnosisResultFragment : Fragment() {
             .beginTransaction()
             .replace(R.id.main_fl, DiagnosisCameraFragment())
         transaction.commit()
+    }
+
+    // 버튼을 선택 상태로 변경하는 함수
+    private fun selectButton(button: View) {
+        // 이전에 선택된 버튼의 isSelected 속성을 false로 설정하여 선택 해제
+        binding.diagnosisResultBtnSymptom.isSelected = false
+        binding.diagnosisResultBtnCause.isSelected = false
+        binding.diagnosisResultBtnCure.isSelected = false
+
+        // 현재 선택된 버튼의 isSelected 속성을 true로 설정하여 선택
+        button.isSelected = true
+
+        // 선택된 버튼의 ID를 추적
+        selectedButtonId = button.id
     }
 
     class MainViewModel : ViewModel() {

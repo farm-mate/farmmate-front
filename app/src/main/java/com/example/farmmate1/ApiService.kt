@@ -103,7 +103,7 @@ interface ApiService {
     fun postDiagnosis(
         @Part("plantType") plantType: RequestBody,
         @Part image: MultipartBody.Part
-    ): Call<DiagnosisPost>
+    ): Call<DiagnosisResult>
 
     @GET("history")
     fun getHistoryList(): Call<List<History>>

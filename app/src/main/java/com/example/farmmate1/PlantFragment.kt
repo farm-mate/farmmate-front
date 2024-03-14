@@ -46,15 +46,6 @@ class PlantFragment : Fragment(), PlantItemClickListener {
         return view
     }
 
-//    var PlantList = arrayListOf<Plant>(
-//        Plant("","딸기",  "재배지1", "메모1", "2023-05-19"),
-//        Plant("","고추",  "재배지2", "메모2", "2023-05-20"),
-//        Plant("","토마토",  "재배지3", "메모3", "2023-05-21"),
-//        Plant("","포도",  "재배지4", "메모4", "2023-05-22"),
-//        Plant("","파프리카",  "재배지5", "메모5", "2023-05-23"),
-//        Plant("","딸기5",  "재배지9", "메모9", "2023-05-27")
-//    )
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -84,29 +75,6 @@ class PlantFragment : Fragment(), PlantItemClickListener {
                 Log.e("PlantFragment", "Network error: ${t.message}")
             }
         })
-
-//        val Adapter = PlantAdapter(requireContext(),PlantList)
-//        binding.plantListLvPlants.adapter = Adapter
-
-        // 리스트 객체 클릭 시 식물 정보 페이지로 이동
-        // 각 객체에 따른 식물정보(페이지)를 보여줄 수 있도록 plant_uuid 넘겨주기
-//        binding.plantListLvPlants.setOnItemClickListener { parent, view, position, id ->
-//            val selectedPlantUuid = plantList?.get(position)?.plant_uuid
-//            Log.d("plant 선택---", "$selectedPlantUuid")
-//            val bundle = Bundle()
-//            selectedPlantUuid?.let {
-//                bundle.putString("plantUuid", it)
-//            }
-//
-//            val plantInfoFragment = PlantInfoFragment()
-//            plantInfoFragment.arguments = bundle
-//
-//            parentFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.main_fl, plantInfoFragment)
-//                .commit()
-//        }
-
 
         // 식물 추가 버튼 클릭 후 식물 추가 페이지로 이동
         binding.plantAddBtn.setOnClickListener{
