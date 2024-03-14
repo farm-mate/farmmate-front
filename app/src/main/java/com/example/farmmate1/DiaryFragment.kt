@@ -243,19 +243,22 @@ class DiaryFragment : Fragment() {
 
                         }
 
-                        val (waterCheckedDates, fertilizerCheckedDates, pesticideCheckedDates) = checkDiariesForCheckboxes(filteredDiaryList)
+                        val (waterCheckedDates, fertilizerCheckedDates, pesticideCheckedDates) = checkDiariesForCheckboxes(filteredDiaryList).let {
+                            Triple(it.first.toSet(), it.second.toSet(), it.third.toSet())
+                        }
+//                        val waterHashSet = HashSet(waterCheckedDates)
+//                        val fertilizerHashSet = HashSet(fertilizerCheckedDates)
+//                        val pesticideHashSet = HashSet(pesticideCheckedDates)
+//
+//                        val decorators = mutableListOf<EventDecorator>()
+//                        decorators.add(EventDecorator(requireContext(), setOf("water"), waterHashSet))
+//                        decorators.add(EventDecorator(requireContext(), setOf("fertilizer"), fertilizerHashSet))
+//                        decorators.add(EventDecorator(requireContext(), setOf("pesticide"), pesticideHashSet))
+//
+//                        // MaterialCalendarView에 EventDecorator 추가
+//                        calendarView.addDecorators(*decorators.toTypedArray())
 
-                        val waterHashSet = HashSet(waterCheckedDates)
-                        val fertilizerHashSet = HashSet(fertilizerCheckedDates)
-                        val pesticideHashSet = HashSet(pesticideCheckedDates)
-
-                        val decorators = mutableListOf<EventDecorator>()
-                        decorators.add(EventDecorator(requireContext(), setOf("water"), waterHashSet))
-                        decorators.add(EventDecorator(requireContext(), setOf("fertilizer"), fertilizerHashSet))
-                        decorators.add(EventDecorator(requireContext(), setOf("pesticide"), pesticideHashSet))
-
-                        // MaterialCalendarView에 EventDecorator 추가
-                        calendarView.addDecorators(*decorators.toTypedArray())
+                        updateEventDecorators(waterCheckedDates, fertilizerCheckedDates, pesticideCheckedDates)
 
                         calendarView.setOnDateChangedListener { widget, date, selected ->
                             // 선택된 날짜를 이용하여 해당 다이어리 정보를 가져옴
@@ -304,6 +307,26 @@ class DiaryFragment : Fragment() {
         }
 
         return Triple(waterCheckedDates, fertilizerCheckedDates, pesticideCheckedDates)
+    }
+
+    private var eventDecorators: MutableList<EventDecorator> = mutableListOf()
+
+    private fun updateEventDecorators(waterCheckedDates: Set<CalendarDay>, fertilizerCheckedDates: Set<CalendarDay>, pesticideCheckedDates: Set<CalendarDay>) {
+        // 기존에 추가된 데코레이터 제거
+        for (decorator in eventDecorators) {
+            calendarView.removeDecorator(decorator)
+        }
+
+        // 데코레이터 리스트 생성
+        val decorators = mutableListOf<EventDecorator>()
+        decorators.add(EventDecorator(requireContext(), setOf("water"), waterCheckedDates))
+        decorators.add(EventDecorator(requireContext(), setOf("fertilizer"), fertilizerCheckedDates))
+        decorators.add(EventDecorator(requireContext(), setOf("pesticide"), pesticideCheckedDates))
+
+        // 새로운 데코레이터 추가
+        val decoratorsArray = decorators.toTypedArray()
+        eventDecorators.addAll(decorators)
+        calendarView.addDecorators(*decoratorsArray)
     }
 
     private fun displayDiaryInfo(selectedDate: CalendarDay, filteredDiaryList: List<DiaryGet>) {
