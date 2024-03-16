@@ -16,7 +16,6 @@ class WeatherData {
     lateinit var windSpeed:String
     lateinit var windDirection:String
 
-
     fun fromJson(jsonObject: JSONObject?): WeatherData? {
         try{
             Log.d("WeatherData", "JSON Object: $jsonObject")
@@ -43,29 +42,6 @@ class WeatherData {
             return null
         }
     }
-
-//    fun updateData(jsonObject: JSONObject?) {
-//        try {
-//            weatherId = jsonObject?.getJSONArray("weather")?.getJSONObject(0)?.getInt("id")!!
-//            weatherType = jsonObject.getJSONArray("weather").getJSONObject(0).getString("main")
-//            icon = updateWeatherIcon(weatherId)
-//            val roundedTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp") - 273.15).toInt()
-//            tempString = roundedTemp.toString()
-//            tempInt = roundedTemp
-//
-//            val roundedminTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp_min") - 273.15).toInt()
-//            mintempString = roundedminTemp.toString()
-//            mintempInt = roundedminTemp
-//
-//
-//            val roundedmaxTemp: Int = (jsonObject.getJSONObject("main").getDouble("temp_max") - 273.15).toInt()
-//            maxtempString = roundedmaxTemp.toString()
-//            maxtempInt = roundedmaxTemp
-//
-//        } catch (e: JSONException) {
-//            e.printStackTrace()
-//        }
-//    }
 
     private fun updateWeatherIcon(condition: Int): String {
         if (condition in 200..299) {

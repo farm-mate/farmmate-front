@@ -5,8 +5,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
-
-
 object RetrofitClient {
     //에뮬레이터
     //private const val BASE_URL = "http://10.0.2.2:3000/api/"

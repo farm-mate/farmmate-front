@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     else -> {
-                        UserFragment()
+                        SearchFragment()
 
                     }
                 }

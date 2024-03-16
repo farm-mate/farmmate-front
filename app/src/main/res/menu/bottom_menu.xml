@@ -35,8 +35,8 @@
     <item
         android:id="@+id/btm_nav_user"
         android:enabled="true"
-        android:icon="@drawable/user"
-        android:title="유저"
+        android:icon="@drawable/search"
+        android:title="검색"
         app:showAsAction="always"/>
 
 

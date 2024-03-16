@@ -11,7 +11,6 @@
         android:layout_height="match_parent"
         tools:context=".PlantListActivity">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/plant_list_layout_title"
             android:layout_width="match_parent"

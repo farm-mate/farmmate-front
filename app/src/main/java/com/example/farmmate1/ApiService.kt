@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.http.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 
 interface ApiService {
 
@@ -116,5 +117,15 @@ interface ApiService {
     @GET("history")
     fun getHistory(): Call<History>
 
+    @GET("service")
+    fun searchDiseases(
+        @Query("apiKey") apiKey: String,
+        @Query("serviceCode") serviceCode: String,
+        @Query("serviceType") serviceType: String,
+        @Query("cropName") cropName: String,
+        @Query("sickNameKor") sickNameKor: String,
+        @Query("displayCount") displayCount: Int,
+        @Query("startPoint") startPoint: Int
+    ): Call<SearchResponse>
 
 }

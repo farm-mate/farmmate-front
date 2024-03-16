@@ -36,4 +36,9 @@
         <item>참외</item>
         <item>토마토</item>
     </string-array>
+
+    <string-array name="crop_disease_options">
+        <item>작물명</item>
+        <item>병 이름</item>
+    </string-array>
 </resources>
