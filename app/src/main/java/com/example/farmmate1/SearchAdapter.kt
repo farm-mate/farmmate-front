@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class SearchAdapter(private var itemList: MutableList<Disease>) :
+class SearchAdapter(private var itemList: MutableList<Disease>, private val onItemClick: (Disease) -> Unit) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -46,6 +46,9 @@ class SearchAdapter(private var itemList: MutableList<Disease>) :
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         holder.bind(itemList[position])
+        holder.itemView.setOnClickListener {
+            onItemClick(itemList[position])
+        }
     }
 
     override fun getItemCount(): Int {

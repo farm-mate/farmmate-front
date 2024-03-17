@@ -41,7 +41,12 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // RecyclerView 설정
-        searchAdapter = SearchAdapter(mutableListOf()) // 변경된 부분
+        searchAdapter = SearchAdapter(mutableListOf()) { clickedItem ->
+            // 클릭한 아이템의 sickKey를 가져와서 상세 페이지로 전달
+            val sickKey = clickedItem.sickKey
+            // 상세 페이지로 이동
+            moveToSearchDetailFragment(sickKey)
+        }
         binding.searchRecyclerView.apply {
             adapter = searchAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -117,23 +122,19 @@ class SearchFragment : Fragment() {
         }
     }
 
+    private fun moveToSearchDetailFragment(sickKey: String) {
+        val bundle = Bundle()
+        bundle.putString("sickKey", sickKey)
 
-//    private fun searchDiseases(searchTerm: String) {
-//        Log.d("SearchFragment", "검색어: $searchTerm")
-//        // TODO: Retrofit을 사용하여 서버로 요청을 보내고 응답을 처리하는 코드 작성
-//        // 여기서는 더미 데이터를 사용하여 결과를 표시합니다.
-//        val dummyResults = listOf(
-//            SearchResultItem("가지", "질병1", "Disease1", "thumb1", 1),
-//            SearchResultItem("사과", "질병2", "Disease2", "thumb2", 2),
-//            // 여기에 더 많은 결과 추가 가능
-//        )
-//
-//        val filteredResults = dummyResults.filter { item ->
-//            item.cropName.contains(searchTerm) || item.sickNameKor.contains(searchTerm) || item.sickNameEng.contains(searchTerm)
-//        }
-//
-//        // 어댑터의 데이터를 업데이트
-//        searchAdapter.updateData(filteredResults)
-//    }
+        val searchDetailFragment = SearchDetailFragment()
+        searchDetailFragment.arguments = bundle
+
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.main_fl, searchDetailFragment)
+            .addToBackStack(null) // 백 스택에 추가하여 뒤로가기를 위한 처리
+            .commit()
+    }
+
 }
 

@@ -128,4 +128,11 @@ interface ApiService {
         @Query("startPoint") startPoint: Int
     ): Call<SearchResponse>
 
+    @GET("service")
+    fun getDetail(
+        @Query("apiKey") apiKey: String,
+        @Query("serviceCode") serviceCode: String,
+        @Query("sickKey") sickKey: String
+    ): Call<SearchDetail>
+
 }
