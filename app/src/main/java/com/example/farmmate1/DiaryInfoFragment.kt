@@ -177,7 +177,7 @@ class DiaryInfoFragment : Fragment() {
 
                         // 이미지 파일을 MultipartBody.Part로 변환
                         val requestBody = RequestBody.create(MediaType.parse(contentType), bytes)
-                        val multipart = MultipartBody.Part.createFormData("diaryImg", fileName, requestBody)
+                        val multipart = MultipartBody.Part.createFormData("image", fileName, requestBody)
                         image = multipart
 
                         // 이미지가 변경되었음을 표시
