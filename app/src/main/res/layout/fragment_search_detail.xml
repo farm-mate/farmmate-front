@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchDetailFragment">
+
+    <ScrollView
+        android:id="@+id/search_detail_fragment_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/search_detail_fragment_cl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SearchDetailFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/search_detail_layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingTop="20dp">
+
+            <ImageButton
+                android:id="@+id/search_detail_back_ib"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="30dp"
+                android:src="@drawable/back"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/search_detail_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="질병 상세 정보"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/search_detail_back_ib"
+                app:layout_constraintBottom_toBottomOf="@+id/search_detail_back_ib"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/search_detail_layout_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/search_detail_layout_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/search_detail_cropName_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="28dp"
+                    android:text="가지"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="start|center_vertical">
+
+                    <TextView
+                        android:id="@+id/search_detail_sickNameKor_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sick Name (Korean)"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        android:layout_gravity="start"/>
+
+                    <TextView
+                        android:id="@+id/search_detail_sickNameEng_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sick Name (English)"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:layout_gravity="start"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/search_detail_layout_ll"/>
+
+            <LinearLayout
+                android:id="@+id/search_detail_layout_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="24dp"
+                app:layout_constraintTop_toBottomOf="@id/divider3">
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/ic_launcher_background"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/search_detail_layout_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="24dp"
+                app:layout_constraintTop_toBottomOf="@id/search_detail_layout_image">
+
+                <TextView
+                    android:id="@+id/search_detail_title_symptom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="병 증상"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/search_detail_content_symptom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="잎, 줄기, 과실에 발생한다.
+     잎에는 갈색의 원형 또는 부정형의 병반으로 나타나고, 진전되면 겹무늬병반으로 확대된다.
+     줄기에는 처음 갈색의 작은 반점으로 나타나고, 상하로 진전되어 장타원형의 병반이 된다.
+     과실에는 갈색 원형의 겹무늬병반이 형성되고, 중앙에는 흑색 소립점(병자각)이 형성된다."
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/search_detail_title_virus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="병원체명"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/search_detail_content_virus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phomopsis vexans (Sacc. &amp; P. Syd.) Harter"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/search_detail_title_condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="발생환경"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/search_detail_content_condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="병원균은 병든 식물체의 잔재(殘滓)에서 균사 또는 병자각의 형태로 겨울을 지난 후 1차 전염원이 된다.
+     채종포장에서 발생되면 종자전염이 될 수 있다.
+     배수가 불량하고, 밀식하거나 질소질비료를 많이 주면 병 발생이 조장되며, 가을철 비가 자주 오고 습한 날이 많을 때 발생이 심하다."
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/search_detail_title_prevent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="방제방법"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/search_detail_content_prevent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="100dp"
+                    android:text="- 건전 종자를 사용하거나 종자 소독을 한다.
+    \n  - 병든 잎은 일찍 제거하여 전염원을 없앤다.
+    \n  - 생육이 왕성하게 관리한다.
+    \n  - 발병이 심한 곳은 가지 이외의 작물로 돌려짓기한다.
+    \n  - 과습하지 않도록 포장관리를 철저히 하고 질소질비료를 적당량 살포한다."
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>
