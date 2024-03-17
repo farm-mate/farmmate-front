@@ -9,7 +9,7 @@ data class DiseaseDetailService(
     val cropName: String,
     val sickNameChn: String,
     val preventionMethod: String,
-    val virusImgList: List<String>,
+    val virusImgList: List<Image>,
     val sickNameKor: String,
     val developmentCondition: String,
     val symptoms: String,

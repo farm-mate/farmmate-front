@@ -92,7 +92,7 @@ class SearchDetailFragment : Fragment() {
                                         marginStart = 4.dpToPx(requireContext()) // marginStart 설정
                                     }
                                     setImageResource(R.drawable.ic_launcher_foreground)
-                                    //gravity = Gravity.CENTER_VERTICAL
+                                    scaleType = ImageView.ScaleType.CENTER_CROP
                                 }
 
                                 // 이미지를 비동기적으로 로드하고 설정
