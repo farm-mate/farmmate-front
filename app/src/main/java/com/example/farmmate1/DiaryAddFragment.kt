@@ -66,14 +66,6 @@ class DiaryAddFragment : Fragment() {
         return view
     }
 
-//    private lateinit var spinner: Spinner
-//    private lateinit var saveButton: Button
-//    private lateinit var imageView: ImageView
-//
-//    private lateinit var diaryDataListener: DiaryDataListener
-//    private lateinit var WriteDiaryTvDate: TextView
-//    private lateinit var data: String
-
     private var checkedItems = mutableSetOf<String>() // 체크된 항목 기록
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -158,7 +150,6 @@ class DiaryAddFragment : Fragment() {
                             textView.text = plantName
                             return view
                         }
-
                         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
                             val view = super.getDropDownView(position, convertView, parent)
                             val plantName = getItem(position)?.first

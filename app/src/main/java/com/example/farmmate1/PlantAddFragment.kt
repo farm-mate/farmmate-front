@@ -86,10 +86,12 @@ class PlantAddFragment : Fragment() {
 
     private fun setUpSpinnerPlants() {
         val plants = resources.getStringArray(R.array.plants)
-        val adapter = ArrayAdapter(requireContext(),R.layout.spinner_item_plant, plants)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, plants)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         val spinner = binding.plantAddSpinnerSelect
         spinner.adapter = adapter
     }
+
 
     private fun moveToPlantFragment() {
         val transaction = parentFragmentManager
