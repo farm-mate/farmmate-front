@@ -58,12 +58,6 @@ class DiaryFragment : Fragment() {
             }
         })
 
-//        // 캘린더 뷰에 날짜 선택 리스너 등록
-//        calendarView.setOnDateChangedListener { widget, date, selected ->
-//            // 선택된 날짜 정보를 다른 곳에서 활용할 수 있도록 저장
-//            selectedDate = date
-//        }
-
         // 상단바 get
         val retrofit = RetrofitClient.instance
         val apiService = retrofit.create(ApiService::class.java)
@@ -71,6 +65,8 @@ class DiaryFragment : Fragment() {
         // SharedPreferences에서 디바이스 ID 가져오기
         val sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val deviceId: String = sharedPreferences.getString(DEVICE_ID_KEY, "") ?: ""
+
+        val plantInfoName = arguments?.getString("plantInfoName")
 
         apiService.getPlantList(deviceId).enqueue(object : Callback<List<PlantGet>> {
             override fun onResponse(call: Call<List<PlantGet>>, response: Response<List<PlantGet>>) {
@@ -107,12 +103,26 @@ class DiaryFragment : Fragment() {
                         }
                     }
 
-                    // 맨 처음 버튼을 선택 상태로 지정
-                    val firstButton = binding.diaryLinearlayout.getChildAt(0) as? Button
-                    firstButton?.isSelected = true
-                    selectedPlantName = firstButton?.text.toString()
-                    Log.d("DiaryPlantName","$selectedPlantName")
-                    fetchDiaryListFromServer()
+                    // plantInfo에서 넘어온 경우
+                    plantInfoName?.let { plantName ->
+                        for (i in 0 until binding.diaryLinearlayout.childCount) {
+                            val button = binding.diaryLinearlayout.getChildAt(i) as? Button
+                            if (button?.text.toString() == plantName) {
+                                button?.isSelected = true
+                                selectedPlantName = plantName
+                                Log.d("DiaryPlantName", "$selectedPlantName")
+                                fetchDiaryListFromServer()
+                                break
+                            }
+                        }
+                    } ?: run {
+                        // 넘겨준 값이 없을 경우에는 맨 처음 버튼을 선택 상태로 지정
+                        val firstButton = binding.diaryLinearlayout.getChildAt(0) as? Button
+                        firstButton?.isSelected = true
+                        selectedPlantName = firstButton?.text.toString()
+                        Log.d("DiaryPlantName", "$selectedPlantName")
+                        fetchDiaryListFromServer()
+                    }
 
                 } else {
                     // API 요청 실패 처리

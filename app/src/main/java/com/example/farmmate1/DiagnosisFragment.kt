@@ -27,7 +27,8 @@ class DiagnosisFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var selectedDate: CalendarDay? = null
-    private var selectedPlantName: String? = null
+    private var selectedPlantName: String? = ""
+    private var selectedPlantUuid: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,6 @@ class DiagnosisFragment : Fragment() {
         _binding = FragmentDiagnosisBinding.inflate(inflater, container, false)
         val view = binding.root
 
-
         // 상단바 get
         val retrofit = RetrofitClient.instance
         val apiService = retrofit.create(ApiService::class.java)
@@ -49,43 +49,58 @@ class DiagnosisFragment : Fragment() {
         val sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val deviceId: String = sharedPreferences.getString(DEVICE_ID_KEY, "") ?: ""
 
+        val plantInfoName = arguments?.getString("plantInfoName")
+
         apiService.getPlantList(deviceId).enqueue(object : Callback<List<PlantGet>> {
             override fun onResponse(call: Call<List<PlantGet>>, response: Response<List<PlantGet>>) {
                 val plantList = response.body() as? ArrayList<PlantGet>
                 if (plantList != null) {
 
                     setButtonTextForLinearLayout(plantList)
-                    // 동적으로 버튼 추가
-                    for (plant in plantList) {
-                    }
 
+                    // 이미 있는 버튼에 데이터 할당
                     for (i in 0 until 5) {
                         val button = binding.diagnosisLinearlayout.getChildAt(i) as? Button
                         button?.setOnClickListener {
                             // 클릭된 버튼을 강조하기 위해 색상 변경
                             onButtonClicked(button)
                             selectedPlantName = button?.text.toString()
-                            //fetchDiaryListFromServer()
+                            selectedPlantUuid = plantList[i].plant_uuid
+                            fetchDiaryListFromServer(selectedPlantUuid)
                         }
                     }
 
-                    // 동적으로 생성된 버튼에 클릭 이벤트 처리기 추가
+                    // 동적으로 생성된 버튼
                     for (i in 5 until binding.diagnosisLinearlayout.childCount) {
                         val button = binding.diagnosisLinearlayout.getChildAt(i) as? Button
                         button?.setOnClickListener {
                             // 클릭된 버튼을 강조하기 위해 색상 변경
                             onButtonClicked(button)
                             selectedPlantName = button?.text.toString()
-                            //fetchDiaryListFromServer()
+                            selectedPlantUuid = plantList[i].plant_uuid
+                            fetchDiaryListFromServer(selectedPlantUuid)
                         }
                     }
 
-                    // 맨 처음 버튼을 선택 상태로 지정
-                    val firstButton = binding.diagnosisLinearlayout.getChildAt(0) as? Button
-                    firstButton?.isSelected = true
-                    selectedPlantName = firstButton?.text.toString()
-                    //fetchDiaryListFromServer()
-
+                    plantInfoName?.let { plantName ->
+                        for (i in 0 until binding.diagnosisLinearlayout.childCount) {
+                            val button = binding.diagnosisLinearlayout.getChildAt(i) as? Button
+                            if (button?.text.toString() == plantName) {
+                                button?.isSelected = true
+                                selectedPlantName = plantName
+                                selectedPlantUuid = plantList.find { it.plant_name == plantName }?.plant_uuid
+                                fetchDiaryListFromServer(selectedPlantUuid)
+                                break
+                            }
+                        }
+                    } ?: run {
+                        // 넘겨준 값이 없을 경우에는 맨 처음 버튼을 선택 상태로 지정
+                        val firstButton = binding.diagnosisLinearlayout.getChildAt(0) as? Button
+                        firstButton?.isSelected = true
+                        selectedPlantName = firstButton?.text.toString()
+                        selectedPlantUuid = plantList[0].plant_uuid
+                        fetchDiaryListFromServer(selectedPlantUuid)
+                    }
                 } else {
                     // API 요청 실패 처리
                     Log.e("DiagnosisFragment", "Failed to fetch plant list: ${response.message()}")
@@ -116,30 +131,6 @@ class DiagnosisFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val retrofit = RetrofitClient.instance
-        val apiService = retrofit.create(ApiService::class.java)
-
-        // 데이터 요청
-//        apiService.getHistoryList().enqueue(object : Callback<List<History>> {
-//            override fun onResponse(call: Call<List<History>>, response: Response<List<History>>) {
-//                if (response.isSuccessful) {
-//                    val historyList = response.body() as? ArrayList<History>
-//                    if (historyList != null) {
-//                        val adapter = HistoryAdapter(requireContext(), historyList)
-//                        binding.diagnosisListLvHistory.adapter = adapter
-//                    }
-//                } else {
-//                    // API 요청 실패 처리
-//                    Log.e("DiagnosisFragment", "Failed to fetch plant list: ${response.message()}")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<List<History>>, t: Throwable) {
-//                // 통신 오류 처리
-//                Log.e("DiagnosisFragment", "Network error: ${t.message}")
-//            }
-//        })
 
         // history 어댑터 연결
         val Adapter = HistoryAdapter(requireContext(),HistoryList)
@@ -206,6 +197,31 @@ class DiagnosisFragment : Fragment() {
         }
     }
 
+    private fun fetchDiaryListFromServer(plantUuid: String?){
+        val retrofit = RetrofitClient.instance
+        val apiService = retrofit.create(ApiService::class.java)
+
+//        apiService.getSavedResult(plantUuid).enqueue(object : Callback<List<History>> {
+//            override fun onResponse(call: Call<List<History>>, response: Response<List<History>>) {
+//                if (response.isSuccessful) {
+//                    val historyList = response.body() as? ArrayList<History>
+//                    if (historyList != null) {
+//                        val adapter = HistoryAdapter(requireContext(), historyList)
+//                        binding.diagnosisListLvHistory.adapter = adapter
+//                    }
+//                } else {
+//                    // API 요청 실패 처리
+//                    Log.e("DiagnosisFragment", "Failed to fetch plant list: ${response.message()}")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<History>>, t: Throwable) {
+//                // 통신 오류 처리
+//                Log.e("DiagnosisFragment", "Network error: ${t.message}")
+//            }
+//        })
+        }
+
     private fun moveToDiagnosisCameraFragment(selectedCrop: String?) {
         val bundle = Bundle().apply {
             putString("selectedCrop", selectedCrop) // 선택한 작물을 번들에 저장
@@ -257,15 +273,4 @@ class DiagnosisFragment : Fragment() {
             .show() // 다이얼로그 표시
     }
 
-//    class MainViewModel : ViewModel() {
-//
-//        private val _count = MutableLiveData<Int>()
-//        val count : LiveData<Int> get() = _count
-//        init {
-//            _count.value = 5
-//        }
-//        fun getUpdatedCount(plusCount: Int){
-//            _count.value = (_count.value)?.plus(plusCount)
-//        }
-//    }
 }

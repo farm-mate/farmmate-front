@@ -19,6 +19,7 @@ class PlantInfoFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var plantUuid:String? = ""
+    private var plantName:String? = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +57,8 @@ class PlantInfoFragment : Fragment() {
 
                         Log.d("PlantInfoFragment", "$plantget")
 
-                        binding.plantInfoTvNickname.text = plantget?.plant_name
+                        plantName = plantget?.plant_name
+                        binding.plantInfoTvNickname.text = plantName
                         binding.plantInfoTvType.text = plantget?.plant_type
                         binding.plantInfoTvFirstdate.text = plantget?.first_planting_date
                         binding.plantInfoTvGetlocation.text = plantget?.plant_location
@@ -126,18 +128,28 @@ class PlantInfoFragment : Fragment() {
 
     // 하단 바 교체해주어야
     private fun moveToDiagnosisFragment() {
+        val bundle = Bundle()
+        bundle.putString("plantInfoName", plantName)
+
+        val diagnosisFragment = DiagnosisFragment()
+        diagnosisFragment.arguments = bundle
+
         val transaction = parentFragmentManager
             .beginTransaction()
-            .replace(R.id.main_fl, DiagnosisFragment())
-        // 뒤로가기 하면 이전 페이지로 갈 수 있도록.. transaction.addToBackStack(data)
+            .replace(R.id.main_fl, diagnosisFragment)
         transaction.commit()
     }
 
     private fun moveToDiaryFragment() {
+        val bundle = Bundle()
+        bundle.putString("plantInfoName", plantName)
+
+        val diaryFragment = DiaryFragment()
+        diaryFragment.arguments = bundle
+
         val transaction = parentFragmentManager
             .beginTransaction()
-            .replace(R.id.main_fl, DiaryFragment())
-        // 뒤로가기 하면 이전 페이지로 갈 수 있도록.. transaction.addToBackStack(data)
+            .replace(R.id.main_fl, diaryFragment)
         transaction.commit()
     }
 
