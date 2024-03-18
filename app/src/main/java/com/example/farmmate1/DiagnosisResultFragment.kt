@@ -1,11 +1,15 @@
 package com.example.farmmate1
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,14 +18,11 @@ import com.example.farmmate1.databinding.FragmentDiagnosisResultBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.ArrayList
 
 class DiagnosisResultFragment : Fragment() {
     private var _binding: FragmentDiagnosisResultBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +34,9 @@ class DiagnosisResultFragment : Fragment() {
     }
 
     private var selectedButtonId: Int = R.id.diagnosis_result_btn_symptom
+    private var plantList: ArrayList<PlantGet>? = null
+    private var plantData: List<Pair<String, String>> = emptyList()
+    private var diseaseUuid: String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,6 +50,7 @@ class DiagnosisResultFragment : Fragment() {
         var plantType: String? = ""
 
         if (diagnosisResult != null) {
+            diseaseUuid = diagnosisResult.diseaseUuid
 
             // 결과
             diseaseName = diagnosisResult.diseaseName
@@ -97,10 +102,17 @@ class DiagnosisResultFragment : Fragment() {
             moveToDiagnosisFragment()
         }
 
+        // plantList GET
+        getPlantList()
+
+        // 저장
+        binding.diagnosisResultBtnSave.setOnClickListener {
+            showPlantSelectionDialog()
+        }
+
         // 재측정
         binding.diagnosisResultBtnRecheck.setOnClickListener {
-            // TODO: plantName 전달
-            moveToDiagnosisCameraFragment()
+            moveToDiagnosisCameraFragment(plantType)
         }
     }
 
@@ -118,12 +130,19 @@ class DiagnosisResultFragment : Fragment() {
         transaction.commit()
     }
 
-    private fun moveToDiagnosisCameraFragment() {
-        val transaction = parentFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_fl, DiagnosisCameraFragment())
+    private fun moveToDiagnosisCameraFragment(plantType: String?) {
+        val transaction = parentFragmentManager.beginTransaction()
+        val fragment = DiagnosisCameraFragment()
+
+        // 번들에 데이터 추가
+        val bundle = Bundle()
+        bundle.putString("selectedCrop", plantType)
+        fragment.arguments = bundle
+
+        transaction.replace(R.id.main_fl, fragment)
         transaction.commit()
     }
+
 
     // 버튼을 선택 상태로 변경하는 함수
     private fun selectButton(button: View) {
@@ -139,15 +158,86 @@ class DiagnosisResultFragment : Fragment() {
         selectedButtonId = button.id
     }
 
-    class MainViewModel : ViewModel() {
+    private fun getPlantList(){
+        // Retrofit 인스턴스 생성
+        val retrofit = RetrofitClient.instance
+        val apiService = retrofit.create(ApiService::class.java)
 
-        private val _count = MutableLiveData<Int>()
-        val count : LiveData<Int> get() = _count
-        init {
-            _count.value = 5
-        }
-        fun getUpdatedCount(plusCount: Int){
-            _count.value = (_count.value)?.plus(plusCount)
-        }
+        // SharedPreferences에서 디바이스 ID 가져오기
+        val sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val deviceId: String = sharedPreferences.getString(DEVICE_ID_KEY, "") ?: ""
+
+        apiService.getPlantList(deviceId).enqueue(object : Callback<List<PlantGet>> {
+            override fun onResponse(call: Call<List<PlantGet>>, response: Response<List<PlantGet>>) {
+                val plantList = response.body() as? ArrayList<PlantGet>
+                if (plantList != null) {
+                    // 작물 이름과 plant_uuid를 매핑하여 리스트에 저장
+                    plantData = plantList.map { (it.plant_name ?: "Unknown") to it.plant_uuid }
+                } else {
+                    Log.e("DiaryResultFragment", "Failed to fetch user crops: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<PlantGet>>, t: Throwable) {
+                Log.e("DiaryResultFragment", "Network error: ${t.message}")
+            }
+        })
     }
+
+    private fun showPlantSelectionDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("작물 선택")
+
+        val plantNames = plantData.map { it.first }.toTypedArray()
+        var selectedPlantIndex = 0 // 초기 선택된 항목의 인덱스를 추적
+
+        // 라디오 버튼으로 작물 목록 표시
+        builder.setSingleChoiceItems(plantNames, selectedPlantIndex) { dialog, which ->
+            selectedPlantIndex = which // 선택한 항목의 인덱스 업데이트
+        }
+
+        // 다음 버튼
+        builder.setPositiveButton("다음") { dialog, _ ->
+            val selectedPlantUuid = plantData[selectedPlantIndex].second
+            val request = DiagnosisSaveRequest(selectedPlantUuid, diseaseUuid)
+            Log.d("DiagnosisResultFragment", "$selectedPlantUuid, $diseaseUuid")
+            postDiagnosisSave(request)
+
+            dialog.dismiss()
+        }
+
+        // 취소 버튼
+        builder.setNegativeButton("취소") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        builder.show()
+    }
+
+    private fun postDiagnosisSave(request: DiagnosisSaveRequest) {
+        // Retrofit 인스턴스 생성
+        val retrofit = RetrofitClient.instance
+        val apiService = retrofit.create(ApiService::class.java)
+
+        // POST 요청 보내기
+        apiService.postDiagnosisSave(request).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    // 요청이 성공적으로 처리된 경우의 처리 로직
+                    Log.d("DiagnosisResultFragment", "Diagnosis saved successfully.")
+                    moveToDiagnosisFragment()
+                } else {
+                    // 요청이 실패한 경우의 처리 로직
+                    Log.e("DiagnosisResultFragment", "Failed to save diagnosis: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                // 네트워크 오류 또는 예외 발생 시의 처리 로직
+                Log.e("DiagnosisResultFragment", "Network error: ${t.message}")
+            }
+        })
+    }
+
+
 }

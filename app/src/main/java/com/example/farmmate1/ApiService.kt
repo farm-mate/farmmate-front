@@ -106,16 +106,22 @@ interface ApiService {
         @Part image: MultipartBody.Part
     ): Call<DiagnosisResult>
 
-    @GET("history")
-    fun getHistoryList(): Call<List<History>>
-    // 서버에서 진단 결과를 가져오는 GET 요청을 정의
+//    @GET("history")
+//    fun getHistoryList(): Call<List<History>>
+//    // 서버에서 진단 결과를 가져오는 GET 요청을 정의
+//
+//    @POST("history")
+//    @Headers("Content-Type: application/json")
+//    fun saveResult(@Body history: History): Call<History>
+//
+//    @GET("history")
+//    fun getHistory(): Call<History>
 
-    @POST("history")
-    @Headers("Content-Type: application/json")
-    fun saveResult(@Body history: History): Call<History>
+    // 진단 결과 저장 POST 요청
+    @POST("plant/diagnose/result")
+    fun postDiagnosisSave(@Body request: DiagnosisSaveRequest): Call<Void>
 
-    @GET("history")
-    fun getHistory(): Call<History>
+//-------------------------------------------------------------------------------
 
     @GET("service")
     fun searchDiseases(

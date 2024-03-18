@@ -72,7 +72,6 @@ class DiagnosisCameraFragment : Fragment() {
         binding.diagnosisCameraBtnNext.setOnClickListener {
             // 서버에 이미지 보내기
             sendDiagnosisToServer(selectedCrop)
-            //moveToDiagnosisResultFragment()
         }
 
     }
@@ -210,12 +209,6 @@ class DiagnosisCameraFragment : Fragment() {
         transaction.commit()
     }
 
-//    private fun moveToDiagnosisResultFragment() {
-//        val transaction = parentFragmentManager.beginTransaction()
-//            .replace(R.id.main_fl, DiagnosisResultFragment())
-//        transaction.commit()
-//    }
-
     private fun sendDiagnosisToServer(plantType: String?) {
 
         val retrofit = RetrofitClient.instance
@@ -273,32 +266,5 @@ class DiagnosisCameraFragment : Fragment() {
             e.printStackTrace()
         }
     }
-
-//    private fun encodeImageToBase64(imagePath: String): String {
-//        val imageFile = File(imagePath)
-//        val byteArrayOutputStream = ByteArrayOutputStream()
-//
-//        try {
-//            val fileInputStream = FileInputStream(imageFile)
-//            val buffer = ByteArray(1024)
-//            var bytesRead = 0
-//            while (fileInputStream.read(buffer).also { bytesRead = it } != -1) {
-//                byteArrayOutputStream.write(buffer, 0, bytesRead)
-//            }
-//            fileInputStream.close()
-//
-//            val byteArray = byteArrayOutputStream.toByteArray()
-//            return Base64.encodeToString(byteArray, Base64.DEFAULT)
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//        } finally {
-//            try {
-//                byteArrayOutputStream.close()
-//            } catch (e: IOException) {
-//                e.printStackTrace()
-//            }
-//        }
-//        return ""
-//    }
 
 }

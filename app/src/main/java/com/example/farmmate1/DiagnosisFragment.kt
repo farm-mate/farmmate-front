@@ -147,8 +147,6 @@ class DiagnosisFragment : Fragment() {
 
         // 진단하기 버튼 클릭 시 알림창 (진단할 작물 선택)
         binding.diagnosisBtnDiagnosis.setOnClickListener{
-            //moveToDiagnosisSelectFragment()
-            //moveToDiagnosisCameraFragment()
             showCropSelectionDialog()
         }
 
@@ -207,15 +205,6 @@ class DiagnosisFragment : Fragment() {
             button?.isSelected = (button == clickedButton)
         }
     }
-
-
-
-//    private fun moveToDiagnosisSelectFragment() {
-//        val transaction = parentFragmentManager
-//            .beginTransaction()
-//            .replace(R.id.main_fl, DiagnosisSelectFragment())
-//        transaction.commit()
-//    }
 
     private fun moveToDiagnosisCameraFragment(selectedCrop: String?) {
         val bundle = Bundle().apply {
