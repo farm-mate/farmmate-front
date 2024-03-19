@@ -50,6 +50,8 @@ class HistoryAdapter (val context: Context, val historyList: ArrayList<History>)
             sequence.setImageResource(imageResources[position])
         }
 
+        date.text = history?.created_at?.substring(0, 10)
+
         history.disease?.let { diseaseInfo ->
             result.text = diseaseInfo.diseaseName
             Log.d("HistoryAdapter", "Disease name: ${diseaseInfo.diseaseName}")

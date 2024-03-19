@@ -52,6 +52,12 @@ class DiagnosisResultFragment : Fragment() {
         if (diagnosisResult != null) {
             diseaseUuid = diagnosisResult.diseaseUuid
 
+            // 사진
+            val plantImg = binding.diagnosisResultIvPhoto
+
+            val imageUrl = diagnosisResult?.plantImg
+            ImageLoaderTask(plantImg).execute(imageUrl)
+
             // 결과
             diseaseName = diagnosisResult.diseaseName
             binding.diagnosisResultTvName.text = diseaseName
@@ -67,7 +73,7 @@ class DiagnosisResultFragment : Fragment() {
                 binding.diagnosisResultBtnSymptom.visibility = View.GONE
                 binding.diagnosisResultBtnCause.visibility = View.GONE
                 binding.diagnosisResultBtnCure.visibility = View.GONE
-                binding.diagnosisResultTvDetail.text = "정상입니다."
+                binding.diagnosisResultTvDetail.text = "$plantType 진단 결과 정상 작물로 예측됩니다."
             }
 
         } else {

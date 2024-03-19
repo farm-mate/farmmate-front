@@ -58,15 +58,22 @@ class DiagnosisSavedFragment : Fragment() {
                         binding.diagnosisSavedTvName.text = historyget?.disease?.diseaseName
                         binding.diagnosisSavedTvDetail.text = historyget?.disease?.diseaseSymptom
 
+                        // 사진
+                        val plantImg = binding.diagnosisSavedIvPhoto
+
+                        val imageUrl = historyget?.disease?.plantImg
+                        ImageLoaderTask(plantImg).execute(imageUrl)
+
                         symptom = historyget?.disease?.diseaseSymptom
                         cause = historyget?.disease?.diseaseCause
                         treatment = historyget?.disease?.diseaseTreatment
+                        val plantType = historyget?.disease?.plantName
 
                         if (historyget?.disease?.diseaseName == "정상") {
                             binding.diagnosisSavedBtnSymptom.visibility = View.GONE
                             binding.diagnosisSavedBtnCause.visibility = View.GONE
                             binding.diagnosisSavedBtnCure.visibility = View.GONE
-                            binding.diagnosisSavedTvDetail.text = "정상입니다."
+                            binding.diagnosisSavedTvDetail.text = "$plantType 진단 결과 정상 작물로 예측됩니다."
                         }
                     } else {
                         // API 요청 실패 처리

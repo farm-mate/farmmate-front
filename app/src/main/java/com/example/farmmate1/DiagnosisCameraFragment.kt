@@ -239,7 +239,8 @@ class DiagnosisCameraFragment : Fragment() {
                                     it.diseaseSymptom,
                                     it.diseaseCause,
                                     it.diseaseTreatment,
-                                    it.diagnosisCode
+                                    it.diagnosisCode,
+                                    it.plantImg
                                 )
                             }
                             val bundle = Bundle().apply {

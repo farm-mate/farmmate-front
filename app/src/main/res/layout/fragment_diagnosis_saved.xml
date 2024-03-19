@@ -78,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:text="참외 흰가루병"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

@@ -11,7 +11,8 @@ data class DiagnosisResult(
     val diseaseSymptom: String?,
     val diseaseCause: String?,
     val diseaseTreatment: String?,
-    val diagnosisCode: Int
+    val diagnosisCode: Int,
+    val plantImg: String? // 추가된 필드
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
@@ -21,7 +22,8 @@ data class DiagnosisResult(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readInt()
+        parcel.readInt(),
+        parcel.readString() // 추가된 필드 읽기
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -33,6 +35,7 @@ data class DiagnosisResult(
         parcel.writeString(diseaseCause)
         parcel.writeString(diseaseTreatment)
         parcel.writeInt(diagnosisCode)
+        parcel.writeString(plantImg) // 추가된 필드 쓰기
     }
 
     override fun describeContents(): Int {

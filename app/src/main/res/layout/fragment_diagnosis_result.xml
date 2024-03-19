@@ -78,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:text="참외 흰가루병"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -150,7 +151,7 @@
                     android:id="@+id/diagnosis_result_tv_detail"
                     android:layout_width="295dp"
                     android:layout_height="wrap_content"
-                    android:minHeight="150dp"
+                    android:minHeight="130dp"
                     android:layout_marginTop="24dp"
                     android:text=""
                     android:textColor="@color/black"
