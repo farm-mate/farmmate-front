@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HistoryAdapter (val context: Context, val historyList: ArrayList<History>) : BaseAdapter()
 {
@@ -24,7 +27,7 @@ class HistoryAdapter (val context: Context, val historyList: ArrayList<History>)
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_history, null)
         val sequence = view.findViewById<ImageView>(R.id.list_item_ib_number)
-        val date = view.findViewById<TextView>(R.id.list_item_tv_date)
+        val dateTextView = view.findViewById<TextView>(R.id.list_item_tv_date)
         val result = view.findViewById<TextView>(R.id.list_item_tv_result)
 
         val history = historyList[position]
@@ -50,7 +53,24 @@ class HistoryAdapter (val context: Context, val historyList: ArrayList<History>)
             sequence.setImageResource(imageResources[position])
         }
 
-        date.text = history?.created_at?.substring(0, 10)
+        val dateTimeString = history?.created_at ?: ""
+        val utcFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        val kstFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+// UTC 문자열을 Date 객체로 파싱
+        val date: Date = utcFormatter.parse(dateTimeString) ?: Date()
+
+// Date 객체를 KST로 변환
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+        calendar.time = date
+        calendar.add(Calendar.HOUR_OF_DAY, 9) // UTC 시간에서 KST로 변환
+
+// KST 시간대로 변환하여 문자열로 출력
+        val kstDateString = kstFormatter.format(calendar.time)
+
+        dateTextView.text = kstDateString
+
+
 
         history.disease?.let { diseaseInfo ->
             result.text = diseaseInfo.diseaseName
