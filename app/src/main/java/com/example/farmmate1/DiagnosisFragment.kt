@@ -29,6 +29,7 @@ class DiagnosisFragment : Fragment() {
     private var selectedDate: CalendarDay? = null
     private var selectedPlantName: String? = ""
     private var selectedPlantUuid: String? = ""
+    private var historyList: ArrayList<History>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,25 +117,8 @@ class DiagnosisFragment : Fragment() {
         return view
     }
 
-    var HistoryList = arrayListOf<History>(
-        History(R.drawable.number_one, "2023-06-01", "정상"),
-        History(R.drawable.number_two, "2023-06-11", "상추균핵병"),
-        History(R.drawable.number_three, "2023-07-07", "정상"),
-        History(R.drawable.number_four, "2023-07-19", "정상"),
-        History(R.drawable.number_five, "2023-08-03", "상추균핵병"),
-        History(R.drawable.number_six, "2023-08-26", "정상"),
-        History(R.drawable.number_seven, "2023-09-14", "정상"),
-        History(R.drawable.number_eight, "2023-09-30", "상추노균병"),
-        History(R.drawable.number_nine, "2023-10-01", "상추노균병"),
-        History(R.drawable.number_ten, "2023-10-06", "정상")
-    )
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // history 어댑터 연결
-        val Adapter = HistoryAdapter(requireContext(),HistoryList)
-        binding.diagnosisListLvHistory.adapter = Adapter
 
         // 진단하기 버튼 클릭 시 알림창 (진단할 작물 선택)
         binding.diagnosisBtnDiagnosis.setOnClickListener{
@@ -143,7 +127,22 @@ class DiagnosisFragment : Fragment() {
 
         // 리스트 객체 클릭 시 진단 결과 페이지로 이동..
         binding.diagnosisListLvHistory.setOnItemClickListener { parent, view, position, id ->
-            moveToDiagnosisResultFragment()}
+            historyList?.let { list ->
+                if (position < list.size) {
+                    val selectedHistory = list[position]
+                    val bundle = Bundle().apply {
+                        putString("plantDiseaseUuid", selectedHistory.plantDiseaseUuid)
+                    }
+                    val diagnosisSavedFragment = DiagnosisSavedFragment()
+                    diagnosisSavedFragment.arguments = bundle
+
+                    val transaction = parentFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.main_fl, diagnosisSavedFragment)
+                    transaction.commit()
+                }
+            }
+        }
 
     }
 
@@ -201,26 +200,28 @@ class DiagnosisFragment : Fragment() {
         val retrofit = RetrofitClient.instance
         val apiService = retrofit.create(ApiService::class.java)
 
-//        apiService.getSavedResult(plantUuid).enqueue(object : Callback<List<History>> {
-//            override fun onResponse(call: Call<List<History>>, response: Response<List<History>>) {
-//                if (response.isSuccessful) {
-//                    val historyList = response.body() as? ArrayList<History>
-//                    if (historyList != null) {
-//                        val adapter = HistoryAdapter(requireContext(), historyList)
-//                        binding.diagnosisListLvHistory.adapter = adapter
-//                    }
-//                } else {
-//                    // API 요청 실패 처리
-//                    Log.e("DiagnosisFragment", "Failed to fetch plant list: ${response.message()}")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<List<History>>, t: Throwable) {
-//                // 통신 오류 처리
-//                Log.e("DiagnosisFragment", "Network error: ${t.message}")
-//            }
-//        })
-        }
+        apiService.getSavedResult(plantUuid).enqueue(object : Callback<List<History>> {
+            override fun onResponse(call: Call<List<History>>, response: Response<List<History>>) {
+                if (response.isSuccessful) {
+                    historyList = response.body() as? ArrayList<History>
+                    if (historyList != null) {
+                        // history 어댑터 연결
+                        val adapter = HistoryAdapter(requireContext(), historyList!!)
+                        binding.diagnosisListLvHistory.adapter = adapter
+                    }
+                } else {
+                    // API 요청 실패 처리
+                    Log.e("DiagnosisFragment", "Failed to fetch plant list: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<History>>, t: Throwable) {
+                // 통신 오류 처리
+                Log.e("DiagnosisFragment", "Network error: ${t.message}")
+            }
+        })
+
+    }
 
     private fun moveToDiagnosisCameraFragment(selectedCrop: String?) {
         val bundle = Bundle().apply {
@@ -234,13 +235,6 @@ class DiagnosisFragment : Fragment() {
         val transaction = parentFragmentManager
             .beginTransaction()
             .replace(R.id.main_fl, fragment)
-        transaction.commit()
-    }
-
-    private fun moveToDiagnosisResultFragment() {
-        val transaction = parentFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_fl, DiagnosisResultFragment())
         transaction.commit()
     }
 

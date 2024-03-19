@@ -55,8 +55,6 @@ class DiagnosisResultFragment : Fragment() {
             // 결과
             diseaseName = diagnosisResult.diseaseName
             binding.diagnosisResultTvName.text = diseaseName
-            // 설명
-            //binding.diagnosisResultTvDescribe.text = diagnosisResult.
             // 처음에는 증상
             binding.diagnosisResultTvDetail.text = diagnosisResult.diseaseSymptom
 

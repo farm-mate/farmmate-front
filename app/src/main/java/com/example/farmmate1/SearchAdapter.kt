@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.farmmate1.api.Disease
 
 class SearchAdapter(private var itemList: MutableList<Disease>, private val onItemClick: (Disease) -> Unit) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {

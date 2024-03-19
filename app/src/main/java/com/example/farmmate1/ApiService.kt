@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
+import com.example.farmmate1.api.SearchResponse
 
 interface ApiService {
 
@@ -111,8 +111,12 @@ interface ApiService {
     fun postDiagnosisSave(@Body request: DiagnosisSaveRequest): Call<Void>
 
     // 식물별 진단 결과 GET 요청
-    @GET("plant/diagnosis/result/{plantUuid}")
-    fun getSavedResult(@Path("plantUuid") plantUuid: String?): Call<History>
+    @GET("plant/diagnose/result/plant/{plantUuid}")
+    fun getSavedResult(@Path("plantUuid") plantUuid: String?): Call<List<History>>
+
+    // 개별 진단 결과 GET 요청
+    @GET("plant/diagnose/result/{plantDiseaseUuid}")
+    fun getResult(@Path("plantDiseaseUuid") plantDiseaseUuid: String?): Call<History>
 
 //-------------------------------------------------------------------------------
 

@@ -15,6 +15,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import com.example.farmmate1.api.Disease
+import com.example.farmmate1.api.SearchResponse
 
 class SearchFragment : Fragment() {
 

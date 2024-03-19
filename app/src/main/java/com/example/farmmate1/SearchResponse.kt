@@ -1,4 +1,4 @@
-package com.example.farmmate1
+package com.example.farmmate1.api
 
 data class SearchResponse(
     val service: Service
@@ -21,18 +21,3 @@ data class Disease(
     val oriImg: String,
     val sickKey: String
 )
-//package com.example.farmmate1
-//
-//data class SearchResponse(
-//    val buildTime: String,
-//    val totalCount: Int,
-//    val startPoint: Int,
-//    val displayCount: Int,
-//    val cropName: String,
-//    val sickNameKor: String,
-//    val sickNameChn: String,
-//    val sickNameEng: String,
-//    val thumbImg: String,
-//    val oriImg: String,
-//    val sickKey: Int
-//)
